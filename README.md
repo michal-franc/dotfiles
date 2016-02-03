@@ -1,4 +1,4 @@
 MyVim
 =====
 
-My vim configuration both on windows and unix
+Simple vim init that downloads vundle + vimrc to kick start
