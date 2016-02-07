@@ -14,3 +14,6 @@ call vundle#end()            " required
 filetype plugin indent on    " required
 
 autocmd VimEnter * NERDTree
+
+imap ii <esc>
+set backspace=indent,eol,start
