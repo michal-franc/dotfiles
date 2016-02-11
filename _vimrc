@@ -9,6 +9,8 @@ call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
+Plugin 'pangloss/vim-javascript'
+Plugin 'elzr/vim-json'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -18,3 +20,7 @@ autocmd VimEnter * NERDTree
 imap ii <esc>
 set backspace=indent,eol,start
 set tabstop=4 softtabstop=0 noexpandtab shiftwidth=4
+
+" syntax options
+filetype plugin indent on
+syntax on
