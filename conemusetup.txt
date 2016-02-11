@@ -1,0 +1,14 @@
+// vim + blog
+-new_console:d:{blog_path} "C:\Program Files (x86)\Git\share\Vim\vim74\vim.exe" -cur_console:m
+
+// msysgit
+-cur_console:d:D:\ "%ProgramFiles(x86)%\Git\bin\sh.exe" --login -i -cur_console:m:sT40H
+
+-new_console:d:D:\ "C:\Program Files (x86)\Git\share\Vim\vim74\vim.exe" -cur_console:n 
+
+-cur_console:d:D:\ "%ProgramFiles(x86)%\Git\bin\sh.exe" --login -i -cur_console:n:sT25H
+
+//node
+-cur_console:d:D:\ "C:\Windows\System32\cmd.exe /k "C:\Program Files\nodejs\nodevars.bat"" --login -i -cur_console:n:sT66V
+
+cmd.exe -new_console:d:D:\ -i -cur_console:n:sT50V
