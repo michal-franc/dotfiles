@@ -24,3 +24,5 @@ set tabstop=4 softtabstop=0 noexpandtab shiftwidth=4
 " syntax options
 filetype plugin indent on
 syntax on
+
+set noswapfile
