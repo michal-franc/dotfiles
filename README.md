@@ -1,9 +1,6 @@
 MyVim
 =====
-
 git clone in yuour Home folder
-
-For Windows that will be probably c:\users\username
 
 run vim_init.sh
 run vim and execute command :BundleInstall
@@ -19,4 +16,6 @@ TODO-add instructions:
 - install byobu
 - config byobu properly by addint 256 terminal support
   - $ echo 'set -g default-terminal "screen-256color"' >> ~/.byobu/profile.tmux
-- add change ITERM2 settings
+- add change ITERM2 settings to properly use xterm256
+- zsh themes and installation tutorial too
+- alias vim to nvim

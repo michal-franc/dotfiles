@@ -9,26 +9,67 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
+Plugin 'dracula/vim'
 Plugin 'scrooloose/nerdtree'
-Plugin 'pangloss/vim-javascript'
-Plugin 'elzr/vim-json'
-Plugin 'tpope/vim-fugitive'
 Plugin 'bling/vim-airline'
-Plugin 'kien/ctrlp.vim'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'godlygeek/tabular'
+Plugin 'neomake/neomake'
+
+"new plugins testing
+Plugin 'tpope/vim-surround'
+Plugin 'majutsushi/tagbar'
+" not working Plugin 'scroolloose/nerdcommenter'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'easymotion/vim-easymotion'
+Plugin 'tpope/vim-repeat'
+" requires python Plugin 'sirver/ultisnips'
+" problems installing Plugin 'raimondi/delimmate'
+Plugin 'kien/ctrlp.vim'
 Plugin 'plasticboy/vim-markdown'
-Plugin 'zenorocha/dracula-theme', {'rtp': 'vim/'}
 Plugin 'derekwyatt/vim-scala'  
 Plugin 'Shougo/unite.vim'  
-Plugin 'vim-syntastic/syntastic'
-Plugin 'mtscout6/syntastic-local-eslint.vim'
+Plugin 'elzr/vim-json'
+Plugin 'tpope/vim-fugitive'
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
+Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'wincent/command-t'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'tpope/vim-sensible'
+Plugin 'yggdroot/indentline'
+
+"snippets
+"Plugin 'justingj/vim-react-snippets'
+"Plugin 'SirVer/ultisnips'
+"Plugin 'honza/vim-snippets'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
 
-autocmd VimEnter * NERDTree
+autocmd! BufWritePost * Neomake
+autocmd InsertChange,TextChanged * update | Neomake
+
+"Airline setting theme
+let g:airline_theme='dracula'
+
+" just to make sure that proper background from theme is used
+set background=dark
+
+"jsx plugin
+let g:jsx_ext_required=0
+
+"ident guides
+let g:indent_guides_auto_colors = 0
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=3
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=4
 
 imap ii <esc>
+
+" NERDTree show hidden files like .babelrc .gitignore
+let NERDTreeShowHidden=1
+" open NERDTree automatically
+autocmd VimEnter * NERDTree 
 
 " search in unite
 nmap <D-F> unite#custom#source('file_rec/async', 'ignore_pattern', 'node_modules/')?
@@ -39,31 +80,19 @@ set backspace=indent,eol,start
 set tabstop=2 softtabstop=0 expandtab shiftwidth=2
 
 " syntax options
-filetype plugin indent on
 syntax on
+filetype plugin indent on
 
 set noswapfile
 
-" syntastic options
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+"you need to specify args eslint default config is broken and doesnt read the
+"errors properly
+let g:neomake_javascript_eslint_maker = {
+    \ 'args':['--no-color', '--format', 'compact'],
+    \ 'exe': 'eslint',
+    \ 'errorformat': '%f: line %l\, col %c\, %m',
+    \ }
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_loc_list_height = 5
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 1
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_javascript_eslint_exec = 'eslint_d'
-
-let g:syntastic_error_symbol = '❌'
-let g:syntastic_style_error_symbol = '⁉️'
-let g:syntastic_warning_symbol = '⚠️'
-let g:syntastic_style_warning_symbol = '💩'
-
-highlight link SyntasticErrorSign SignColumn
-highlight link SyntasticWarningSign SignColumn
-highlight link SyntasticStyleErrorSign SignColumn
-highlight link SyntasticStyleWarningSign SignColumn
-
+let g:neomake_javascript_enabled_makers = ['eslint']
+let g:neomake_place_signs= 1
+let g:neomake_verbose = 3
