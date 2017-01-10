@@ -16,3 +16,7 @@ TODO-add instructions:
 - gem install neovim
 - add neomake
 - check installation by :CheckHealth
+- install byobu
+- config byobu properly by addint 256 terminal support
+  - $ echo 'set -g default-terminal "screen-256color"' >> ~/.byobu/profile.tmux
+- add change ITERM2 settings
