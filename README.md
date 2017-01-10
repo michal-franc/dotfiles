@@ -11,6 +11,7 @@ run vim and execute command :BundleInstall
 
 TODO-add instructions:
 - install neovim
+- install eslint globally
 - ln _vimrc ( you need to create files manualy )_
 - gem install neovim
 - add neomake
