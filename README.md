@@ -19,3 +19,5 @@ TODO-add instructions:
 - add change ITERM2 settings to properly use xterm256
 - zsh themes and installation tutorial too
 - alias vim to nvim
+- install https://github.com/ryanoasis/nerd-fonts
+- add droind nerdtreee font to terminal

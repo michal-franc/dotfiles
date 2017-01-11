@@ -8,19 +8,21 @@ autocmd BufEnter * silent! lcd %:p:h " automatically sets up the pwd for a file
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
+" readt and stable
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'dracula/vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'bling/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'godlygeek/tabular'
 Plugin 'neomake/neomake'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'xuyuanp/nerdtree-git-plugin'
 
 "new plugins testing
 Plugin 'tpope/vim-surround'
+Plugin 'moll/vim-node'
 Plugin 'majutsushi/tagbar'
 " not working Plugin 'scroolloose/nerdcommenter'
-Plugin 'airblade/vim-gitgutter'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'tpope/vim-repeat'
 " requires python Plugin 'sirver/ultisnips'
@@ -38,6 +40,14 @@ Plugin 'wincent/command-t'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'tpope/vim-sensible'
 Plugin 'yggdroot/indentline'
+Plugin 'mhinz/vim-startify'
+Plugin 'parkr/vim-jekyll'
+Plugin 'junegunn/goyo.vim'
+
+" test todo plugin http://vimawesome.com/?q=todo
+
+" nice glyphs
+Plugin 'ryanoasis/vim-devicons'
 
 "snippets
 "Plugin 'justingj/vim-react-snippets'
@@ -50,8 +60,12 @@ filetype plugin indent on    " required
 autocmd! BufWritePost * Neomake
 autocmd InsertChange,TextChanged * update | Neomake
 
+set encoding=utf8
+set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Plus\ Nerd\ File\ Types:h11
+
 "Airline setting theme
 let g:airline_theme='dracula'
+let g:airline_powerline_fonts = 1
 
 " just to make sure that proper background from theme is used
 set background=dark
@@ -68,8 +82,10 @@ imap ii <esc>
 
 " NERDTree show hidden files like .babelrc .gitignore
 let NERDTreeShowHidden=1
+
 " open NERDTree automatically
-autocmd VimEnter * NERDTree 
+" doesnt work het with startify
+" autocmd VimEnter * NERDTree 
 
 " search in unite
 nmap <D-F> unite#custom#source('file_rec/async', 'ignore_pattern', 'node_modules/')?
@@ -84,6 +100,8 @@ syntax on
 filetype plugin indent on
 
 set noswapfile
+set number
+highlight LineNr ctermfg=239
 
 "you need to specify args eslint default config is broken and doesnt read the
 "errors properly
