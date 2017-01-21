@@ -23,3 +23,4 @@ TODO-add instructions:
 - add droind nerdtreee font to terminal
 - tmux.conf settings to automatically update ~/.byobu/tmux.conf with tmux-vim-navigator
 - folder structure description
+- httpie installation
