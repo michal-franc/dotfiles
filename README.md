@@ -22,3 +22,4 @@ TODO-add instructions:
 - install https://github.com/ryanoasis/nerd-fonts
 - add droind nerdtreee font to terminal
 - tmux.conf settings to automatically update ~/.byobu/tmux.conf with tmux-vim-navigator
+- folder structure description
