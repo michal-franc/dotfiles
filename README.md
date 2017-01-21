@@ -1,4 +1,4 @@
-MyVim
+Installation instructions
 =====
 git clone in yuour Home folder
 
