@@ -19,9 +19,10 @@ Plug 'airblade/vim-gitgutter'
 Plug 'xuyuanp/nerdtree-git-plugin'
 
 "new plugins testing
+Plug 'airblade/vim-rooter'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+Plug 'shougo/vimproc.vim', {'do' : 'make'}
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-session'
 Plug 'OmniSharp/omnisharp-vim'
@@ -207,3 +208,11 @@ nnoremap <leader>tp :OmniSharpAddToProject<cr>
 " (Experimental - uses vim-dispatch or vimproc plugin) - Start the omnisharp server for the current solution
 nnoremap <leader>ss :OmniSharpStartServer<cr>
 nnoremap <leader>sp :OmniSharpStopServer<cr>
+
+command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
+
+let g:rooter_patterns = ['Rakefile', '.git/', 'DockerFile']
+" dont spam echo
+let g:rooter_silent_chdir = 1
+"worth adding?
+"https://github.com/junegunn/fzf.vim/issues/123
