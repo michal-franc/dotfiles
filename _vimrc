@@ -6,59 +6,70 @@ autocmd BufEnter * silent! lcd %:p:h " automatically sets up the pwd for a file
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+call plug#begin()
 
 " readt and stable
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'dracula/vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'bling/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'neomake/neomake'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'xuyuanp/nerdtree-git-plugin'
+Plug 'VundleVim/Vundle.vim'
+Plug 'dracula/vim'
+Plug 'scrooloose/nerdtree'
+Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'neomake/neomake'
+Plug 'airblade/vim-gitgutter'
+Plug 'xuyuanp/nerdtree-git-plugin'
 
 "new plugins testing
-Plugin 'tpope/vim-surround'
-Plugin 'moll/vim-node'
-Plugin 'majutsushi/tagbar'
-" not working Plugin 'scroolloose/nerdcommenter'
-Plugin 'easymotion/vim-easymotion'
-Plugin 'tpope/vim-repeat'
-" requires python Plugin 'sirver/ultisnips'
-" problems installing Plugin 'raimondi/delimmate'
-Plugin 'kien/ctrlp.vim'
-Plugin 'plasticboy/vim-markdown'
-Plugin 'derekwyatt/vim-scala'  
-Plugin 'Shougo/unite.vim'  
-Plugin 'elzr/vim-json'
-Plugin 'tpope/vim-fugitive'
-Plugin 'pangloss/vim-javascript'
-Plugin 'mxw/vim-jsx'
-Plugin 'jistr/vim-nerdtree-tabs'
-Plugin 'wincent/command-t'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'tpope/vim-sensible'
-Plugin 'yggdroot/indentline'
-Plugin 'mhinz/vim-startify'
-Plugin 'parkr/vim-jekyll'
-Plugin 'junegunn/goyo.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-session'
+Plug 'OmniSharp/omnisharp-vim'
+Plug 'OrangeT/vim-csharp'
+Plug 'ervandew/supertab'
+Plug 'tpope/vim-dispatch'
+Plug 'vim-syntastic/syntastic'
+Plug 'tpope/vim-surround'
+Plug 'moll/vim-node'
+Plug 'majutsushi/tagbar'
+Plug 'scrooloose/nerdcommenter'
+Plug 'easymotion/vim-easymotion'
+Plug 'tpope/vim-repeat'
+Plug 'raimondi/delimitmate'
+Plug 'kien/ctrlp.vim'
+Plug 'plasticboy/vim-markdown'
+Plug 'derekwyatt/vim-scala'  
+Plug 'Shougo/unite.vim'  
+Plug 'elzr/vim-json'
+Plug 'tpope/vim-fugitive'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+Plug 'jistr/vim-nerdtree-tabs'
+Plug 'wincent/command-t'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'tpope/vim-sensible'
+Plug 'yggdroot/indentline'
+Plug 'mhinz/vim-startify'
+Plug 'parkr/vim-jekyll'
+Plug 'junegunn/goyo.vim'
 
 " test todo plugin http://vimawesome.com/?q=todo
 
 " nice glyphs
-Plugin 'ryanoasis/vim-devicons'
+Plug 'ryanoasis/vim-devicons'
 
 "snippets
-"Plugin 'justingj/vim-react-snippets'
-"Plugin 'SirVer/ultisnips'
-"Plugin 'honza/vim-snippets'
+"Plug 'justingj/vim-react-snippets'
+"Plug 'SirVer/ultisnips'
+"Plug 'honza/vim-snippets'
 
-call vundle#end()            " required
-filetype plugin indent on    " required
+call plug#end()
 
 autocmd! BufWritePost * Neomake
 autocmd InsertChange,TextChanged * update | Neomake
+
+" setting leader as space
+let mapleader="\<Space>"
 
 set encoding=utf8
 set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Plus\ Nerd\ File\ Types:h11
@@ -73,33 +84,52 @@ set background=dark
 "jsx plugin
 let g:jsx_ext_required=0
 
-"ident guides
-let g:indent_guides_auto_colors = 0
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=3
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=4
+" Omnisharp settings
+let g:OmniSharp_selector_ui = 'unite'  " Use unite.vim
+let g:SuperTabDefaultCompletionType = 'context'
+let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
+let g:SuperTabDefaultCompletionTypeDiscovery = ["&omnifunc:<c-x><c-o>","&completefunc:<c-x><c-n>"]
+let g:SuperTabClosePreviewOnPopupClose = 1
 
 imap ii <esc>
+
+" enables vim switch pane using CTRL hjkl which is in line with the tmux
+" plugin to integrate vim and tmux nicely
+
+nmap <C-J> <C-W>j<C-W>_
+nmap <C-K> <C-W>k<C-W>_
+nmap <C-H> <C-W>h<C-W>_
+nmap <C-L> <C-W>l<C-W>_
 
 " NERDTree show hidden files like .babelrc .gitignore
 let NERDTreeShowHidden=1
 
 " open NERDTree automatically
+" add shortcut to open NERDTree something like CTRL+TAB NERDTreeToogle
 " doesnt work het with startify
 " autocmd VimEnter * NERDTree 
 
 " search in unite
-nmap <D-F> unite#custom#source('file_rec/async', 'ignore_pattern', 'node_modules/')?
-" so that i support it in the windows too
-nmap <C-F> <D-F>
+"call unite#filters#matcher_default#use(['matcher_fuzzy'])
+"call unite#filters#sorter_default#use(['sorter_rank'])
+
+" ignore certain files and directories while searching
+"call unite#custom#source('file,file_rec,file_rec/neovim,grep', 'ignore_pattern', 'bin\|node_modules\|\.git$')
+"call unite#custom#source('file,file_rec,file_rec/neovim,grep', 'max_candidates', 50)
+
+"nnoremap <silent> <C-R> :<C-u>UniteWithProjectDir -toggle -auto-resize file_rec/neovim<cr><c-u>
+"nnoremap <silent> <C-F> :<C-u>UniteWithProjectDir -toggle -auto-resize grep<cr><c-u>
 
 set backspace=indent,eol,start
 set tabstop=2 softtabstop=0 expandtab shiftwidth=2
 
-" syntax options
+" syntax ptions
 syntax on
 filetype plugin indent on
 
 set noswapfile
+
+" enabling line numbers and setting nice color which is non invasive
 set number
 highlight LineNr ctermfg=239
 
@@ -113,4 +143,67 @@ let g:neomake_javascript_eslint_maker = {
 
 let g:neomake_javascript_enabled_makers = ['eslint']
 let g:neomake_place_signs= 1
-let g:neomake_verbose = 3
+
+" syntastic
+let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
+
+augroup omnisharp_commands
+    autocmd!
+
+    "Set autocomplete function to OmniSharp (if not using YouCompleteMe completion plugin)
+    autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
+
+    " Synchronous build (blocks Vim)
+    "autocmd FileType cs nnoremap <F5> :wa!<cr>:OmniSharpBuild<cr>
+    " Builds can also run asynchronously with vim-dispatch installed
+    autocmd FileType cs nnoremap <leader>b :wa!<cr>:OmniSharpBuildAsync<cr>
+    " automatic syntax check on events (TextChanged requires Vim 7.4)
+    autocmd BufEnter,TextChanged,InsertLeave *.cs SyntasticCheck
+
+    " Automatically add new cs files to the nearest project on save
+    autocmd BufWritePost *.cs call OmniSharp#AddToProject()
+
+    "show type information automatically when the cursor stops moving
+    autocmd CursorHold *.cs call OmniSharp#TypeLookupWithoutDocumentation()
+
+    "The following commands are contextual, based on the current cursor position.
+
+    autocmd FileType cs nnoremap gd :OmniSharpGotoDefinition<cr>
+    autocmd FileType cs nnoremap <leader>fi :OmniSharpFindImplementations<cr>
+    autocmd FileType cs nnoremap <leader>ft :OmniSharpFindType<cr>
+    autocmd FileType cs nnoremap <leader>fs :OmniSharpFindSymbol<cr>
+    autocmd FileType cs nnoremap <leader>fu :OmniSharpFindUsages<cr>
+    "finds members in the current buffer
+    autocmd FileType cs nnoremap <leader>fm :OmniSharpFindMembers<cr>
+    " cursor can be anywhere on the line containing an issue
+    autocmd FileType cs nnoremap <leader>x  :OmniSharpFixIssue<cr>
+    autocmd FileType cs nnoremap <leader>fx :OmniSharpFixUsings<cr>
+    autocmd FileType cs nnoremap <leader>tt :OmniSharpTypeLookup<cr>
+    autocmd FileType cs nnoremap <leader>dc :OmniSharpDocumentation<cr>
+    "navigate up by method/property/field
+    autocmd FileType cs nnoremap <C-K> :OmniSharpNavigateUp<cr>
+    "navigate down by method/property/field
+    autocmd FileType cs nnoremap <C-J> :OmniSharpNavigateDown<cr>
+
+augroup END
+
+" Contextual code actions (requires CtrlP or unite.vim)
+nnoremap <leader><space> :OmniSharpGetCodeActions<cr>
+" Run code actions with text selected in visual mode to extract method
+vnoremap <leader><space> :call OmniSharp#GetCodeActions('visual')<cr>
+
+" rename with dialog
+nnoremap <leader>nm :OmniSharpRename<cr>
+nnoremap <F2> :OmniSharpRename<cr>
+" rename without dialog - with cursor on the symbol to rename... ':Rename newname'
+command! -nargs=1 Rename :call OmniSharp#RenameTo("<args>")
+
+" Force OmniSharp to reload the solution. Useful when switching branches etc.
+nnoremap <leader>rl :OmniSharpReloadSolution<cr>
+nnoremap <leader>cf :OmniSharpCodeFormat<cr>
+" Load the current .cs file to the nearest project
+nnoremap <leader>tp :OmniSharpAddToProject<cr>
+
+" (Experimental - uses vim-dispatch or vimproc plugin) - Start the omnisharp server for the current solution
+nnoremap <leader>ss :OmniSharpStartServer<cr>
+nnoremap <leader>sp :OmniSharpStopServer<cr>
