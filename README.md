@@ -7,6 +7,7 @@ run vim and execute command :BundleInstall
 
 
 TODO-add instructions:
+- convert this to .dotfiles repo
 - install neovim
 - install eslint globally
 - ln _vimrc ( you need to create files manualy )_
@@ -22,3 +23,8 @@ TODO-add instructions:
 - install https://github.com/ryanoasis/nerd-fonts
 - add droind nerdtreee font to terminal
 - tmux.conf settings to automatically update ~/.byobu/tmux.conf with tmux-vim-navigator
+- make the c-h button work ok -> https://github.com/neovim/neovim/issues/2048#issuecomment-78045837
+- add omnisharp installation steps - optional ?
+- add oh my zsh installation steps
+- https://github.com/neovim/python-client
+- install fzf and follow installation instructions
