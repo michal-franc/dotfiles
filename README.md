@@ -1,4 +1,4 @@
-MyVim
+Installation instructions
 =====
 git clone in yuour Home folder
 
@@ -23,6 +23,8 @@ TODO-add instructions:
 - install https://github.com/ryanoasis/nerd-fonts
 - add droind nerdtreee font to terminal
 - tmux.conf settings to automatically update ~/.byobu/tmux.conf with tmux-vim-navigator
+- folder structure description
+- httpie installation
 - make the c-h button work ok -> https://github.com/neovim/neovim/issues/2048#issuecomment-78045837
 - add omnisharp installation steps - optional ?
 - add oh my zsh installation steps
