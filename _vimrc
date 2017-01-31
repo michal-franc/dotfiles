@@ -110,17 +110,6 @@ let NERDTreeShowHidden=1
 " doesnt work het with startify
 " autocmd VimEnter * NERDTree 
 
-" search in unite
-"call unite#filters#matcher_default#use(['matcher_fuzzy'])
-"call unite#filters#sorter_default#use(['sorter_rank'])
-
-" ignore certain files and directories while searching
-"call unite#custom#source('file,file_rec,file_rec/neovim,grep', 'ignore_pattern', 'bin\|node_modules\|\.git$')
-"call unite#custom#source('file,file_rec,file_rec/neovim,grep', 'max_candidates', 50)
-
-"nnoremap <silent> <C-R> :<C-u>UniteWithProjectDir -toggle -auto-resize file_rec/neovim<cr><c-u>
-"nnoremap <silent> <C-F> :<C-u>UniteWithProjectDir -toggle -auto-resize grep<cr><c-u>
-
 set backspace=indent,eol,start
 set tabstop=2 softtabstop=0 expandtab shiftwidth=2
 
