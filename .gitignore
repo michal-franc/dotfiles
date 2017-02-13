@@ -6,3 +6,6 @@
 !*.gitignore
 !_vimrc
 !init_vim.sh
+!windows
+!unix-arch
+!unix-ubuntu
