@@ -30,3 +30,4 @@ TODO-add instructions:
 - add oh my zsh installation steps
 - https://github.com/neovim/python-client
 - install fzf and follow installation instructions
+- https://marketplace.visualstudio.com/items?itemName=HippoCampSoftwareLtd.CodeLineage
