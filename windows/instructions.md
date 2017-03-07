@@ -11,3 +11,4 @@ babun + vim + simple _vimrc
 babun config to have start cmd - https://github.com/babun/babun/issues/299 Tools:
 WinDirStats - https://windirstat.net/
 Visual Studio code -> code . should open VS Code
+2Day app integrated with toodledo
