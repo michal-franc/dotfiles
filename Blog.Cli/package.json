@@ -1,0 +1,21 @@
+{
+  "name": "blog-cli",
+  "version": "0.0.1",
+  "description": "Simple cli tool to automate my work around blog",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Michal Franc",
+  "license": "MIT",
+  "dependencies": {
+    "co": "^4.6.0",
+    "co-prompt": "^1.0.0",
+    "commander": "^2.9.0",
+    "opn": "^4.0.2",
+    "shelljs": "^0.7.7"
+  },
+  "bin": {
+    "blog": "./index.js"
+  }
+}

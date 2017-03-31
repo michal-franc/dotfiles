@@ -1,6 +1,8 @@
 # Ignore everything
 /*
 /*/
+node_modules/
+*.lock
 
 # But not these files...
 !*.gitignore
@@ -9,3 +11,4 @@
 !windows
 !unix-arch
 !unix-ubuntu
+!Blog.Cli
