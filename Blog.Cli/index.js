@@ -37,6 +37,12 @@ program
       if(command === 'vim') {
         openVim('');
       }
+
+      // generate new blog post with a readline prompts
+      // go to draft folder with NerdTree opened
+      // go to ideas folder with -=-
+      // publish moves the draft to blog folder for publish
+      // schedule moves the post to schdeuled folder
     })
   })
 .parse(process.argv);
