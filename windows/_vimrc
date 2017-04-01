@@ -1,0 +1,55 @@
+set nocompatible              " be iMproved, required
+filetype on
+filetype off                  " required
+
+autocmd BufEnter * silent! lcd %:p:h " automatically sets up the pwd for a file
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call plug#begin()
+
+Plug 'scrooloose/nerdtree'
+Plug 'bling/vim-airline'
+Plug 'airblade/vim-gitgutter'
+
+Plug 'OrangeT/vim-csharp'
+Plug 'moll/vim-node'
+Plug 'junegunn/goyo.vim'
+
+call plug#end()
+
+" setting leader as space
+let mapleader="\<Space>"
+
+" just to make sure that proper background from theme is used
+set background=dark
+
+imap ii <esc>
+
+" enables vim switch pane using CTRL hjkl which is in line with the tmux
+" plugin to integrate vim and tmux nicely
+
+nmap <C-J> <C-W>j<C-W>_
+nmap <C-K> <C-W>k<C-W>_
+nmap <C-H> <C-W>h<C-W>_
+nmap <C-L> <C-W>l<C-W>_
+
+" NERDTree show hidden files like .babelrc .gitignore
+let NERDTreeShowHidden=1
+
+" open NERDTree automatically
+" add shortcut to open NERDTree something like CTRL+TAB NERDTreeToogle
+" doesnt work het with startify
+autocmd VimEnter * NERDTree 
+
+set backspace=indent,eol,start
+set tabstop=2 softtabstop=0 expandtab shiftwidth=2
+
+" syntax ptions
+syntax on
+filetype plugin indent on
+
+set noswapfile
+
+" enabling line numbers and setting nice color which is non invasive
+set number
