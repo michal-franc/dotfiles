@@ -94,7 +94,7 @@ image: ${image}
         var category = yield prompt('category:');
         var date = yield prompt('date (yyyy-mm-dd hh:mm):');
 
-        shell.sed('-i', '%date%', date, file);
+        shell.sed('-i', '%date%', date, filename);
         shell.mv(filename, mainBlogFolder + '_posts\\' + category);
       }
 
