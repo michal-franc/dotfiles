@@ -11,4 +11,6 @@ folder structure on windows machine
 * WinDirStats - https://windirstat.net/
 * Visual Studio code -> code . should open VS Code
 * 2Day app integrated with toodledo
-* ripgrep
+* install choco
+* choco install ripgrep
+* install XMind
