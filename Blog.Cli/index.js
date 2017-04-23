@@ -27,53 +27,55 @@ var openVim = (file) => {
 };
 
 program
-.version('0.0.1')
-.option('site', 'opens main blog site')
-.option('local', 'opens local blog, if not runinng do jekyll run on bash subsystem')
-.option('social', 'opens various social sites') 
-.option('idea', 'opens main idea file') 
-.option('ideas', 'opens folder with ideas') 
-.option('draft', 'opens new draft file') 
-.option('drafts', 'opens folder with drafts') 
-.option('template', 'adds jekyll template') 
-.option('publish', 'moves post to proper folder and adds datetime') 
 .arguments('<command> [filename]')
-  .action((command, filename) => {
-    co(function *() {
-      if(command === 'site') {
-        spawnChrome('http://mfranc.com/');
-      }
-      
-      if(command === 'local') {
-        // assuming here that blog is running on local all the time, need to somehow run ruby jekyll all the time
-        spawnChrome('http://mfranc.com.local/');
-      }
+.version('0.0.1')
+.on("--help", () =>{
+  console.log('site - opens main blog site');
+  console.log('local - opens local blog, if not runinng do jekyll run on bash subsystem');
+  console.log('social - opens various social sites');
+  console.log('idea - opens main idea file');
+  console.log('ideas - opens folder with ideas');
+  console.log('draft - opens new draft file');
+  console.log('drafts - opens folder with drafts');
+  console.log('template - adds jekyll template');
+  console.log('publish - moves post to proper folder and adds datetime');
+})
+.action((command, filename) => {
+  co(function *() {
+    if(command === 'site') {
+      spawnChrome('http://mfranc.com/');
+    }
+    
+    if(command === 'local') {
+      // assuming here that blog is running on local all the time, need to somehow run ruby jekyll all the time
+      spawnChrome('http://mfranc.com.local/');
+    }
 
-      if(command === 'social') {
-        spawnChrome('https://tweetdeck.twitter.com/');
-        spawnChrome('https://facebook.com/');
-        spawnChrome('https://reddit.com/');
-        spawnChrome('https://devspl.slack.com/');
-      }
+    if(command === 'social') {
+      spawnChrome('https://tweetdeck.twitter.com/');
+      spawnChrome('https://facebook.com/');
+      spawnChrome('https://reddit.com/');
+      spawnChrome('https://devspl.slack.com/');
+    }
 
-      if(command === 'idea') {
-       openVim(mainBlogFolder + '_posts\\_draft\\ideas\\' + 'new_idea.md');
-      }
+    if(command === 'idea') {
+     openVim(mainBlogFolder + '_posts\\_draft\\ideas\\' + 'new_idea.md');
+    }
 
-      if(command === 'draft') {
-       openVim(mainBlogFolder + '_posts\\_draft\\' + 'new_draft.md');
-      }
+    if(command === 'draft') {
+     openVim(mainBlogFolder + '_posts\\_draft\\' + 'new_draft.md');
+    }
 
-      if(command === 'template') {
-        var title = yield prompt('title:');
-        var summary = yield prompt('summary:');
-        var slug = yield prompt('slug:');
-        var category = yield prompt('category:');
-        var tags = yield prompt('tags (comma):');
-        var image = yield prompt('image.jpg (images folder):');
+    if(command === 'template') {
+      var title = yield prompt('title:');
+      var summary = yield prompt('summary:');
+      var slug = yield prompt('slug:');
+      var category = yield prompt('category:');
+      var tags = yield prompt('tags (comma):');
+      var image = yield prompt('image.jpg (images folder):');
 
-        var template = 
-            `---
+      var template = 
+          `---
 layout: post
 title: ${title}
 summary: ${summary}
@@ -85,36 +87,36 @@ tags: [${tags}]
 image: ${image}
 ---`;
 
-        if(filename){
-          prependFile(filename, template, function(error) {
-            if (error) {
-                console.error(error.message);
-            }
+      if(filename){
+        prependFile(filename, template, function(error) {
+          if (error) {
+              console.error(error.message);
+          }
 
-            console.log('file template added');
-            shell.mv(filename, mainBlogFolder + '_posts\\_draft\\' + slug + '.md');
-            console.log('file move');
-            process.exit();
-          });
-        } 
-      }
+          console.log('file template added');
+          shell.mv(filename, mainBlogFolder + '_posts\\_draft\\' + slug + '.md');
+          console.log('file move');
+          process.exit();
+        });
+      } 
+    }
 
-      if(command === 'publish') {
-        var category = yield prompt('category:');
-        var date = yield prompt('date (yyyy-mm-dd hh:mm):');
+    if(command === 'publish') {
+      var category = yield prompt('category:');
+      var date = yield prompt('date (yyyy-mm-dd hh:mm):');
 
-        shell.sed('-i', '%date%', date, filename);
-        shell.mv(filename, mainBlogFolder + '_posts\\' + category + '\\' + date.substring(0, 10) + '-' + filename);
-        process.exit();
-      }
+      shell.sed('-i', '%date%', date, filename);
+      shell.mv(filename, mainBlogFolder + '_posts\\' + category + '\\' + date.substring(0, 10) + '-' + filename);
+      process.exit();
+    }
 
-      if(command === 'drafts') {
-       openVim(mainBlogFolder + '_posts\\_draft\\');
-      }
+    if(command === 'drafts') {
+     openVim(mainBlogFolder + '_posts\\_draft\\');
+    }
 
-      if(command === 'ideas') {
-       openVim(mainBlogFolder + '_posts\\_draft\\ideas\\');
-      }
-    })
+    if(command === 'ideas') {
+     openVim(mainBlogFolder + '_posts\\_draft\\ideas\\');
+    }
   })
+})
 .parse(process.argv);
