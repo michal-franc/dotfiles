@@ -27,6 +27,16 @@ var openVim = (file) => {
 };
 
 program
+.version('0.0.1')
+.option('site', 'opens main blog site')
+.option('local', 'opens local blog, if not runinng do jekyll run on bash subsystem')
+.option('social', 'opens various social sites') 
+.option('idea', 'opens main idea file') 
+.option('ideas', 'opens folder with ideas') 
+.option('draft', 'opens new draft file') 
+.option('drafts', 'opens folder with drafts') 
+.option('template', 'adds jekyll template') 
+.option('publish', 'moves post to proper folder and adds datetime') 
 .arguments('<command> [filename]')
   .action((command, filename) => {
     co(function *() {
@@ -87,10 +97,6 @@ image: ${image}
             process.exit();
           });
         } 
-      }
-
-      if(command === 'wait') {
-        shell.mv(filename, mainBlogFolder + '_posts\\waiting\\');
       }
 
       if(command === 'publish') {
