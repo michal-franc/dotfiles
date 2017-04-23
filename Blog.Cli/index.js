@@ -57,6 +57,7 @@ program
       if(command === 'template') {
         var title = yield prompt('title:');
         var summary = yield prompt('summary:');
+        var slug = yield prompt('slug:');
         var category = yield prompt('category:');
         var tags = yield prompt('tags (comma):');
         var image = yield prompt('image.jpg (images folder):');
@@ -81,6 +82,8 @@ image: ${image}
             }
 
             console.log('file template added');
+            shell.mv(filename, mainBlogFolder + '_posts\\_draft\\' + slug + '.md');
+            console.log('file move');
             process.exit();
           });
         } 
@@ -95,7 +98,8 @@ image: ${image}
         var date = yield prompt('date (yyyy-mm-dd hh:mm):');
 
         shell.sed('-i', '%date%', date, filename);
-        shell.mv(filename, mainBlogFolder + '_posts\\' + category);
+        shell.mv(filename, mainBlogFolder + '_posts\\' + category + '\\' + date.substring(0, 10) + '-' + filename);
+        process.exit();
       }
 
       if(command === 'drafts') {
