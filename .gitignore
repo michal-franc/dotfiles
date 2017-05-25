@@ -6,9 +6,8 @@ node_modules/
 
 # But not these files...
 !*.gitignore
-!_vimrc
-!init_vim.sh
 !windows
-!unix-arch
-!unix-ubuntu
+!unix
 !Blog.Cli
+!unix
+!git
