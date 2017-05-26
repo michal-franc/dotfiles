@@ -14,3 +14,11 @@ folder structure on windows machine
 * install choco
 * choco install ripgrep
 * install XMind
+* install bash + https://github.com/xilun/cbwin to run bash commands
+* from bash follow unix installation? Oh MyZSH?
+
+
+
+
+### I3
+There is a possiblity to run i3 on WLS but you need MOBAXTerm or other X SErver emulator
