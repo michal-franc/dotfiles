@@ -17,6 +17,7 @@ folder structure on windows machine
 * install bash + https://github.com/xilun/cbwin to run bash commands
 * from bash follow unix installation? Oh MyZSH?
 * add to your cmder start task -c /bin/zsh
+* retrieve color pallete for cmder
 
 
 
