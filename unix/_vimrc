@@ -5,59 +5,58 @@ filetype off                  " required
 autocmd BufEnter * silent! lcd %:p:h " automatically sets up the pwd for a file
 
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call plug#begin()
 
-" readt and stable
-Plug 'VundleVim/Vundle.vim'
+call plug#begin('~/.vim/plugged')
+
+" ready and stable
 Plug 'dracula/vim'
 Plug 'scrooloose/nerdtree'
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'neomake/neomake'
 Plug 'airblade/vim-gitgutter'
 Plug 'xuyuanp/nerdtree-git-plugin'
-
-"new plugins testing
-Plug 'airblade/vim-rooter'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-Plug 'shougo/vimproc.vim', {'do' : 'make'}
-Plug 'xolox/vim-misc'
-Plug 'xolox/vim-session'
-Plug 'OmniSharp/omnisharp-vim'
-Plug 'OrangeT/vim-csharp'
-Plug 'ervandew/supertab'
-Plug 'tpope/vim-dispatch'
-Plug 'vim-syntastic/syntastic'
-Plug 'tpope/vim-surround'
-Plug 'moll/vim-node'
-Plug 'majutsushi/tagbar'
-Plug 'scrooloose/nerdcommenter'
-Plug 'easymotion/vim-easymotion'
-Plug 'tpope/vim-repeat'
-Plug 'raimondi/delimitmate'
-Plug 'kien/ctrlp.vim'
-Plug 'plasticboy/vim-markdown'
-Plug 'derekwyatt/vim-scala'  
-Plug 'Shougo/unite.vim'  
-Plug 'elzr/vim-json'
-Plug 'tpope/vim-fugitive'
-Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
-Plug 'jistr/vim-nerdtree-tabs'
-Plug 'wincent/command-t'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'tpope/vim-sensible'
-Plug 'yggdroot/indentline'
-Plug 'mhinz/vim-startify'
-Plug 'parkr/vim-jekyll'
 Plug 'junegunn/goyo.vim'
-
-" test todo plugin http://vimawesome.com/?q=todo
+Plug 'OmniSharp/omnisharp-vim'
+Plug 'neomake/neomake'
 
 " nice glyphs
-Plug 'ryanoasis/vim-devicons'
+" Plug 'ryanoasis/vim-devicons'
+
+"new plugins testing
+"Plug 'airblade/vim-rooter'
+"Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+"Plug 'junegunn/fzf.vim'
+"Plug 'shougo/vimproc.vim', {'do' : 'make'}
+"Plug 'xolox/vim-misc'
+"Plug 'xolox/vim-session'
+"Plug 'OrangeT/vim-csharp'
+"Plug 'ervandew/supertab'
+"Plug 'tpope/vim-dispatch'
+"Plug 'vim-syntastic/syntastic'
+"Plug 'tpope/vim-surround'
+"Plug 'moll/vim-node'
+"Plug 'majutsushi/tagbar'
+"Plug 'scrooloose/nerdcommenter'
+"Plug 'easymotion/vim-easymotion'
+"Plug 'tpope/vim-repeat'
+"Plug 'raimondi/delimitmate'
+"Plug 'kien/ctrlp.vim'
+"Plug 'plasticboy/vim-markdown'
+"Plug 'derekwyatt/vim-scala'  
+"Plug 'Shougo/unite.vim'  
+"Plug 'elzr/vim-json'
+"Plug 'tpope/vim-fugitive'
+"Plug 'pangloss/vim-javascript'
+"Plug 'mxw/vim-jsx'
+"Plug 'jistr/vim-nerdtree-tabs'
+"Plug 'wincent/command-t'
+"Plug 'christoomey/vim-tmux-navigator'
+"Plug 'tpope/vim-sensible'
+"Plug 'yggdroot/indentline'
+"Plug 'mhinz/vim-startify'
+"Plug 'parkr/vim-jekyll'
+
+" test todo plugin http://vimawesome.com/?q=todo
 
 "snippets
 "Plug 'justingj/vim-react-snippets'
@@ -86,6 +85,10 @@ set background=dark
 let g:jsx_ext_required=0
 
 " Omnisharp settings
+
+let g:OmniSharp_server_type = 'v1'
+let g:OmniSharp_server_type = 'roslyn'
+
 let g:OmniSharp_selector_ui = 'unite'  " Use unite.vim
 let g:SuperTabDefaultCompletionType = 'context'
 let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"

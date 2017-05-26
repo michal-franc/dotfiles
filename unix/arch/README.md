@@ -121,6 +121,10 @@ And that's it! This works absolutely fine on my Windows machine running Arch x86
 ### Terminal Colors links
 http://terminal.sexy/
 
+### setting proper key delay
+
+xseet r rate 150 20
+
 
 ### Xresource
 ! Dracula Xresources palette
