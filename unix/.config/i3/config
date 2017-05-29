@@ -15,7 +15,7 @@ set $mod Mod4
 # Font
 #
 
-font pango:Droid Sans Mono 9
+font pango:Droid Sans Mono 8
 
 # use this keyes for focus, movement resize
 
