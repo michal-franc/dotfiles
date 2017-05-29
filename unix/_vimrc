@@ -16,7 +16,6 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'airblade/vim-gitgutter'
 Plug 'xuyuanp/nerdtree-git-plugin'
 Plug 'junegunn/goyo.vim'
-Plug 'OmniSharp/omnisharp-vim'
 Plug 'neomake/neomake'
 
 " nice glyphs
@@ -62,6 +61,9 @@ Plug 'neomake/neomake'
 "Plug 'justingj/vim-react-snippets'
 "Plug 'SirVer/ultisnips'
 "Plug 'honza/vim-snippets'
+
+"Not working yet
+"Plug 'OmniSharp/omnisharp-vim'
 
 call plug#end()
 
