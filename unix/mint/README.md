@@ -2,28 +2,39 @@ To install vim with python support
 
 sudo apt-get install vim-nox-py2
 
-removing XFCE 
+
+Installing i3
+------------------
+sudo apt-get install i3 i3-wm 
+touch .xinitrc
+add exec i3 
+
+if it doesnt work then you need to try and sudo dpkg-reconfigure mdm
+
+removing XFCE 
 ----------------------------------------------------
 In my case (Mint with cinnamon and XFCE) I did:
 
-sudo apt-get -f install
-sudo apt-get clean
-sudo apt-get autoclean
-sudo apt-get update
+sudo apt-get -f install 
+sudo apt-get clean 
+sudo apt-get autoclean 
+sudo apt-get update 
 THEN:
 
 sudo apt-get purge xfce4  # failed
-THEN:
+THEN: 
 
-sudo apt-get purge xfconf
-sudo apt-get autoremove
-sudo apt-get -f install
-sudo apt-get clean
-sudo apt-get autoclean
-sudo apt-get update
+sudo apt-get purge xfconf 
+sudo apt-get autoremove 
+sudo apt-get -f install 
+sudo apt-get clean 
+sudo apt-get autoclean 
+sudo apt-get update 
 
 ----------------------------------------------------------
 Termite installation
+
+Install GIT! before running this script
 
 https://github.com/Corwind/termite-install/blob/master/termite-install.sh
 
