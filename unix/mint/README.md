@@ -103,3 +103,4 @@ https://docs.docker.com/engine/installation/linux/ubuntu/#install-using-the-repo
 #### VIM
 VIM from one of the graphical packages to have + clipboard and python
 
+http://todolist.site/#installation
