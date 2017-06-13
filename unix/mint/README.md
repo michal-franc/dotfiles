@@ -7,18 +7,16 @@ In my case (Mint with cinnamon and XFCE) I did:
 * sudo apt-get -f install 
 * sudo apt-get clean 
 * sudo apt-get autoclean 
+* sudo apt-get update  
+
+* sudo apt-get purge xfce4  # failed 
+
+* sudo apt-get purge xfconf 
+* sudo apt-get autoremove 
+* sudo apt-get -f install 
+* sudo apt-get clean 
+* sudo apt-get autoclean 
 * sudo apt-get update 
-THEN: 
-
-sudo apt-get purge xfce4  # failed 
-THEN: 
-
-sudo apt-get purge xfconf 
-sudo apt-get autoremove 
-sudo apt-get -f install 
-sudo apt-get clean 
-sudo apt-get autoclean 
-sudo apt-get update 
 
 ----------------------------------------------------------
 Termite installation 
@@ -29,21 +27,21 @@ curl https://raw.githubusercontent.com/Corwind/termite-install/master/termite-in
 
 add to /.config/i3/config 
 
-sudo apt-get install rofi 
+* sudo apt-get install rofi 
 ----------------------------------------------------------
 script  
 
-sudo mv .config/i3/config .config/i3/copy_config 
-sudo ln dotfiles/unix/.config/i3/config .config/i3/config 
+* sudo mv .config/i3/config .config/i3/copy_config 
+* sudo ln dotfiles/unix/.config/i3/config .config/i3/config 
 
 ------------------------------------------------------------
 Termite install 
 
 mkdir .config/termite 
-sudo ln dotfiles/unix/.config/termite/config .config/termite/config 
+* sudo ln dotfiles/unix/.config/termite/config .config/termite/config 
 
 ---------------------------------------
-sudo apt-get install zsh 
+* sudo apt-get install zsh 
 
 https://github.com/robbyrussell/oh-my-zsh 
 https://github.com/denysdovhan/spaceship-zsh-theme -> move tmp to themes folder and rename 
