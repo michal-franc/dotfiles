@@ -85,4 +85,4 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias t=todolist
-function n() { echo - $@ >> main.notes; }
+function n() { echo "- $@" >> main.notes; }
