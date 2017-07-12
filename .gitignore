@@ -8,6 +8,6 @@ node_modules/
 !*.gitignore
 !windows
 !unix
-!Blog.Cli
+!cli-tools
 !unix
 !git
