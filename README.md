@@ -1,6 +1,10 @@
 #### Unix Installation
 https://arch-anywhere.or
 
+#### TODO
+Create your own customized aliases for different things
+https://github.com/robbyrussell/oh-my-zsh/wiki/Cheatsheet
+
 
 Installation instructions
 ====
