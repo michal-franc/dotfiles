@@ -5,8 +5,10 @@ ZSH_THEME="spaceship"
 plugins=(git, z)
 
 source $ZSH/oh-my-zsh.sh
+source $ZSH/templates/zshrc.zsh-template
 
 alias t=todolist
+
 
 #todo expand it to do a grep with all the notes
 #todo expand it even further to enable for n l - display list of notes with number 
@@ -20,3 +22,10 @@ function n() {
      echo "- $@" >> .main.notes;
  fi 
 }
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[[ -f /home/mfranc/JustEat/JE.ElasticSearchSnapshot.Lambda/node_modules/tabtab/.completions/serverless.zsh ]] && . /home/mfranc/JustEat/JE.ElasticSearchSnapshot.Lambda/node_modules/tabtab/.completions/serverless.zsh
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[[ -f /home/mfranc/JustEat/JE.ElasticSearchSnapshot.Lambda/node_modules/tabtab/.completions/sls.zsh ]] && . /home/mfranc/JustEat/JE.ElasticSearchSnapshot.Lambda/node_modules/tabtab/.completions/sls.zsh
