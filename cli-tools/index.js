@@ -8,17 +8,19 @@ var prependFile = require('prepend-file');
 
 var prompt = require('co-prompt');
 
-var mainBlogFolder = 'C:\\Users\\mfranc\\DropBox\\blog\\michal-franc.github.io\\';
+var mainBlogFolder = '~/Work/michal-franc.github.io/'
 
 var spawnChrome = (site) => {
   opn(site);
 };
 
-var openVim = (file) => {
+var openVim = (folder, filename) => {
   var editor = process.env.EDITOR || 'vim'; 
 
-  var child = spawn(editor, [file, '-c Goyo'], {
-    stdio: 'inherit' 
+  var params = [folder, '-c Goyo', '-c o ' + filename];
+
+  var child = spawn(editor, params, {
+    stdio: 'inherit'
   });
 
   child.on('exit', function (e, code) {
@@ -59,11 +61,11 @@ program
     }
 
     if(command === 'idea') {
-     openVim(mainBlogFolder + '_posts\\_draft\\ideas\\' + 'new_idea.md');
+     openVim(mainBlogFolder + '_posts/_draft/ideas/', 'new_idea.md');
     }
 
     if(command === 'draft') {
-     openVim(mainBlogFolder + '_posts\\_draft\\' + 'new_draft.md');
+     openVim(mainBlogFolder + '_posts/_draft/', 'new_draft.md');
     }
 
     if(command === 'template') {
@@ -94,7 +96,7 @@ image: ${image}
           }
 
           console.log('file template added');
-          shell.mv(filename, mainBlogFolder + '_posts\\_draft\\' + slug + '.md');
+          shell.mv(filename, mainBlogFolder + '_posts/_draft/' + slug + '.md');
           console.log('file move');
           process.exit();
         });
@@ -106,16 +108,16 @@ image: ${image}
       var date = yield prompt('date (yyyy-mm-dd hh:mm):');
 
       shell.sed('-i', '%date%', date, filename);
-      shell.mv(filename, mainBlogFolder + '_posts\\' + category + '\\' + date.substring(0, 10) + '-' + filename);
+      shell.mv(filename, mainBlogFolder + '_posts/' + category + '/' + date.substring(0, 10) + '-' + filename);
       process.exit();
     }
 
     if(command === 'drafts') {
-     openVim(mainBlogFolder + '_posts\\_draft\\');
+     openVim(mainBlogFolder + '_posts/_draft/');
     }
 
     if(command === 'ideas') {
-     openVim(mainBlogFolder + '_posts\\_draft\\ideas\\');
+     openVim(mainBlogFolder + '_posts/_draft/ideas/');
     }
   })
 })
