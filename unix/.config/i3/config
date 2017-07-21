@@ -15,7 +15,7 @@ set $mod Mod4
 # Font
 #
 
-font pango:Droid Sans Mono 8
+font pango:Droid Sans Mono 10
 
 # use this keyes for focus, movement resize
 
@@ -127,6 +127,6 @@ new_float normal 0
 hide_edge_borders none
 
 bar {
-        status_command i3status
+        status_command i3status | i3status-taskwarrior
         position top
 }
