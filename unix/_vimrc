@@ -138,6 +138,7 @@ let g:neomake_javascript_eslint_maker = {
 
 let g:neomake_javascript_enabled_makers = ['eslint']
 let g:neomake_place_signs= 1
+let g:neomake_warning_sign={'text': '⚠', 'texthl': 'NeomakeErrorMsg'}
 
 " syntastic
 let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
@@ -222,3 +223,4 @@ endfunction
 autocmd! User FzfStatusLine call <SID>fzf_statusline()
 
 colorscheme dracula
+highlight NeomakeErrorMsg ctermfg=1 ctermbg=236
