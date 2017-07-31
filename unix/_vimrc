@@ -17,6 +17,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'xuyuanp/nerdtree-git-plugin'
 Plug 'junegunn/goyo.vim'
 Plug 'neomake/neomake'
+Plug 'pangloss/vim-javascript'
 
 " nice glyphs
 " Plug 'ryanoasis/vim-devicons'
@@ -45,7 +46,6 @@ Plug 'neomake/neomake'
 "Plug 'Shougo/unite.vim'  
 "Plug 'elzr/vim-json'
 "Plug 'tpope/vim-fugitive'
-"Plug 'pangloss/vim-javascript'
 "Plug 'mxw/vim-jsx'
 "Plug 'jistr/vim-nerdtree-tabs'
 "Plug 'wincent/command-t'
@@ -220,3 +220,5 @@ function! s:fzf_statusline()
 endfunction
 
 autocmd! User FzfStatusLine call <SID>fzf_statusline()
+
+colorscheme dracula
