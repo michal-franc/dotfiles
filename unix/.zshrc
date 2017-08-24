@@ -26,6 +26,12 @@ function calendar() {
   gcalcli calw --calendar michal.franc@just-eat.com --monday -w 30
 }
 
+# taskwarrior function
+# project shorthand
+function tp() {
+  task project:$@
+}
+
 # tabtab source for serverless package
 # uninstall by removing these lines or running `tabtab uninstall serverless`
 [[ -f /home/mfranc/JustEat/JE.ElasticSearchSnapshot.Lambda/node_modules/tabtab/.completions/serverless.zsh ]] && . /home/mfranc/JustEat/JE.ElasticSearchSnapshot.Lambda/node_modules/tabtab/.completions/serverless.zsh
