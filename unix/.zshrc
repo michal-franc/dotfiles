@@ -1,4 +1,5 @@
 export ZSH=/home/mfranc/.oh-my-zsh
+export GOPATH=$HOME/go
 
 ZSH_THEME="spaceship"
 

@@ -36,17 +36,17 @@ bindsym $mod+Shift+q kill
 # start dmenu (a program launcher)
 bindsym $mod+d exec "rofi -show run"
 
-# change focus
-bindsym $mod+$left  focus left
-bindsym $mod+$down  focus down
-bindsym $mod+$up    focus up
-bindsym $mod+$right focus right
+# i3 vim nav
+bindsym --release $mod+$left exec --no-startup-id "i3-vim-nav h"
+bindsym --release $mod+$down exec --no-startup-id "i3-vim-nav j"
+bindsym --release $mod+$up exec --no-startup-id "i3-vim-nav k"
+bindsym --release $mod+$right exec --no-startup-id "i3-vim-nav l"
 
 # move focused window
-bindsym $mod+Shift+$left  move left
-bindsym $mod+Shift+$down move down
-bindsym $mod+Shift+$up move up
-bindsym $mod+Shift+$right move right
+bindsym --release $mod+Shift+$left  move left
+bindsym --release $mod+Shift+$down move down
+bindsym --release $mod+Shift+$up move up
+bindsym --release $mod+Shift+$right move right
 
 # split in horizontal orientation
 bindsym $mod+b split h exec termite

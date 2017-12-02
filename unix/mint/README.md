@@ -109,3 +109,23 @@ http://todolist.site/#installation
 Dont forget to install tig :)
 
 * sudo apt-get install tig
+
+
+---------------------
+Installing go and GOPATH for i3-vim-nav
+---------------------
+https://github.com/termhn/i3-vim-nav
+
+setting GOPATH
+
+create a folder ~/go
+
+go get -u github.com/michal-franc/i3-vim-nav
+
+if it cant find GOPATH remember that sudo might be using different ENV variables
+
+sudo ln -s <your installation folder> /usr/local/bin
+
+in order to use i3-vim-nav and i get the error sorry the commang is not supported in this VIM
+You will need to install vim.nox-py2 and make sure 
+that sudo update-alternatives --config vim and select vim.nox
