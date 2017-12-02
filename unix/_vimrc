@@ -46,6 +46,7 @@ Plug 'pangloss/vim-javascript'
 "Plug 'Shougo/unite.vim'  
 "Plug 'elzr/vim-json'
 "Plug 'tpope/vim-fugitive'
+"Plug 'pangloss/vim-javascript'
 "Plug 'mxw/vim-jsx'
 "Plug 'jistr/vim-nerdtree-tabs'
 "Plug 'wincent/command-t'
@@ -67,14 +68,14 @@ Plug 'pangloss/vim-javascript'
 
 call plug#end()
 
-autocmd! BufWritePost * Neomake
-autocmd InsertChange,TextChanged * update | Neomake
+" autocmd! BufWritePost * Neomake
+" autocmd InsertChange,TextChanged * update | Neomake
 
 " setting leader as space
 let mapleader="\<Space>"
 
 set encoding=utf8
-set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Plus\ Nerd\ File\ Types:h11
+set guifont=Monoscape:h11
 
 "Airline setting theme
 let g:airline_theme='dracula'
@@ -86,18 +87,7 @@ set background=dark
 "jsx plugin
 let g:jsx_ext_required=0
 
-" Omnisharp settings
-
-let g:OmniSharp_server_type = 'v1'
-let g:OmniSharp_server_type = 'roslyn'
-
-let g:OmniSharp_selector_ui = 'unite'  " Use unite.vim
-let g:SuperTabDefaultCompletionType = 'context'
-let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
-let g:SuperTabDefaultCompletionTypeDiscovery = ["&omnifunc:<c-x><c-o>","&completefunc:<c-x><c-n>"]
-let g:SuperTabClosePreviewOnPopupClose = 1
-
-imap ii <esc>
+imap kk <esc>
 
 " enables vim switch pane using CTRL hjkl which is in line with the tmux
 " plugin to integrate vim and tmux nicely
@@ -113,7 +103,7 @@ let NERDTreeShowHidden=1
 " open NERDTree automatically
 " add shortcut to open NERDTree something like CTRL+TAB NERDTreeToogle
 " doesnt work het with startify
-" autocmd VimEnter * NERDTree 
+autocmd VimEnter * NERDTree 
 
 set backspace=indent,eol,start
 set tabstop=2 softtabstop=0 expandtab shiftwidth=2
@@ -138,71 +128,6 @@ let g:neomake_javascript_eslint_maker = {
 
 let g:neomake_javascript_enabled_makers = ['eslint']
 let g:neomake_place_signs= 1
-let g:neomake_warning_sign={'text': '⚠', 'texthl': 'NeomakeErrorMsg'}
-
-" syntastic
-let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
-
-augroup omnisharp_commands
-    autocmd!
-
-    "Set autocomplete function to OmniSharp (if not using YouCompleteMe completion plugin)
-    autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
-
-    " Synchronous build (blocks Vim)
-    "autocmd FileType cs nnoremap <F5> :wa!<cr>:OmniSharpBuild<cr>
-    " Builds can also run asynchronously with vim-dispatch installed
-    autocmd FileType cs nnoremap <leader>b :wa!<cr>:OmniSharpBuildAsync<cr>
-    " automatic syntax check on events (TextChanged requires Vim 7.4)
-    autocmd BufEnter,TextChanged,InsertLeave *.cs SyntasticCheck
-
-    " Automatically add new cs files to the nearest project on save
-    autocmd BufWritePost *.cs call OmniSharp#AddToProject()
-
-    "show type information automatically when the cursor stops moving
-    autocmd CursorHold *.cs call OmniSharp#TypeLookupWithoutDocumentation()
-
-    "The following commands are contextual, based on the current cursor position.
-
-    autocmd FileType cs nnoremap gd :OmniSharpGotoDefinition<cr>
-    autocmd FileType cs nnoremap <leader>fi :OmniSharpFindImplementations<cr>
-    autocmd FileType cs nnoremap <leader>ft :OmniSharpFindType<cr>
-    autocmd FileType cs nnoremap <leader>fs :OmniSharpFindSymbol<cr>
-    autocmd FileType cs nnoremap <leader>fu :OmniSharpFindUsages<cr>
-    "finds members in the current buffer
-    autocmd FileType cs nnoremap <leader>fm :OmniSharpFindMembers<cr>
-    " cursor can be anywhere on the line containing an issue
-    autocmd FileType cs nnoremap <leader>x  :OmniSharpFixIssue<cr>
-    autocmd FileType cs nnoremap <leader>fx :OmniSharpFixUsings<cr>
-    autocmd FileType cs nnoremap <leader>tt :OmniSharpTypeLookup<cr>
-    autocmd FileType cs nnoremap <leader>dc :OmniSharpDocumentation<cr>
-    "navigate up by method/property/field
-    autocmd FileType cs nnoremap <C-K> :OmniSharpNavigateUp<cr>
-    "navigate down by method/property/field
-    autocmd FileType cs nnoremap <C-J> :OmniSharpNavigateDown<cr>
-
-augroup END
-
-" Contextual code actions (requires CtrlP or unite.vim)
-nnoremap <leader><space> :OmniSharpGetCodeActions<cr>
-" Run code actions with text selected in visual mode to extract method
-vnoremap <leader><space> :call OmniSharp#GetCodeActions('visual')<cr>
-
-" rename with dialog
-nnoremap <leader>nm :OmniSharpRename<cr>
-nnoremap <F2> :OmniSharpRename<cr>
-" rename without dialog - with cursor on the symbol to rename... ':Rename newname'
-command! -nargs=1 Rename :call OmniSharp#RenameTo("<args>")
-
-" Force OmniSharp to reload the solution. Useful when switching branches etc.
-nnoremap <leader>rl :OmniSharpReloadSolution<cr>
-nnoremap <leader>cf :OmniSharpCodeFormat<cr>
-" Load the current .cs file to the nearest project
-nnoremap <leader>tp :OmniSharpAddToProject<cr>
-
-" (Experimental - uses vim-dispatch or vimproc plugin) - Start the omnisharp server for the current solution
-nnoremap <leader>ss :OmniSharpStartServer<cr>
-nnoremap <leader>sp :OmniSharpStopServer<cr>
 
 command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --follow --color "always" '.shellescape(<q-args>), 1, <bang>0)
 
@@ -221,6 +146,3 @@ function! s:fzf_statusline()
 endfunction
 
 autocmd! User FzfStatusLine call <SID>fzf_statusline()
-
-colorscheme dracula
-highlight NeomakeErrorMsg ctermfg=1 ctermbg=236
