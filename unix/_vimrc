@@ -93,10 +93,10 @@ imap kk <esc>
 " enables vim switch pane using CTRL hjkl which is in line with the tmux
 " plugin to integrate vim and and i3wm 
 
-nnoremap <c-l> :call Focus('right', 'l')<CR>
-nnoremap <c-h> :call Focus('left', 'h')<CR>
-nnoremap <c-k> :call Focus('up', 'k')<CR>
-nnoremap <c-j> :call Focus('down', 'j')<CR>
+nnoremap <silent> <c-l> :call Focus('right', 'l')<CR>
+nnoremap <silent> <c-h> :call Focus('left', 'h')<CR>
+nnoremap <silent> <c-k> :call Focus('up', 'k')<CR>
+nnoremap <silent> <c-j> :call Focus('down', 'j')<CR>
 
 " NERDTree show hidden files like .babelrc .gitignore
 let NERDTreeShowHidden=1
