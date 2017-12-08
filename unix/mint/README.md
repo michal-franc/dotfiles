@@ -3,6 +3,12 @@ Take the mint with cinamom image and install it just like usual.
 Before procedding install Guest Additions and make sure software rendering message is gone
 To be able to install Additions you need to run
 * sudo apt-get install build-essential
+* sudo apt-get update -y
+* sudo apt-get upgrade -y
+* sudo apt-get dist-upgrade -y
+* sudo apt-get install linux-headers-generic
+
+Virtual box 5.14 had a bug with 'generic' kernel ( mint is generic ) - so make sure you use VBox > 5.14
 
 This is the tutorial on how to convert Mint installation to system with I3WM.
 
