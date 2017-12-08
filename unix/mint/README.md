@@ -15,7 +15,7 @@ This is the tutorial on how to convert Mint installation to system with I3WM.
 removing XFCE  
 ----------------------------------------------------
 In my case (Mint with cinnamon and XFCE) I did: 
-
+* sudo apt-get -f i3
 * sudo apt-get -f install 
 * sudo apt-get clean 
 * sudo apt-get autoclean 
