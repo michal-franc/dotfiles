@@ -1,3 +1,9 @@
+Take the mint with cinamom image and install it just like usual.
+
+Before procedding install Guest Additions and make sure software rendering message is gone
+To be able to install Additions you need to run
+* sudo apt-get install build-essential
+
 This is the tutorial on how to convert Mint installation to system with I3WM.
 
 removing XFCE  
