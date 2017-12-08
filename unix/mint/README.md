@@ -1,4 +1,4 @@
-Take the mint with cinamom image and install it just like usual.
+Take the mint with xfce (not cinammon) image and install it just like usual.
 
 Before procedding install Guest Additions and make sure software rendering message is gone
 To be able to install Additions you need to run
