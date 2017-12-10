@@ -18,7 +18,7 @@ Plug 'xuyuanp/nerdtree-git-plugin'
 Plug 'junegunn/goyo.vim'
 Plug 'neomake/neomake'
 Plug 'pangloss/vim-javascript'
-Plug 'termhn/i3-vim-nav'
+Plug 'michal-franc/i3-vim-nav'
 
 " nice glyphs
 " Plug 'ryanoasis/vim-devicons'
