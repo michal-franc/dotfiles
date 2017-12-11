@@ -141,3 +141,11 @@ sudo ln -s <your installation folder> /usr/local/bin
 in order to use i3-vim-nav and i get the error sorry the commang is not supported in this VIM
 You will need to install vim.nox-py2 and make sure 
 that sudo update-alternatives --config vim and select vim.nox
+
+
+
+------------------------
+Great Tools
+----------------------
+
+sudo apt-get install entr -> auto running files on file change:
