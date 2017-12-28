@@ -49,6 +49,8 @@ script
 ------------------------------------------------------------
 Termite install 
 
+* sudo apt-get install git
+
 mkdir .config/termite 
 * sudo ln dotfiles/unix/.config/termite/config .config/termite/config 
 
