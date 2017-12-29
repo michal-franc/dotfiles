@@ -144,9 +144,12 @@ in order to use i3-vim-nav and i get the error sorry the commang is not supporte
 You will need to install vim.nox-py2 and make sure 
 that sudo update-alternatives --config vim and select vim.nox
 
+----------------------
+Fonts
+----------------------
+https://askubuntu.com/questions/333409/how-to-install-the-monaco-font
 
-
-------------------------
+----------------------
 Great Tools
 ----------------------
 
