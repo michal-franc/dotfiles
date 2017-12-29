@@ -148,6 +148,7 @@ that sudo update-alternatives --config vim and select vim.nox
 Fonts
 ----------------------
 sudo apt-get install fonts-inconsolata
+https://github.com/source-foundry/Hack
 
 ----------------------
 Great Tools
