@@ -63,7 +63,7 @@ https://github.com/denysdovhan/spaceship-zsh-theme -> move tmp to themes folder 
 ln .zshrc from gi 
 
 
-xset r rate 150 20 - to auto 
+xset r rate 150 40 - to auto 
 
 
 --------------------------------------
