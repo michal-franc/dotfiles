@@ -147,7 +147,7 @@ that sudo update-alternatives --config vim and select vim.nox
 ----------------------
 Fonts
 ----------------------
-https://askubuntu.com/questions/333409/how-to-install-the-monaco-font
+sudo apt-get install fonts-inconsolata
 
 ----------------------
 Great Tools
