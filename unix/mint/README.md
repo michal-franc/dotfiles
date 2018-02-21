@@ -1,7 +1,11 @@
 Take the mint with xfce (not cinammon) image and install it just like usual.
 
+Dont install third party software - we are generating smallest possible Mint installation. We dont need that.
+Pick English US keyboard
+
 Before procedding install Guest Additions and make sure software rendering message is gone
-To be able to install Additions you need to run
+
+Sometimes To be able to install Additions you need to run
 * sudo apt-get install build-essential
 * sudo apt-get update -y
 * sudo apt-get upgrade -y
@@ -12,23 +16,23 @@ Virtual box 5.14 had a bug with 'generic' kernel ( mint is generic ) - so make s
 
 This is the tutorial on how to convert Mint installation to system with I3WM.
 
+Installing Guest Addtions is simple - just add image and in terminal on admin rights run the sh. Then restart.
+
 removing XFCE  
 ----------------------------------------------------
 In my case (Mint with cinnamon and XFCE) I did: 
-* sudo apt-get -f i3
-* sudo apt-get -f install 
-* sudo apt-get clean 
-* sudo apt-get autoclean 
-* sudo apt-get update  
+* sudo apt-get install i3
 
-* sudo apt-get purge xfce4  # failed 
+reboot and switch to i3 from logon screen
+Just logout and select i3 as your interface
 
-* sudo apt-get purge xfconf 
-* sudo apt-get autoremove 
-* sudo apt-get -f install 
-* sudo apt-get clean 
-* sudo apt-get autoclean 
-* sudo apt-get update 
+* sudo apt-get remove --purge xfce*
+* sudo apt-get remove --purge libreoffice*
+* sudo apt-get remove --purge thunderbird*
+* sudo apt-get remove --purge gimp*
+* sudo apt-get remove --purge firefox*
+* sudo apt-get clean
+* sudo apt-get autoremove
 
 ----------------------------------------------------------
 Termite installation 
