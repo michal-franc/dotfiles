@@ -5,13 +5,10 @@ Every reinstall is an opportunity to make this repo a lot better.
 My distro of choice is - Mint and most of the Unix related configs are for Mint
 I had a brief moment of love with Arch and my get back to it one day.
 
-#### Where to Start?
-At the moment, the most up to date setup instructions are for Mint[1].
-
-[1](/unix)
+## Where to Start?
+At the moment, the most up to date setup instructions are for [Mint](/unix)
 
 #### Outdated instructions
-
 #### Unix Installation
 https://arch-anywhere.or
 
