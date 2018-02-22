@@ -37,10 +37,16 @@ bindsym $mod+Shift+q kill
 bindsym $mod+d exec "rofi -show run"
 
 # i3 vim nav
-bindsym --release $mod+$left exec --no-startup-id "i3-vim-nav h"
-bindsym --release $mod+$down exec --no-startup-id "i3-vim-nav j"
-bindsym --release $mod+$up exec --no-startup-id "i3-vim-nav k"
-bindsym --release $mod+$right exec --no-startup-id "i3-vim-nav l"
+# experimental comment out normal focus
+#bindsym --release $mod+$left exec --no-startup-id "i3-vim-nav h"
+#bindsym --release $mod+$down exec --no-startup-id "i3-vim-nav j"
+#bindsym --release $mod+$up exec --no-startup-id "i3-vim-nav k"
+#bindsym --release $mod+$right exec --no-startup-id "i3-vim-nav l"
+
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
 
 # move focused window
 bindsym --release $mod+Shift+$left  move left
