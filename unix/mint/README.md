@@ -62,19 +62,60 @@ mkdir .config/termite
 
 * sudo ln dotfiles/unix/.config/i3/config .config/i3/config 
 
-#### TODO: i3 vim nav here
-#### TODO: go installation here
 
+ZSH 
 ---------------------------------------
 * sudo apt-get install zsh 
 
 https://github.com/robbyrussell/oh-my-zsh 
-https://github.com/denysdovhan/spaceship-zsh-theme -> move tmp to themes folder and rename 
 
-ln .zshrc from gi 
+* https://github.com/zplug/zplug
 
+* zplug install
+
+ln dotfiles/unix/.zshrc ~/.zshrc
 
 xset r rate 150 40 - to auto 
+
+My i3 config uses i3-vim-nav for navigation beetwen panels. This soft is used to easilly navigate to i3 context using same controls. This step is necessary now to enable pane jumpiong.
+
+---------------------
+Installing go and GOPATH for i3-vim-nav
+---------------------
+Go Installation
+
+https://github.com/golang/go/wiki/Ubuntu
+
+When installing new version you need to setup proper path
+
+export  PATH="$PATH:/user/lib/go-1.9/bin"
+this is also added .zshrc so will be added automaticaly after all the other steps are finished :P
+
+
+//THIS is at the moment broken and optional
+----------------------
+If you want to test i3-vim-nav uncommet special config in i3
+
+sudo apt-get install libxdo-dev
+sudo apt-get install xdotool
+
+https://github.com/termhn/i3-vim-nav
+
+go get -u github.com/michal-franc/i3-vim-nav
+
+if it cant find GOPATH remember that sudo might be using different ENV variables
+
+-----------------------
+install VIM
+sudo apt-get install vim.nox-py2
+
+ln dotfiles/unix/_vimrc _vimrc
+
+install plug
+https://github.com/junegunn/vim-plug
+
+run PlugInstall
+
 --------------------------------------
 Go to main site download deb and use sudo dpkg -i on poackage 
 -------------------------------------------
@@ -93,18 +134,28 @@ Installing VBox guest addtions
 ------------------------------------
 http://www.techrepublic.com/article/how-to-install-virtualbox-guest-additions-on-a-gui-less-ubuntu-server-host/ 
 
+when mounting and /mount/cdrom is missing -> just create this folder with mkdir
+
+you still need to do this step from cli
+
 ln .xinitrc -> script 
 
 
 RipgRep instlal 
 ----------------
-download package 
+download package  -> ripgrep x86_64
 unpack 
 tar -xvzf community_images.tar.gz 
 
 move to tools 
-ln to /usr/bin/rg 
+ln rg /usr/bin/rg 
 
+
+Linking all the settings
+--------------------------
+
+ln dotfiles/unix/.xinitrc .xinitrc
+ln dotfiles/unix/.Xresources .Xresources
 
 Installing Mono 
 ------------------
@@ -119,48 +170,43 @@ https://askubuntu.com/questions/575505/glibcxx-3-4-20-not-found-how-to-fix-this-
 ------------------
 Visual Studio Code Settings file
 
-Docker
-------------------
-https://docs.docker.com/engine/installation/linux/ubuntu/#install-using-the-repository
-
-#### VIM
-VIM from one of the graphical packages to have + clipboard and python
-
-http://todolist.site/#installation
-
-
 Dont forget to install tig :)
 
 * sudo apt-get install tig
 
-
----------------------
-Installing go and GOPATH for i3-vim-nav
----------------------
-https://github.com/termhn/i3-vim-nav
-
-setting GOPATH
-
-create a folder ~/go
-
-go get -u github.com/michal-franc/i3-vim-nav
-
-if it cant find GOPATH remember that sudo might be using different ENV variables
-
-sudo ln -s <your installation folder> /usr/local/bin
-
-in order to use i3-vim-nav and i get the error sorry the commang is not supported in this VIM
-You will need to install vim.nox-py2 and make sure 
-that sudo update-alternatives --config vim and select vim.nox
-
 ----------------------
 Fonts
 ----------------------
+
+only inconsolata is used at the moment
 sudo apt-get install fonts-inconsolata
-https://github.com/source-foundry/Hack
+
+
+#https://github.com/source-foundry/Hack
 
 ----------------------
 Great Tools
 ----------------------
 
 sudo apt-get install entr -> auto running files on file change:
+
+
+----------------------
+Python
+---------------------
+
+sudo apt-get install python-pip
+sudo apt-get install python3-pip
+
+Docker
+------------------
+https://docs.docker.com/engine/installation/linux/ubuntu/#install-using-the-repository
+
+beacuse you are using mint you need to check on release page which ubuntu build your version derive from and then replace lsb_release with the name of ubuntu
+for instance sylvia -> based on xenial then use xenial
+
+
+Chrome Extensions and setup
+--------------------------
+
+Install lastpass, vimium -> set up account login withut any synchronization
