@@ -34,29 +34,36 @@ Just logout and select i3 as your interface
 * sudo apt-get clean
 * sudo apt-get autoremove
 
+* sudo rm -rf /usr/share/backgrounds 
+* sudo rm -rf /usr/share/icons
+
+* sudo apt-get install git
+* sudo apt-get install xclip
+
+Configure Github ssh key
+
+cat id_rsa.pub | xclip -selection c
+This will copy your ssh key to clipboard - use it on github
+
+Clone dotfiles to main ~
+
+Create Tools Folder.
+
 ----------------------------------------------------------
 Termite installation 
 
-https://github.com/Corwind/termite-install/blob/master/termite-install.sh 
-
+From tools folder run
 curl https://raw.githubusercontent.com/Corwind/termite-install/master/termite-install.sh > termite_install.sh 
-
-add to /.config/i3/config 
-
-* sudo apt-get install rofi 
-----------------------------------------------------------
-script  
-
-* sudo mv .config/i3/config .config/i3/copy_config 
-* sudo ln dotfiles/unix/.config/i3/config .config/i3/config 
-
-------------------------------------------------------------
-Termite install 
-
-* sudo apt-get install git
 
 mkdir .config/termite 
 * sudo ln dotfiles/unix/.config/termite/config .config/termite/config 
+
+* sudo apt-get install rofi 
+
+* sudo ln dotfiles/unix/.config/i3/config .config/i3/config 
+
+#### TODO: i3 vim nav here
+#### TODO: go installation here
 
 ---------------------------------------
 * sudo apt-get install zsh 
@@ -68,8 +75,6 @@ ln .zshrc from gi
 
 
 xset r rate 150 40 - to auto 
-
-
 --------------------------------------
 Go to main site download deb and use sudo dpkg -i on poackage 
 -------------------------------------------
