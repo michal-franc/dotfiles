@@ -1,6 +1,6 @@
 export ZSH=/home/mfranc/.oh-my-zsh
 export GOPATH=$HOME/go
-export PATH="$PATH:/usr/lib/go-1.9/bin"
+export PATH="$PATH:/usr/lib/go-1.9/bin:$GOPATH/bin"
 
 plugins=(git z)
 source $ZSH/oh-my-zsh.sh
