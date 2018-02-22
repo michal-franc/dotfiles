@@ -1,10 +1,8 @@
 export ZSH=/home/mfranc/.oh-my-zsh
 export GOPATH=$HOME/go
-
-ZSH_THEME="spaceship"
+export PATH="$PATH:/usr/lib/go-1.9/bin"
 
 plugins=(git z)
-
 source $ZSH/oh-my-zsh.sh
 
 alias t=todolist
@@ -39,3 +37,10 @@ function tp() {
 # tabtab source for sls package
 # uninstall by removing these lines or running `tabtab uninstall sls`
 [[ -f /home/mfranc/JustEat/JE.ElasticSearchSnapshot.Lambda/node_modules/tabtab/.completions/sls.zsh ]] && . /home/mfranc/JustEat/JE.ElasticSearchSnapshot.Lambda/node_modules/tabtab/.completions/sls.zsh
+
+
+source ~/.zplug/init.zsh
+
+zplug denysdovhan/spaceship-prompt, use:spaceship.zsh, from:github, as:theme
+
+zplug load --verbose
