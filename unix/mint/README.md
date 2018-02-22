@@ -206,6 +206,11 @@ beacuse you are using mint you need to check on release page which ubuntu build 
 for instance sylvia -> based on xenial then use xenial
 
 
+MiniKube
+------------------
+https://kubernetes.io/docs/tasks/tools/install-kubectl/
+
+
 Chrome Extensions and setup
 --------------------------
 
