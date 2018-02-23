@@ -210,6 +210,8 @@ MiniKube
 ------------------
 https://kubernetes.io/docs/tasks/tools/install-kubectl/
 
+Follow installation guide and remember to use --vm-driver=none
+https://github.com/kubernetes/minikube
 
 Chrome Extensions and setup
 --------------------------
