@@ -198,6 +198,9 @@ Python
 sudo apt-get install python-pip
 sudo apt-get install python3-pip
 
+pip install setuptools
+pip install locust
+
 Docker
 ------------------
 https://docs.docker.com/engine/installation/linux/ubuntu/#install-using-the-repository
