@@ -205,6 +205,10 @@ https://docs.docker.com/engine/installation/linux/ubuntu/#install-using-the-repo
 beacuse you are using mint you need to check on release page which ubuntu build your version derive from and then replace lsb_release with the name of ubuntu
 for instance sylvia -> based on xenial then use xenial
 
+If getting docker socket permission then run
+
+sudo usermod -a -G docker $USER
+
 
 MiniKube
 ------------------
