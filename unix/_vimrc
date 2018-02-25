@@ -104,7 +104,7 @@ let NERDTreeShowHidden=1
 " open NERDTree automatically
 " add shortcut to open NERDTree something like CTRL+TAB NERDTreeToogle
 " doesnt work het with startify
-autocmd VimEnter * NERDTree 
+" autocmd VimEnter * NERDTree 
 
 set backspace=indent,eol,start
 set tabstop=2 softtabstop=0 expandtab shiftwidth=2

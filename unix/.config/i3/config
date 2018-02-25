@@ -128,7 +128,7 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-new_window pixel 3
+new_window pixel 5
 new_float normal 0
 hide_edge_borders none
 
