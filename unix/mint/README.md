@@ -195,11 +195,11 @@ sudo apt-get install entr -> auto running files on file change:
 Python
 ---------------------
 
-sudo apt-get install python-pip
-sudo apt-get install python3-pip
+sudo apt-get install python-pip 
+sudo apt-get install python3-pip 
 
-pip install setuptools
-pip install locust
+pip install setuptools 
+pip install locust 
 
 Docker
 ------------------
