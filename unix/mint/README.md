@@ -202,6 +202,7 @@ pip install setuptools
 pip install locust 
 
 sudo apt-get install pylint
+sudo ln dotfiles/unix/.pylintrc .pylintrc
 
 Docker
 ------------------
