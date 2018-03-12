@@ -20,6 +20,9 @@ Plug 'neomake/neomake'
 Plug 'pangloss/vim-javascript'
 Plug 'michal-franc/i3-vim-nav'
 
+" testing new
+Plug 'vim-syntastic/syntastic'
+
 " nice glyphs
 " Plug 'ryanoasis/vim-devicons'
 
@@ -33,7 +36,6 @@ Plug 'michal-franc/i3-vim-nav'
 "Plug 'OrangeT/vim-csharp'
 "Plug 'ervandew/supertab'
 "Plug 'tpope/vim-dispatch'
-"Plug 'vim-syntastic/syntastic'
 "Plug 'tpope/vim-surround'
 "Plug 'moll/vim-node'
 "Plug 'majutsushi/tagbar'
