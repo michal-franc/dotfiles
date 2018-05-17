@@ -108,6 +108,8 @@ if it cant find GOPATH remember that sudo might be using different ENV variables
 -----------------------
 install VIM
 sudo apt-get install vim.nox-py2
+or
+sudo apt-get install gtk-py2 -> has clipboard
 
 ln dotfiles/unix/_vimrc _vimrc
 
