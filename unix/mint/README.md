@@ -250,3 +250,5 @@ then run the script
 
 and https://unix.stackexchange.com/questions/35624/how-to-run-dropbox-daemon-in-background
 
+Workflow used to send images from windows box to the unix box assumes that github repo kept in Dropbox/blog/ is used to create blog posts
+
