@@ -189,6 +189,7 @@ Great Tools
 ----------------------
 
 sudo apt-get install entr -> auto running files on file change:
+pip install grip -> great tool to preview github readme files
 
 
 ----------------------
@@ -227,3 +228,23 @@ Chrome Extensions and setup
 --------------------------
 
 Install lastpass, vimium -> set up account login withut any synchronization
+
+
+
+Things Needed for the BLog
+---------------------------
+sudo apt-get install ruby-dev
+sudo apt-get install nodejs
+gem install jekyll bundler
+
+
+
+Dropbox
+-----------------------------
+Mostly using dropbox to sync files from host or other machines in a simple way
+
+Install from dropbox instruction
+then run the script
+
+and https://unix.stackexchange.com/questions/35624/how-to-run-dropbox-daemon-in-background
+
