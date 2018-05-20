@@ -49,10 +49,10 @@ bindsym $mod+$up focus up
 bindsym $mod+$right focus right
 
 # move focused window
-bindsym --release $mod+Shift+$left  move left
-bindsym --release $mod+Shift+$down move down
-bindsym --release $mod+Shift+$up move up
-bindsym --release $mod+Shift+$right move right
+bindsym Control+Shift+$left  move left
+bindsym Control+Shift+$down move down
+bindsym Control+Shift+$up move up
+bindsym Control+Shift+$right move right
 
 # split in horizontal orientation
 bindsym $mod+b split h exec termite
