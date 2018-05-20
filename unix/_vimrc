@@ -92,6 +92,8 @@ let g:jsx_ext_required=0
 
 imap kk <esc>
 
+set clipboard=unnamedplus
+
 " enables vim switch pane using CTRL hjkl which is in line with the tmux
 " plugin to integrate vim and and i3wm 
 
