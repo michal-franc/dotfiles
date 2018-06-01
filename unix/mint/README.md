@@ -252,3 +252,16 @@ and https://unix.stackexchange.com/questions/35624/how-to-run-dropbox-daemon-in-
 
 Workflow used to send images from windows box to the unix box assumes that github repo kept in Dropbox/blog/ is used to create blog posts
 
+
+Maim
+------------------------------
+sudo apt-get install cmake
+sudo apt-get install libglm-dev
+sudo apt-get install librandr-dev
+sudo apt-get install libglew-dev
+sudo apt-get install libjpeg-dev
+
+https://github.com/naelstrof/maim
+
+usage:
+maim --noopengl -s | xclip selection clipboard -t image/png
