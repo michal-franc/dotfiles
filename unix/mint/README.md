@@ -91,6 +91,7 @@ When installing new version you need to setup proper path
 export  PATH="$PATH:/user/lib/go-1.9/bin"
 this is also added .zshrc so will be added automaticaly after all the other steps are finished :P
 
+go get -u golang.org/x/lint/golint
 
 //THIS is at the moment broken and optional
 ----------------------
