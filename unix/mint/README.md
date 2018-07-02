@@ -93,6 +93,8 @@ this is also added .zshrc so will be added automaticaly after all the other step
 
 go get -u golang.org/x/lint/golint
 
+install go watcher from github
+
 //THIS is at the moment broken and optional
 ----------------------
 If you want to test i3-vim-nav uncommet special config in i3
