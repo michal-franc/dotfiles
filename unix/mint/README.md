@@ -268,3 +268,12 @@ https://github.com/naelstrof/maim
 
 usage:
 maim --noopengl -s | xclip selection clipboard -t image/png
+
+TaskWarrior - local todo
+--------------------------------
+sudo apt-get install taskwarrior
+
+In every repo project i create a folder .todo this folder is used to keep todo list per project
+Then i have an alias in bashrc to use taskwarrior with overrider folder .todo
+
+
