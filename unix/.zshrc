@@ -8,8 +8,7 @@ export EDITOR='vim'
 plugins=(git z zsh-autosuggestions)
 source $ZSH/oh-my-zsh.sh
 
-alias t=todolist
-
+alias t="task rc.data.location=.todo"
 
 #todo expand it to do a grep with all the notes
 #todo expand it even further to enable for n l - display list of notes with number 
@@ -18,20 +17,14 @@ alias t=todolist
 #there could be diffent modes - nodes in current project folder, global notes
 function n() {
  if [[ $# -eq 0 ]] ; then
-     cat .main.notes;
+     cat .notes;
  else
-     echo "- $@" >> .main.notes;
+     echo "- $@" >> .notes;
  fi 
 }
 
 function calendar() {
   gcalcli calw --calendar michal.franc@just-eat.com --monday -w 30
-}
-
-# taskwarrior function
-# project shorthand
-function tp() {
-  task project:$@
 }
 
 # tabtab source for serverless package
@@ -40,7 +33,6 @@ function tp() {
 # tabtab source for sls package
 # uninstall by removing these lines or running `tabtab uninstall sls`
 [[ -f /home/mfranc/JustEat/JE.ElasticSearchSnapshot.Lambda/node_modules/tabtab/.completions/sls.zsh ]] && . /home/mfranc/JustEat/JE.ElasticSearchSnapshot.Lambda/node_modules/tabtab/.completions/sls.zsh
-
 
 source ~/.zplug/init.zsh
 
