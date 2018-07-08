@@ -133,6 +133,6 @@ new_float normal 0
 hide_edge_borders none
 
 bar {
-        status_command i3status | i3status-taskwarrior
+        status_command i3blocks -c ~/.config/i3/i3blocks.conf
         position top
 }

@@ -276,4 +276,8 @@ sudo apt-get install taskwarrior
 In every repo project i create a folder .todo this folder is used to keep todo list per project
 Then i have an alias in bashrc to use taskwarrior with overrider folder .todo
 
+I3blocks
+------------------------------------
+sudo apt-get install i3blocks
 
+ln dotfiles/unix/.config/i3/i3blocks.conf ~/.config/i3/i3blocks.conf
