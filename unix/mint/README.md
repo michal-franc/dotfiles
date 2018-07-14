@@ -276,7 +276,7 @@ sudo apt-get install libjpeg-dev
 https://github.com/naelstrof/maim
 
 usage:
-maim --noopengl -s | xclip selection clipboard -t image/png
+maim --noopengl -s | xclip -selection clipboard -t image/png
 
 TaskWarrior - local todo
 --------------------------------
