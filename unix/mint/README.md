@@ -121,6 +121,12 @@ https://github.com/junegunn/vim-plug
 
 run PlugInstall
 
+Install vim 8
+
+sudo add-apt-repository ppa:jonathonf/vim
+sudo apt update
+sudo apt install vim
+
 --------------------------------------
 Go to main site download deb and use sudo dpkg -i on poackage 
 -------------------------------------------
