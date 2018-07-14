@@ -18,10 +18,13 @@ Plug 'xuyuanp/nerdtree-git-plugin'
 Plug 'junegunn/goyo.vim'
 Plug 'neomake/neomake'
 Plug 'pangloss/vim-javascript'
-Plug 'michal-franc/i3-vim-nav'
+Plug 'vim-syntastic/syntastic'
 
 " testing new
-Plug 'vim-syntastic/syntastic'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-sort-motion'
 
 " nice glyphs
 " Plug 'ryanoasis/vim-devicons'
@@ -36,7 +39,6 @@ Plug 'vim-syntastic/syntastic'
 "Plug 'OrangeT/vim-csharp'
 "Plug 'ervandew/supertab'
 "Plug 'tpope/vim-dispatch'
-"Plug 'tpope/vim-surround'
 "Plug 'moll/vim-node'
 "Plug 'majutsushi/tagbar'
 "Plug 'scrooloose/nerdcommenter'
@@ -120,7 +122,7 @@ filetype plugin indent on
 set noswapfile
 
 " enabling line numbers and setting nice color which is non invasive
-set number
+set number relativenumber
 highlight LineNr ctermfg=239
 
 "you need to specify args eslint default config is broken and doesnt read the
