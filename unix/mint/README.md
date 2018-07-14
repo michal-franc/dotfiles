@@ -95,6 +95,9 @@ go get -u golang.org/x/lint/golint
 
 install go watcher from github
 
+install godoc  https://michaelheap.com/installing-godoc-for-golang-go-1-2/
+go get golang.org/x/tools/cmd/godoc
+
 //THIS is at the moment broken and optional
 ----------------------
 If you want to test i3-vim-nav uncommet special config in i3
