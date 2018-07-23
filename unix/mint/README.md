@@ -290,3 +290,7 @@ I3blocks
 sudo apt-get install i3blocks
 
 ln dotfiles/unix/.config/i3/i3blocks.conf ~/.config/i3/i3blocks.conf
+
+htop - mem usage and cpu
+--------------------------------
+sudo apt-get install htop
