@@ -294,3 +294,8 @@ ln dotfiles/unix/.config/i3/i3blocks.conf ~/.config/i3/i3blocks.conf
 htop - mem usage and cpu
 --------------------------------
 sudo apt-get install htop
+
+
+Bash
+-------------------
+bats -> sudo apt-get install bats 
