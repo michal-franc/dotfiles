@@ -25,6 +25,7 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-sort-motion'
+Plug 'rust-lang/rust.vim'
 
 " nice glyphs
 " Plug 'ryanoasis/vim-devicons'
