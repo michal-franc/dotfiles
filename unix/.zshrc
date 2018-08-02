@@ -7,6 +7,7 @@ export EDITOR='vim'
 
 plugins=(git z zsh-autosuggestions)
 source $ZSH/oh-my-zsh.sh
+source $HOME/.cargo/env
 
 alias t="task rc.data.location=.todo"
 
