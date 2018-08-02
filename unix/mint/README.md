@@ -299,3 +299,8 @@ sudo apt-get install htop
 Bash
 -------------------
 bats -> sudo apt-get install bats 
+
+
+Rust:
+------------------
+https://www.rust-lang.org/en-US/install.html
