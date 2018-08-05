@@ -36,6 +36,17 @@ function screenf() {
   maim --noopengl -s ~/Pictures/$(date +%s).png
 }
 
+function autotest() {
+  if  [[ $1 == 'python' ]]; then
+    rg --files -tpy | entr python3 -m unittest
+  fi
+
+  if  [[ $1 == 'rust' ]]; then
+    rg --files -trust | entr cargo test -- --nocapture
+  fi
+}
+
+
 # tabtab source for serverless package
 # uninstall by removing these lines or running `tabtab uninstall serverless`
 [[ -f /home/mfranc/JustEat/JE.ElasticSearchSnapshot.Lambda/node_modules/tabtab/.completions/serverless.zsh ]] && . /home/mfranc/JustEat/JE.ElasticSearchSnapshot.Lambda/node_modules/tabtab/.completions/serverless.zsh
