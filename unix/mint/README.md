@@ -22,6 +22,7 @@ removing XFCE
 ----------------------------------------------------
 In my case (Mint with cinnamon and XFCE) I did: 
 * sudo apt-get install i3
+* sudo apt-get install libanyevent-i3-perl <- required for saving workspaces
 
 reboot and switch to i3 from logon screen
 Just logout and select i3 as your interface
