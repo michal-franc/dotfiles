@@ -44,6 +44,10 @@ function autotest() {
   if  [[ $1 == 'rust' ]]; then
     rg --files -trust | entr cargo test -- --nocapture
   fi
+
+  if  [[ $1 == 'bash' ]]; then
+    rg --files -tsh | entr bats $2
+  fi
 }
 
 
