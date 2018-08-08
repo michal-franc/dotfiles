@@ -310,3 +310,8 @@ https://www.rust-lang.org/en-US/install.html
 Json parsing tool
 -------------------------
 sudo apt-get install jqk
+
+WeeChat for slack
+-------------------
+sudo apt-get install weechat-curses weechat-plugins
+https://github.com/wee-slack/wee-slack
