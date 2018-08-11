@@ -131,6 +131,8 @@ sudo add-apt-repository ppa:jonathonf/vim
 sudo apt update
 sudo apt install vim
 
+youcompleteme - requires compliation of ycm server -> https://github.com/Valloric/YouCompleteMe#installation
+
 --------------------------------------
 Go to main site download deb and use sudo dpkg -i on poackage 
 -------------------------------------------
@@ -213,6 +215,9 @@ Python
 
 sudo apt-get install python-pip 
 sudo apt-get install python3-pip 
+
+sudo apt-get install python-dev
+sudo apt-get install python3-dev
 
 pip install setuptools 
 pip install locust 
