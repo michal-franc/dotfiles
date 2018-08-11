@@ -320,3 +320,8 @@ WeeChat for slack
 -------------------
 sudo apt-get install weechat-curses weechat-plugins
 https://github.com/wee-slack/wee-slack
+
+
+C#
+-------------------
+sudo apt-get install mono-xbuild
