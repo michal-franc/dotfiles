@@ -78,6 +78,9 @@ mkdir -p ~/tools
 cd $_
 curl https://raw.githubusercontent.com/Corwind/termite-install/master/termite-install.sh > termite_install.sh 
 
+if problems
+https://askubuntu.com/questions/739163/how-to-install-termite
+
 cd ~
 mkdir .config/termite 
 sudo ln dotfiles/unix/.config/termite/config .config/termite/config 
