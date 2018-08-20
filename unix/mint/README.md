@@ -77,16 +77,15 @@ From tools folder run
 mkdir -p ~/tools
 cd $_
 curl https://raw.githubusercontent.com/Corwind/termite-install/master/termite-install.sh > termite_install.sh 
-
-if problems
-https://askubuntu.com/questions/739163/how-to-install-termite
-
+sudo apt install libtool rofi
+sudo ./termite_install.shk
 cd ~
 mkdir .config/termite 
 sudo ln dotfiles/unix/.config/termite/config .config/termite/config 
-sudo apt-get install rofi 
 sudo ln dotfiles/unix/.config/i3/config .config/i3/config 
 ```
+
+if problems https://askubuntu.com/questions/739163/how-to-install-termite
 
 ZSH 
 ---------------------------------------
