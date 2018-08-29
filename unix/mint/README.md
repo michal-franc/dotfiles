@@ -325,3 +325,17 @@ https://github.com/wee-slack/wee-slack
 C#
 -------------------
 sudo apt-get install mono-xbuild
+
+https://remysharp.com/2018/08/23/cli-improved
+
+bat - good replacement for cat:
+-------------------
+https://github.com/sharkdp/bat#installation
+create aliast to use bat instead of cat
+
+prettyping - replacement for ping:
+-------------------
+http://denilson.sa.nom.br/prettyping/
+
+fzf - ctrl+r replacement
+-------------------
