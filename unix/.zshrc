@@ -33,7 +33,11 @@ function screen() {
 }
 
 function screenf() {
-  maim --noopengl -s ~/Pictures/$(date +%s).png
+   if [[ $# -eq 0 ]] ; then
+    maim --noopengl -s ~/Pictures/$(date +%s).png
+   else
+    maim --noopengl -s $PWD/$@
+   fi 
 }
 
 function autotest() {
