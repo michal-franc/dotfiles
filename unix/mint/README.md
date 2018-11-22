@@ -437,3 +437,12 @@ http://denilson.sa.nom.br/prettyping/
 
 fzf - ctrl+r replacement
 -------------------
+
+Scripts in the zsh:
+- prlist -> hub pr list through all the folders
+- autotest (python, rust, bash) -> sets entr automation that runs unit tests if if file changes (requries cargo, python unit test and bats)
+- screen -> uses maim  - enables screen selection and copies scren to clipboard
+- screenf -> uses maim -> saves screen to folder (Pictures by default with date as filename, or current folder with filename)
+- calendar -> shortuct for calw 
+- n -> used to open or append .notes file
+- t -> alias for taskwarrior using local .todo folder
