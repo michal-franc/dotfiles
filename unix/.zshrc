@@ -54,6 +54,16 @@ function autotest() {
   fi
 }
 
+function prlist() {
+  for d in `ls -d */`
+  do
+    echo $d
+    pushd $d > /dev/null
+    hub pr list -f '%sC%>(8)%i%Creset - %t %sC%au%Creset%n %sC%>(8)%Creset %sC%>(4)link%Creset %U%n%n'
+    popd > /dev/null
+  done
+}
+
 # aliases
 alias cat='bat'
 
