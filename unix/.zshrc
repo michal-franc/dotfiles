@@ -54,6 +54,9 @@ function autotest() {
   fi
 }
 
+# aliases
+alias cat='bat'
+
 
 # tabtab source for serverless package
 # uninstall by removing these lines or running `tabtab uninstall serverless`
