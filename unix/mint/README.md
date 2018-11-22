@@ -292,6 +292,10 @@ pip install locust
 
 sudo apt-get install pylint
 sudo ln dotfiles/unix/.pylintrc .pylintrc
+
+
+Usefull libs:
+https://github.com/joowani/binarytree
 ```
 
 Docker
