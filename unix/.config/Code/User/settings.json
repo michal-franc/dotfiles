@@ -25,6 +25,7 @@
     "window.zoomLevel": 0,
     "window.menuBarVisibility": "toggle",
     "window.titleBarStyle": "custom",
+    "window.menuBarStyle": "custom",
     "vim.disableAnnoyingNeovimMessage": true,
     "zenMode.restore": true
 }
