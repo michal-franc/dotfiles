@@ -18,5 +18,9 @@
     "workbench.colorTheme": "One Dark Pro",
     "editor.codeLens": false,
     "window.zoomLevel": 0,
-    "editor.fontSize": 12
+    "editor.fontSize": 12,
+    "files.enableTrash": false,
+    "workbench.enableExperiments": false,
+    "workbench.statusBar.feedback.visible": false,
+    "breadcrumbs.enabled": true
 }
