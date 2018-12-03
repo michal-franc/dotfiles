@@ -26,5 +26,7 @@
     "window.titleBarStyle": "custom",
     "window.menuBarStyle": "custom",
     "vim.disableAnnoyingNeovimMessage": true,
-    "zenMode.restore": true
+    "zenMode.restore": true,
+    "workbench.editor.enablePreview": false,
+    "workbench.editor.enablePreviewFromQuickOpen": false
 }
