@@ -40,6 +40,20 @@ function screenf() {
    fi 
 }
 
+function screenn() {
+    
+    if [ ! -d ".images" ]; then
+      echo Creating folder .images
+      mkdir .images
+    fi
+
+    fileAndFolderName=".images/note-$(date +%s).png"
+    maim --noopengl -s $PWD/$fileAndFolderName
+    echo "![Image](${fileAndFolderName})" | xclip -selection clipboard
+    echo Created file $fileAndFolderName and put it to clipboard
+    echo use ctrl + v in your editor
+}
+
 function autotest() {
   if  [[ $1 == 'python' ]]; then
     rg --files -tpy | entr python3 -m unittest
