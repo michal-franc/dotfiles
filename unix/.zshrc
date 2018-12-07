@@ -16,11 +16,43 @@ alias t="task rc.data.location=.todo"
 #todo n 1 -> cat this note
 #todo n 'test' 1 -> add to notes number 1
 #there could be diffent modes - nodes in current project folder, global notes
+#function n() {
+# if [[ $# -eq 0 ]] ; then
+#     cat .notes;
+# else
+#     echo "- $@" >> .notes;
+# fi 
+#}
+
+# n - cat current notes
+# nv -> opens todays note in vim
+# n -> arg -> puts the arg into current quick note
+#
+# worklog (similar solution as n but static worklog file)
+
 function n() {
+ todayFileFolder=~/Notes/quick-notes/"$(date +%Y-%m-%d).md"
+
+ if [ ! -f todayFileFolder ]; then
+   echo Creating quick note for today
+   touch $todayFileFolder
+ fi
+
  if [[ $# -eq 0 ]] ; then
-     cat .notes;
+     cat $todayFileFolder;
  else
-     echo "- $@" >> .notes;
+     echo "- $@" >> $todayFileFolder;
+ fi 
+}
+
+# TODO: make one function for these scripts
+function worklog() {
+ file=~/Notes/worklog.md
+
+ if [[ $# -eq 0 ]] ; then
+     cat $file;
+ else
+     echo "- $@" >> $file;
  fi 
 }
 
