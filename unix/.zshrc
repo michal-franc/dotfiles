@@ -39,9 +39,9 @@ function n() {
  fi
 
  if [[ $# -eq 0 ]] ; then
-     cat $todayFileFolder;
+    cat $todayFileFolder;
  else
-     echo "- $@" >> $todayFileFolder;
+    echo "- $@" >> $todayFileFolder;
  fi 
 }
 
@@ -50,9 +50,9 @@ function worklog() {
  file=~/Notes/worklog.md
 
  if [[ $# -eq 0 ]] ; then
-     cat $file;
+    cat $file;
  else
-     echo "- $@" >> $file;
+    echo "- $@" >> $file;
  fi 
 }
 
@@ -65,25 +65,29 @@ function screen() {
 }
 
 function screenf() {
-   if [[ $# -eq 0 ]] ; then
+  if [[ $# -eq 0 ]] ; then
     maim --noopengl -s ~/Pictures/$(date +%s).png
-   else
+  else
     maim --noopengl -s $PWD/$@
-   fi 
+  fi 
 }
 
 function screenn() {
-    
-    if [ ! -d ".images" ]; then
-      echo Creating folder .images
-      mkdir .images
-    fi
+  folder=".images"
+  if [[ $# -ne 0 ]] ; then
+    folder=".images/${@}"
+  fi
 
-    fileAndFolderName=".images/note-$(date +%s).png"
-    maim --noopengl -s $PWD/$fileAndFolderName
-    echo "![note-image](${fileAndFolderName})" | xclip -selection clipboard
-    echo Created file $fileAndFolderName and put it to clipboard
-    echo use ctrl + v in your editor
+  if [ ! -d $folder ]; then
+    echo Creating folder $folder
+    mkdir $folder
+  fi
+
+  fileAndFolderName="${folder}/note-$(date +%s).png"
+  maim --noopengl -s $PWD/$fileAndFolderName
+  echo "![note-image](${fileAndFolderName})" | xclip -selection clipboard
+  echo Created file $fileAndFolderName and put it to clipboard
+  echo use ctrl + v in your editor
 }
 
 function autotest() {
