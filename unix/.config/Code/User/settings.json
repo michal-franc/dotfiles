@@ -7,7 +7,7 @@
     ],
     "breadcrumbs.enabled": true,
     "csharp.suppressDotnetRestoreNotification": true,
-    "workbench.activityBar.visible": false,
+    "workbench.activityBar.visible": true,
     "workbench.statusBar.visible": false,
     "workbench.colorTheme": "Dracula",
     "workbench.enableExperiments": false,
@@ -26,7 +26,5 @@
     "window.titleBarStyle": "custom",
     "window.menuBarStyle": "custom",
     "vim.disableAnnoyingNeovimMessage": true,
-    "zenMode.restore": true,
-    "workbench.editor.enablePreview": false,
-    "workbench.editor.enablePreviewFromQuickOpen": false
+    "zenMode.restore": true
 }
