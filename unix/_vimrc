@@ -9,7 +9,6 @@ autocmd BufEnter * silent! lcd %:p:h " automatically sets up the pwd for a file
 call plug#begin('~/.vim/plugged')
 
 " ready and stable
-Plug 'dracula/vim'
 Plug 'scrooloose/nerdtree'
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -85,7 +84,7 @@ set encoding=utf8
 set guifont=Monoscape:h11
 
 "Airline setting theme
-let g:airline_theme='dracula'
+let g:airline_theme='bubblegum'
 let g:airline_powerline_fonts = 1
 
 " just to make sure that proper background from theme is used
