@@ -128,11 +128,23 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-new_window pixel 5
-new_float normal 0
-hide_edge_borders none
+default_border pixel 1
+hide_edge_borders smart
 
 bar {
         status_command i3blocks -c ~/.config/i3/i3blocks.conf
         position top
 }
+
+gaps inner 6
+gaps vertical 100
+gaps horizontal 550
+smart_gaps inverse_outer
+
+# class                 border  backgr. text    indicator child_border
+client.focused #555555 #555555 #ffffff #2e9ef4     #CC0000
+client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
+client.unfocused        #333333 #222222 #888888 #292d2e   #222222
+client.urgent           #2f343a #900000 #ffffff #900000   #900000
+client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
+

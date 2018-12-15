@@ -435,7 +435,7 @@ prettyping - replacement for ping:
 -------------------
 http://denilson.sa.nom.br/prettyping/
 
-fzf - ctrl+r replacement
+fzf - ctrl+p replacement
 -------------------
 
 Scripts in the zsh:
@@ -446,3 +446,11 @@ Scripts in the zsh:
 - calendar -> shortuct for calw 
 - n -> used to open or append .notes file
 - t -> alias for taskwarrior using local .todo folder
+
+
+i3gaps
+----------------
+https://github.com/Airblader/i3/wiki/Compiling-&-Installing
+
+i3blocks
+----------------
