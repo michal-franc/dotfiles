@@ -6,8 +6,16 @@ node_modules/
 
 # But not these files...
 !*.gitignore
-!windows
-!unix
-!cli-tools
-!unix
-!git
+!*.pylintrc
+!*.Xresources
+!*.zshrc
+!*.xinitrc
+!.config
+!images
+!wallpapers
+!_vimrc
+!README.md
+!arch
+!mint
+!init_vim.sh
+!i3-layouts
