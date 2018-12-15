@@ -18,7 +18,7 @@
 
 [colors]
 ;background = ${xrdb:color0:#222}
-background = #222
+background = #000000000
 background-alt = #444
 ;foreground = ${xrdb:color7:#222}
 foreground = #dfdfdf
@@ -36,14 +36,14 @@ height = 25
 radius = 10.0
 fixed-center = false
 
-background = #00000000
-foreground = #FFFFFFFF
+background = ${colors.background}
+foreground = ${colors.foreground}
 
 line-size = 3
 line-color = #f00
 
 border-size = 2
-border-color = #00000000
+border-color = ${colors.background}
 
 padding-left = 0
 padding-right = 0
@@ -57,7 +57,7 @@ font-2 = siji:pixelsize=10;1
 
 modules-left = 
 modules-right =
-modules-center = bspwm i3 filesystem xbacklight xkeyboard memory cpu battery temperature date powermenu
+modules-center = bspwm i3 filesystem memory cpu date
 
 tray-position = right
 tray-padding = 2
@@ -112,7 +112,7 @@ label-unmounted-foreground = ${colors.foreground-alt}
 type = internal/bspwm
 
 label-focused = %index%
-label-focused-background = ${colors.background-alt}
+label-focused-background = ${colors.background}
 label-focused-underline= ${colors.primary}
 label-focused-padding = 2
 
