@@ -10,17 +10,19 @@ node_modules/
 !*.Xresources
 !*.zshrc
 !*.xinitrc
+!README.md
+
+# and not this folders
 !images
 !wallpapers
 !_vimrc
-!README.md
 !arch
 !mint
 !init_vim.sh
 !i3-layouts
 !install_instructions
 
-#.config
+# and not this stuff from .config
 !polybar
 !termite
 !compton.conf

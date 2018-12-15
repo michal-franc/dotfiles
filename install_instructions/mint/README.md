@@ -77,7 +77,12 @@ From tools folder run
 mkdir -p ~/tools
 cd $_
 curl https://raw.githubusercontent.com/Corwind/termite-install/master/termite-install.sh > termite_install.sh 
-sudo apt install libtool rofi
+sudo apt install libtool 
+
+sudo add-apt-repository ppa:jasonpleau/rofi
+sudo apt update
+sudo apt install rofi
+
 sudo ./termite_install.shk
 cd ~
 mkdir .config/termite 
