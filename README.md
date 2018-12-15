@@ -10,5 +10,7 @@ sudo apt install vim
 ```
 
 ![](images/dotfiles_example.PNG)
+![](images/dotfiles_example3.PNG)
+![](images/dotfiles_example4.PNG)
 ![](images/dotfiles_example1.PNG)
 ![](images/dotfiles_example2.PNG)
