@@ -452,5 +452,8 @@ i3gaps
 ----------------
 https://github.com/Airblader/i3/wiki/Compiling-&-Installing
 
-i3blocks
+i3polybar
 ----------------
+sudo apt-get install libxcb-ewmh-dev
+sudo apt install python-xcbgen
+https://github.com/jaagr/polybar
