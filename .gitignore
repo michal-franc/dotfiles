@@ -10,7 +10,6 @@ node_modules/
 !*.Xresources
 !*.zshrc
 !*.xinitrc
-!.config
 !images
 !wallpapers
 !_vimrc
@@ -20,3 +19,11 @@ node_modules/
 !init_vim.sh
 !i3-layouts
 !install_instructions
+
+#.config
+!polybar
+!termite
+!compton.conf
+!fontcoding
+!Code/User/*.json
+!Code/*.sh
