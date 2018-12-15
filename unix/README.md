@@ -9,4 +9,4 @@ sudo apt update
 sudo apt install vim
 ```
 
-![](images/example.png)
+![](images/example.jpg)
