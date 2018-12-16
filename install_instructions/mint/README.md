@@ -462,3 +462,6 @@ i3polybar
 sudo apt-get install libxcb-ewmh-dev
 sudo apt install python-xcbgen
 https://github.com/jaagr/polybar
+
+PDF viewer zathura
+sudo apt-get install zathura or dpkg
