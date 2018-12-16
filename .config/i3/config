@@ -77,6 +77,8 @@ bindsym $mod+space focus mode_toggle
 # focus the parent container
 bindsym $mod+a focus parent
 
+set $workspace10 "10: Book"
+
 # switch to workspace
 bindsym $mod+1 workspace 1
 bindsym $mod+2 workspace 2
@@ -87,7 +89,8 @@ bindsym $mod+6 workspace 6
 bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
-bindsym $mod+0 workspace 10
+bindsym $mod+0 workspace $workspace10
+
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace 1
@@ -99,7 +102,7 @@ bindsym $mod+Shift+6 move container to workspace 6
 bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
-bindsym $mod+Shift+0 move container to workspace 10
+bindsym $mod+Shift+0 move container to workspace $workspace10
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -134,10 +137,13 @@ hide_edge_borders smart
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec_always compton -c
 
+# i3gaps
 gaps inner 8
 gaps vertical 100
 gaps horizontal 550
 smart_gaps inverse_outer
+
+workspace 10 gaps inner 75 
 
 # class                 border  backgr. text    indicator child_border
 client.focused #555555 #555555 #ffffff #2e9ef4     #CC0000
