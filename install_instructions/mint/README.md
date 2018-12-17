@@ -468,3 +468,6 @@ https://github.com/jaagr/polybar
 
 PDF viewer zathura
 sudo apt-get install zathura or dpkg
+
+# usefull for traccing where the files are getting lost
+sudo apt-get install ncdu
