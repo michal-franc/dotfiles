@@ -459,8 +459,11 @@ https://github.com/Airblader/i3/wiki/Compiling-&-Installing
 
 i3polybar
 ----------------
+```bash
 sudo apt-get install libxcb-ewmh-dev
 sudo apt install python-xcbgen
+sudo apt install xcb-proto
+```
 https://github.com/jaagr/polybar
 
 PDF viewer zathura
