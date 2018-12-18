@@ -117,6 +117,9 @@ function prlist() {
 # aliases
 alias cat='bat'
 
+# disabling XON/XOFF flow control
+stty -ixon
+
 
 # tabtab source for serverless package
 # uninstall by removing these lines or running `tabtab uninstall serverless`
