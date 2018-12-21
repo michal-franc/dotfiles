@@ -474,3 +474,6 @@ sudo apt-get install ncdu
 
 # dive usefull tool for Docker
 https://github.com/wagoodman/dive
+
+# required for i3 layouts saving
+sudo apt-get install libanyevent-i3-perl
