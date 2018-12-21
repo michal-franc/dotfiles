@@ -459,9 +459,21 @@ https://github.com/Airblader/i3/wiki/Compiling-&-Installing
 
 i3polybar
 ----------------
+```bash
 sudo apt-get install libxcb-ewmh-dev
 sudo apt install python-xcbgen
+sudo apt install xcb-proto
+```
 https://github.com/jaagr/polybar
 
 PDF viewer zathura
 sudo apt-get install zathura or dpkg
+
+# usefull for traccing where the files are getting lost
+sudo apt-get install ncdu
+
+# dive usefull tool for Docker
+https://github.com/wagoodman/dive
+
+# required for i3 layouts saving
+sudo apt-get install libanyevent-i3-perl
