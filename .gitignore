@@ -21,6 +21,7 @@ node_modules/
 !init_vim.sh
 !i3-layouts
 !install_instructions
+!layouts
 
 # and not this stuff from .config
 !polybar
