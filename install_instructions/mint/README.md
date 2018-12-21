@@ -471,3 +471,6 @@ sudo apt-get install zathura or dpkg
 
 # usefull for traccing where the files are getting lost
 sudo apt-get install ncdu
+
+# dive usefull tool for Docker
+https://github.com/wagoodman/dive
