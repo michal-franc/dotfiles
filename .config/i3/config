@@ -143,8 +143,6 @@ gaps vertical 100
 gaps horizontal 550
 smart_gaps inverse_outer
 
-workspace 10 gaps inner 75 
-
 # class                 border  backgr. text    indicator child_border
 client.focused #555555 #555555 #ffffff #2e9ef4     #CC0000
 client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
