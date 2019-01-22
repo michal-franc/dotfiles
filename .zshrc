@@ -61,14 +61,14 @@ function calendar() {
 }
 
 function screen() {
-  maim --noopengl -s | xclip -selection clipboard -t image/png
+  maim --noopengl -s -d 1 | xclip -selection clipboard -t image/png
 }
 
 function screenf() {
   if [[ $# -eq 0 ]] ; then
-    maim --noopengl -s ~/Pictures/$(date +%s).png
+    maim --noopengl -s -d 1 ~/Pictures/$(date +%s).png
   else
-    maim --noopengl -s $PWD/$@
+    maim --noopengl -s -d 1 $PWD/$@
   fi 
 }
 
