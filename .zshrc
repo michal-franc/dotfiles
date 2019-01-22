@@ -1,6 +1,6 @@
 export ZSH=/home/mfranc/.oh-my-zsh
 export GOPATH=$HOME/go
-export PATH="$PATH:/usr/lib/go-1.9/bin:$GOPATH/bin"
+export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 
 export VISUAL='vim'
 export EDITOR='vim'

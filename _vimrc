@@ -140,6 +140,9 @@ command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-h
 set rtp+=$GOPATH/src/golang.org/x/lint/misc/vim
 autocmd BufWritePost,FileWritePost *.go execute 'Lint' | cwindow
 
+"ctrlp
+let g:ctrlp_working_path_mode = 0
+
 let g:rooter_patterns = ['Rakefile', '.git/', 'DockerFile']
 " dont spam echo
 let g:rooter_silent_chdir = 1
