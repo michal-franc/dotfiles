@@ -55,9 +55,16 @@ font-0 = fixed:pixelsize=10;1
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = siji:pixelsize=10;1
 
-modules-left = 
+
+modules-left = main-goal
 modules-right =
 modules-center = bspwm i3 cpu memory filesystem date
+
+[module/main-goal]
+type = custom/script
+exec = ~/main_goal.sh
+tail = true
+interval = 270
 
 tray-position = right
 tray-padding = 2
