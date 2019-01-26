@@ -58,13 +58,18 @@ font-2 = siji:pixelsize=10;1
 
 modules-left = main-goal
 modules-right =
-modules-center = bspwm i3 cpu memory filesystem date
+modules-center = pomo  bspwm i3 cpu memory filesystem date
 
 [module/main-goal]
 type = custom/script
 exec = ~/main_goal.sh
 tail = true
 interval = 270
+
+[module/pomo]
+type = custom/script
+interval = 1
+exec = pomo status
 
 tray-position = right
 tray-padding = 2
