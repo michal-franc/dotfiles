@@ -48,10 +48,10 @@ function n() {
 
 # TODO: make one function for these scripts
 function worklog() {
- file=~/Notes/worklog.md
+ file=~/notes/work/worklog.md
 
  if [[ $# -eq 0 ]] ; then
-    cat $file;
+    cat $file | tail;
  else
     echo "- $@" >> $file;
  fi 
@@ -72,6 +72,7 @@ function screenf() {
     maim --noopengl -s -d 1 $PWD/$@
   fi 
 }
+
 
 function screenn() {
   folder=".images"
