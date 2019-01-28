@@ -10,6 +10,7 @@ source $ZSH/oh-my-zsh.sh
 source $HOME/.cargo/env
 
 alias t="task rc.data.location=.todo"
+alias tbulk="xargs -L1 task rc.data.location=.todo add < todo.md"
 
 #todo expand it to do a grep with all the notes
 #todo expand it even further to enable for n l - display list of notes with number 
