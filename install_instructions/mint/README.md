@@ -378,6 +378,11 @@ sudo apt-get install taskwarrior
 In every repo project i create a folder .todo this folder is used to keep todo list per project
 Then i have an alias in bashrc to use taskwarrior with overrider folder .todo
 
+tasksh is a usefull packagee you will need to manually install it with dpkg
+google ubuntu tasksh
+
+you will also need to install libreaddline7 deb - download it somewhere :)
+
 I3blocks
 ------------------------------------
 
