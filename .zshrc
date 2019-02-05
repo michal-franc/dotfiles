@@ -87,7 +87,7 @@ function screenn() {
   fi
 
   fileAndFolderName="${folder}/note-$(date +%s).png"
-  maim --noopengl -s $PWD/$fileAndFolderName
+  maim --noopengl -s -d 1 $PWD/$fileAndFolderName
   echo "![note-image](${fileAndFolderName})" | xclip -selection clipboard
   echo Created file $fileAndFolderName and put it to clipboard
   echo use ctrl + v in your editor
