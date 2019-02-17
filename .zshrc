@@ -105,6 +105,10 @@ function autotest() {
   if  [[ $1 == 'bash' ]]; then
     rg --files -tsh | entr bats $2
   fi
+
+  if  [[ $1 == 'go' ]]; then
+    rg --files -tgo | entr go test $2
+  fi
 }
 
 function prlist() {
