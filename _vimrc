@@ -141,7 +141,8 @@ set rtp+=$GOPATH/src/golang.org/x/lint/misc/vim
 autocmd BufWritePost,FileWritePost *.go execute 'Lint' | cwindow
 
 "ctrlp
-let g:ctrlp_working_path_mode = 0
+let g:ctrlp_working_path_mode = 'r'
+let g:ctrlp_root_markers = ['.ctrlp']
 
 let g:rooter_patterns = ['Rakefile', '.git/', 'DockerFile']
 " dont spam echo
