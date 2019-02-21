@@ -10,8 +10,16 @@ plugins=(git z zsh-autosuggestions)
 source $ZSH/oh-my-zsh.sh
 source $HOME/.cargo/env
 
-alias t="task rc.data.location=.todo"
-alias tbulk="xargs -L1 task rc.data.location=.todo add < todo.md"
+alias tlocal="task rc.data.location=.todo"
+# load todos in bulk
+alias tnbulk="xargs -L1 task rc.data.location=.todo add pro:next < todo.md"
+
+# create new script folder == project
+# so that /blog -> pro:blog
+function t() {
+  dir=$(basename "$PWD")
+  task pro:$dir $@
+}
 
 #todo expand it to do a grep with all the notes
 #todo expand it even further to enable for n l - display list of notes with number 
