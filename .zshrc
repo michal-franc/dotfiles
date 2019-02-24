@@ -16,8 +16,13 @@ alias tnbulk="xargs -L1 task rc.data.location=.todo add pro:next < todo.md"
 
 # create new script folder == project
 # so that /blog -> pro:blog
+# if .git repo will use .git base folder
 function t() {
-  dir=$(basename "$PWD")
+  if git rev-parse --is-inside-work-tree > /dev/null; then
+    dir=basename $(git rev-parse --show-toplevel)
+  else
+    dir=$(basename "$PWD")
+  fi
   task pro:$dir $@
 }
 
