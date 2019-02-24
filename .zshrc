@@ -11,6 +11,7 @@ source $ZSH/oh-my-zsh.sh
 source $HOME/.cargo/env
 
 alias tlocal="task rc.data.location=.todo"
+alias tall="task"
 # load todos in bulk
 alias tnbulk="xargs -L1 task rc.data.location=.todo add pro:next < todo.md"
 
