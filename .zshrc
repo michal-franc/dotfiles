@@ -29,7 +29,8 @@ function t() {
     dir=$(basename $(git rev-parse --show-toplevel))
     
     # check if this is main folder (as dotfiles .git)
-    if [ $dir = $(basename ~) ]; then
+    # or todo folder as this one is used for my tasks
+    if [ $dir = $(basename ~) ] || [ $dir = 'todo' ]; then
       # if its dotfiles folder go to pwd
       dir=$(basename $PWD)
     fi
