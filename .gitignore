@@ -10,6 +10,7 @@ node_modules/
 !*.Xresources
 !*.zshrc
 !*.xinitrc
+!*.taskrc
 !README.md
 
 # and not this folders
