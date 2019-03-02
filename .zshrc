@@ -25,11 +25,10 @@ function tsync() {
   popd
 }
 
-# create new script folder == project
+# create dir for other functions
 # so that /blog -> pro:blog
 # if .git repo will use .git base folder
-function t() {
- 
+function tdir() {
   # check if this folder is inside git repo 
   $(git rev-parse --is-inside-work-tree > /dev/null 2>&1)
 
@@ -47,7 +46,18 @@ function t() {
   else
     dir=$(basename $PWD)
   fi
+  echo $dir
+}
 
+# used to set project coefficient 
+tproj() {
+  project=$(tdir)
+  task config urgency.user.project.$project.coefficient $1
+}
+
+# create new script folder == project
+function t() {
+  dir=$(tdir)
   task pro:$dir $@
 }
 
