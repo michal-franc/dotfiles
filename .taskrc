@@ -30,3 +30,15 @@ color=on
 #include /usr/share/doc/task/rc/solarized-light-256.theme
 #include /usr/share/doc/task/rc/no-color.theme
 
+urgency.uda.priority.H.coefficient=2.0
+urgency.uda.priority.M.coefficient=1
+urgency.uda.priority.L.coefficient=0.5
+
+urgency.user.tag.later.coefficient=-6.0
+
+uda.reviewed.type=date
+uda.reviewed.label=Reviewed
+report._reviewed.description=Tasksh review report.  Adjust the filter to your needs.
+report._reviewed.columns=uuid
+report._reviewed.sort=reviewed+,modified+
+report._reviewed.filter=( reviewed.none: or reviewed.before:now-6days ) and ( +PENDING or +WAITING )
