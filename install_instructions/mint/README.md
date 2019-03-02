@@ -379,7 +379,8 @@ In every repo project i create a folder .todo this folder is used to keep todo l
 Then i have an alias in bashrc to use taskwarrior with overrider folder .todo
 
 tasksh is a usefull packagee you will need to manually install it with dpkg
-google ubuntu tasksh
+Install instructions
+https://github.com/GothenburgBitFactory/taskwarrior/issues/2003
 
 you will also need to install libreaddline7 deb - download it somewhere :)
 
