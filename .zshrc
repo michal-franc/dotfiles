@@ -15,6 +15,16 @@ alias tall="task"
 # load todos in bulk
 alias tnbulk="xargs -L1 task rc.data.location=.todo add pro:next < todo.md"
 
+# git add -> commit -> pull -> auto merge and push
+function tsync() {
+  pushd ~/todo
+    git add -A
+    git commit -m 'syncing todo'
+    git pull origin master --no-edit
+    git push origin master
+  popd
+}
+
 # create new script folder == project
 # so that /blog -> pro:blog
 # if .git repo will use .git base folder
