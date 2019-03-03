@@ -11,9 +11,11 @@ node_modules/
 !*.zshrc
 !*.xinitrc
 !*.taskrc
+!*.muttrc
 !README.md
 
 # and not this folders
+!.mutt
 !images
 !wallpapers
 !_vimrc

@@ -491,3 +491,7 @@ https://github.com/wtfutil/wtf
 Pomo
 ----
 https://kevinschoon.github.io/pomo/
+
+Mutt
+----
+install mutt a great email client

@@ -81,7 +81,7 @@ function t() {
 # worklog (similar solution as n but static worklog file)
 
 function n() {
- todayFileFolder=~/Notes/quick-notes/"$(date +%Y-%m-%d).md"
+ todayFileFolder=~/notes/quick-notes/"$(date +%Y-%m-%d).md"
 
  if [ ! -f todayFileFolder ]; then
    echo Creating quick note for today
@@ -95,7 +95,7 @@ function n() {
  fi 
 }
 
-# TODO: make one function for these scripts
+# TODO: make one function for these scripts n and worklog
 function worklog() {
  file=~/notes/work/worklog.md
 
