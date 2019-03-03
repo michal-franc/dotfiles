@@ -56,15 +56,15 @@ font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = siji:pixelsize=10;1
 
 
-modules-left = main-goal
+modules-left =
 modules-right =
-modules-center = pomo  bspwm i3 cpu memory filesystem date
+modules-center = main-goal pomo  bspwm i3 cpu memory filesystem date
 
 [module/main-goal]
 type = custom/script
 exec = ~/main_goal.sh
 tail = true
-interval = 270
+interval = 30
 
 [module/pomo]
 type = custom/script

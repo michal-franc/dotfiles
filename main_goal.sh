@@ -1,3 +1,3 @@
 #!/bin/sh
-goals="$(cat ~/notes/main_goal.md)"
-echo Main Goals $goals
+goals="$(shuf -n 1 ~/todo/goals/monthly.md)"
+echo Monthly Goals: $goals
