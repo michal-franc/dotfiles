@@ -2,8 +2,11 @@
 
 if [ -z "$1" ]
 then
-  echo "param 1 -> No book path supplied"
-  exit 1
+  ls ~/Books
+  read -p "Which book to open? (uses ripgrep): " pick
+  book=$(rg ~/Books/$pick --files)
+else
+  book=$1
 fi
 
 workspace=$2
@@ -19,4 +22,4 @@ i3-msg "workspace $workspace; append_layout /home/mfranc/layouts/book.json"
 termite -d $HOME/notes/books &
 termite &
 termite & 
-zathura $1 &
+zathura $book &
