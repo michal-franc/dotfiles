@@ -36,6 +36,8 @@ urgency.uda.priority.L.coefficient=0.5
 
 urgency.user.tag.later.coefficient=-6.0
 
+urgency.due.coefficient=2.0
+
 uda.reviewed.type=date
 uda.reviewed.label=Reviewed
 report._reviewed.description=Tasksh review report.  Adjust the filter to your needs.
