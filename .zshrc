@@ -58,7 +58,13 @@ tproj() {
 # create new script folder == project
 function t() {
   dir=$(tdir)
-  task pro:$dir $@
+
+  context=$(task _get rc.context)
+  if [ "$context" = "form3" ]; then
+    task +$context pro:$dir $@
+  else
+    task pro:$dir $@
+  fi
 }
 
 #todo expand it to do a grep with all the notes

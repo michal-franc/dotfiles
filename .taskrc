@@ -46,3 +46,5 @@ report._reviewed.sort=reviewed+,modified+
 report._reviewed.filter=( reviewed.none: or reviewed.before:now-6days ) and ( +PENDING or +WAITING )
 
 urgency.user.project.sns-sqs-go.coefficient=2.0
+context.form3=+form3
+context.home=-form3
