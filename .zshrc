@@ -101,6 +101,12 @@ function n() {
  fi 
 }
 
+function nall() {
+  for filename in ~/notes/quick-notes/*.*; do
+    cat $filename
+  done
+}
+
 # TODO: make one function for these scripts n and worklog
 function worklog() {
  file=~/notes/work/worklog.md
