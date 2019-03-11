@@ -1,6 +1,6 @@
 export ZSH=/home/mfranc/.oh-my-zsh
 export GOPATH=$HOME/go
-export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
+export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin:$HOME/layouts
 export GO111MODULE=on
 
 export VISUAL='vim'

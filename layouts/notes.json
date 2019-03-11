@@ -1,0 +1,68 @@
+{
+    "border": "pixel",
+    "floating": "auto_off",
+    "layout": "splitv",
+    "percent": 0.5,
+    "type": "con",
+    "nodes": [
+        {
+            "border": "pixel",
+            "current_border_width": 1,
+            "floating": "auto_off",
+            "geometry": {
+               "height": 410,
+               "width": 655,
+               "x": 0,
+               "y": 0
+            },
+            "name": "mfranc@mfranc-VirtualBox: ~/notes",
+            "percent": 0.8,
+            "swallows": [
+               {
+                "class": "^Termite$"
+               }
+            ],
+            "type": "con"
+        },
+        {
+            "border": "pixel",
+            "current_border_width": 1,
+            "floating": "auto_off",
+            "geometry": {
+               "height": 410,
+               "width": 655,
+               "x": 0,
+               "y": 0
+            },
+            "name": "i3-save-tree --workspace 5 > ~/layouts/notes.json",
+            "percent": 0.2,
+            "swallows": [
+               {
+                "class": "^Termite$"
+               }
+            ],
+            "type": "con"
+        }
+    ]
+}
+
+{
+    "border": "pixel",
+    "current_border_width": 1,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 1037,
+       "width": 1266,
+       "x": 1295,
+       "y": 44
+    },
+    "name": "i3: Layout saving in i3 - Google Chrome",
+    "percent": 0.5,
+    "swallows": [
+       {
+        "class": "^Google\\-chrome$"
+       }
+    ],
+    "type": "con"
+}
+
