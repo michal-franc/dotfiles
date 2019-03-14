@@ -500,3 +500,10 @@ FEH
 ---
 required for wallpapers 
 sudo apt-get install feh
+
+
+BlueTooth:
+-----
+
+Use - sudo bluez.bluetoothctl
+- pair, connect, disconnect
