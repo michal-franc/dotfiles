@@ -58,7 +58,7 @@ font-2 = siji:pixelsize=10;1
 
 modules-left =
 modules-right =
-modules-center = main-goal pomo  bspwm i3 cpu memory filesystem date
+modules-center = main-goal bspwm i3 cpu memory filesystem date
 
 [module/main-goal]
 type = custom/script
