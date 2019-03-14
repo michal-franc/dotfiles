@@ -472,6 +472,9 @@ sudo apt install xcb-proto
 ```
 https://github.com/jaagr/polybar
 
+compton
+sudo apt-get instlal compton
+
 PDF viewer zathura
 sudo apt-get install zathura or dpkg
 
