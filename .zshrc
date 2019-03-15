@@ -3,6 +3,8 @@ export GOPATH=$HOME/go
 export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin:$HOME/layouts
 export GO111MODULE=on
 
+eval $(luarocks path --bin)
+
 export VISUAL='vim'
 export EDITOR='vim'
 
@@ -47,6 +49,11 @@ function tdir() {
     dir=$(basename $PWD)
   fi
   echo $dir
+}
+
+docs() {
+  project=$(tdir)
+  vim ~/Work/docs-projects/$project.md
 }
 
 # used to set project coefficient 
