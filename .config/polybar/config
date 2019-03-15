@@ -45,10 +45,10 @@ line-color = #f00
 border-size = 0
 border-color = ${colors.background}
 
-padding-left = 0
-padding-right = 0
+padding-left = 10
+padding-right = 10
 
-module-margin-left = 3
+module-margin-left = 2
 module-margin-right = 2
 
 font-0 = fixed:pixelsize=10;1
@@ -56,9 +56,9 @@ font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = siji:pixelsize=10;1
 
 
-modules-left =
-modules-right =
-modules-center = main-goal bspwm i3 cpu memory filesystem date
+modules-left = main-goal
+modules-right = battery memory cpu filesystem date
+modules-center = bspwm i3
 
 [module/main-goal]
 type = custom/script
@@ -343,10 +343,9 @@ bar-volume-empty-foreground = ${colors.foreground-alt}
 
 [module/battery]
 type = internal/battery
-battery = BAT0
+battery = BAT1
 adapter = AC
 full-at = 98
-
 format-charging = <animation-charging> <label-charging>
 format-charging-underline = #ffb52a
 
