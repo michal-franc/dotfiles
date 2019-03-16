@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# uses main to take screenshot
+# put it in .folder
+# put it to clipboard ready for markdown paste
+
+folder=".images"
+if [[ $# -ne 0 ]] ; then
+  folder=".images/${@}"
+fi
+
+if [ ! -d $folder ]; then
+  echo Creating folder $folder
+  mkdir $folder
+fi
+
+fileAndFolderName="${folder}/note-$(date +%s).png"
+maim --noopengl -s -d 1 $PWD/$fileAndFolderName
+echo "![note-image](${fileAndFolderName})" | xclip -selection clipboard
+echo Created file $fileAndFolderName and put it to clipboard
+echo use ctrl + v in your editor

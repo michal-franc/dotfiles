@@ -1,0 +1,16 @@
+#!/bin.bash
+
+# script for taking quick notes
+
+todayFileFolder=~/notes/quick-notes/"$(date +%Y-%m-%d).md"
+
+if [ ! -f todayFileFolder ]; then
+ echo Creating quick note for today
+ touch $todayFileFolder
+fi
+
+if [[ $# -eq 0 ]] ; then
+  cat $todayFileFolder;
+else
+  echo "- $@" >> $todayFileFolder;
+fi 

@@ -1,0 +1,12 @@
+#!/bin/bash  
+
+# alias for taskwarriors that works with project based on git repo
+
+dir=$(tdir)
+
+context=$(task _get rc.context)
+if [ "$context" = "form3" ]; then
+  task +$context pro:$dir $@
+else
+  task pro:$dir $@
+fi

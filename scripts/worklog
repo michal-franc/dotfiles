@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# script for quick worklog creation
+
+context=$(task _get rc.context)
+if [ "$context" = "form3" ]; then
+  file=~/Work/worklog.md
+else
+  file=~/notes/work/worklog.md
+fi
+
+if [[ $# -eq 0 ]] ; then
+  cat $file | tail;
+else
+  echo "- $@" >> $file;
+fi 
