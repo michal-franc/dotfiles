@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# display all quick notes
+
+for filename in ~/notes/quick-notes/*.*; do
+  cat $filename
+done
