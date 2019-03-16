@@ -33,6 +33,7 @@ Then follow: [ubuntu/xubuntu/mint installation](/install_instructions/mint). The
 - jq
 - bat
 - tig
+- zathura
 
 ## Screenshots
 ![](images/dotfiles_example3.PNG)
