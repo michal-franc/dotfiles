@@ -1,16 +1,40 @@
-### Common installation step for different Unix/Linux systems
+Welcome to my dotfiles.
+This is still work in progress.
 
-- install - https://github.com/projectivemotion/i3status-taskwarrior
-- dont forget to install vim8 with +clipboard and +python3
+## First step is to clone this repo
 
-```
-sudo add-apt-repository ppa:jonathonf/vim
-sudo apt update
-sudo apt install vim
-```
+- git init in your home dir
+- `git add remote origin git@github.com:michal-franc/dotfiles.git`
+- `git fetch --all`
 
-![](images/dotfiles_example.PNG)
+Then follow: [ubuntu/xubuntu/mint installation](/install_instructions/mint). There is only one at the moment. If you are brave enough you can also try [Arch Linux one](/install_instructions/arch).
+
+## Basic Docs
+
+1. [layout system](/layouts)
+2. [scripts](/scripts)
+3. [visual studio code config](/.config/Code)
+4. taskwarrior usage
+
+### What tools do I use
+
+- polybar
+- vim
+- visual studio code
+- ripgrep
+- taskwarrior
+- rofi
+- termite
+- mutt
+- oh my zsh
+- entr
+- maim
+- htop
+- jq
+- bat
+- tig
+
+## Screenshots
 ![](images/dotfiles_example3.PNG)
-![](images/dotfiles_example4.PNG)
 ![](images/dotfiles_example1.PNG)
 ![](images/dotfiles_example2.PNG)
