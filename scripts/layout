@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# script for invoking layouts system
+
 if [ $# -eq 0 ]
 then
   echo available layouts:

@@ -14,18 +14,10 @@ source $HOME/.cargo/env
 
 alias tlocal="task rc.data.location=.todo"
 alias tall="task"
+# aliases
+alias cat='bat'
 # load todos in bulk
 alias tnbulk="xargs -L1 task rc.data.location=.todo add pro:next < todo.md"
-
-# git add -> commit -> pull -> auto merge and push
-function tsync() {
-  pushd ~/todo
-    git add -A
-    git commit -m 'syncing todo'
-    git pull origin master --no-edit
-    git push origin master
-  popd
-}
 
 # create dir for other functions
 # so that /blog -> pro:blog
@@ -73,25 +65,6 @@ function t() {
     task pro:$dir $@
   fi
 }
-
-#todo expand it to do a grep with all the notes
-#todo expand it even further to enable for n l - display list of notes with number 
-#todo n 1 -> cat this note
-#todo n 'test' 1 -> add to notes number 1
-#there could be diffent modes - nodes in current project folder, global notes
-#function n() {
-# if [[ $# -eq 0 ]] ; then
-#     cat .notes;
-# else
-#     echo "- $@" >> .notes;
-# fi 
-#}
-
-# n - cat current notes
-# nv -> opens todays note in vim
-# n -> arg -> puts the arg into current quick note
-#
-# worklog (similar solution as n but static worklog file)
 
 function n() {
  todayFileFolder=~/notes/quick-notes/"$(date +%Y-%m-%d).md"
@@ -141,7 +114,6 @@ function screenf() {
   fi 
 }
 
-
 function screenn() {
   folder=".images"
   if [[ $# -ne 0 ]] ; then
@@ -160,40 +132,8 @@ function screenn() {
   echo use ctrl + v in your editor
 }
 
-function autotest() {
-  if  [[ $1 == 'python' ]]; then
-    rg --files -tpy | entr python3 -m unittest
-  fi
-
-  if  [[ $1 == 'rust' ]]; then
-    rg --files -trust | entr cargo test -- --nocapture
-  fi
-
-  if  [[ $1 == 'bash' ]]; then
-    rg --files -tsh | entr bats $2
-  fi
-
-  if  [[ $1 == 'go' ]]; then
-    rg --files -tgo | entr go test $2
-  fi
-}
-
-function prlist() {
-  for d in `ls -d */`
-  do
-    echo $d
-    pushd $d > /dev/null
-    hub pr list -f '%sC%>(8)%i%Creset - %t %sC%au%Creset%n %sC%>(8)%Creset %sC%>(4)link%Creset %U%n%n'
-    popd > /dev/null
-  done
-}
-
-# aliases
-alias cat='bat'
-
 # disabling XON/XOFF flow control
 stty -ixon
-
 
 # tabtab source for serverless package
 # uninstall by removing these lines or running `tabtab uninstall serverless`
