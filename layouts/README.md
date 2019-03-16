@@ -28,6 +28,8 @@ Example: `layout code ~/Work 5`
 - opens up 3 terminals, `google chrome` and `vs code` with a folder pointing to the one provided in arg
 
 #### Notes
+Example: `layout notes pocket 6`
+![note-image](.images/note-1552773009.png)
 - opens up 1 termnal, `google chrome` with either `pocket, feedly or google keep` and a flowchart.
 
 #### Social
