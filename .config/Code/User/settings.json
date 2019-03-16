@@ -26,5 +26,6 @@
     "window.titleBarStyle": "custom",
     "window.menuBarStyle": "custom",
     "vim.disableAnnoyingNeovimMessage": true,
-    "zenMode.restore": true
+    "zenMode.restore": true,
+    "keyboard.dispatch": "keyCode"
 }

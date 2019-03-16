@@ -1,11 +1,12 @@
-code --install-extension dracula-theme.theme-dracula
-code --install-extension ms-python.python
-code --install-extension ms-vscode.csharp
-code --install-extension sleistner.vscode-fileutils
-code --install-extension vscodevim.vim
 code --install-extensions dracula-theme.theme-dracula
 code --install-extensions jchannon.csharpextensions
 code --install-extensions ms-python.python
 code --install-extensions ms-vscode.csharp
+code --install-extensions sleistner.vscode-fileutils
+code --install-extensions vscodevim.vim
+code --install-extensions dracula-theme.theme-dracula
+code --install-extensions ms-python.python
+code --install-extensions ms-vscode.csharp
+code --install-extensions rog2.luacheck
 code --install-extensions sleistner.vscode-fileutils
 code --install-extensions vscodevim.vim

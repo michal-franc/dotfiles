@@ -6,6 +6,7 @@ node_modules/
 
 # But not these files...
 !*.gitignore
+!startup.sh
 !*.pylintrc
 !*.Xresources
 !*.zshrc

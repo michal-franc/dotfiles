@@ -131,11 +131,12 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-default_border pixel 1
+default_border pixel 2
 hide_edge_borders smart
 
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh
-exec_always compton -c
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh 
+exec --no-startup-id $HOME/.config/startup.sh
+exec_always compton -c --config ~/.config/compton.conf
 
 # i3gaps
 gaps inner 8
@@ -152,3 +153,8 @@ client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 
 exec xset r rate 150 40
 exec_always feh --randomize --bg-fill $HOME/images/wallpapers/*.jpg
+
+# to make sure that bluetooth module runs after x11 has loaded otherwise you might get an error
+# https://raspberrypi.stackexchange.com/questions/67617/bluetoothctl-fails-to-connect-to-any-device-failed-to-connect-org-bluez-erro
+exec pactl load-module module-bluetooth-discover
+

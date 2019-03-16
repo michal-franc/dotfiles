@@ -118,6 +118,7 @@ Installing go and GOPATH for i3-vim-nav
 Go Installation
 
 https://github.com/golang/go/wiki/Ubuntu
+dont install with apt-get just take the binary
 
 When installing new version you need to setup proper path
 
@@ -353,11 +354,7 @@ Maim
 ------------------------------
 
 ```bash
-sudo apt-get install cmake
-sudo apt-get install libglm-dev
-sudo apt-get install librandr-dev
-sudo apt-get install libglew-dev
-sudo apt-get install libjpeg-dev
+sudo apt-get install cmake libglm-dev libxrandr-dev libglew-dev libjpeg-dev
 ```
 
 https://github.com/naelstrof/maim
@@ -472,6 +469,9 @@ sudo apt install xcb-proto
 ```
 https://github.com/jaagr/polybar
 
+compton
+sudo apt-get instlal compton
+
 PDF viewer zathura
 sudo apt-get install zathura or dpkg
 
@@ -495,3 +495,15 @@ https://kevinschoon.github.io/pomo/
 Mutt
 ----
 install mutt a great email client
+
+FEH
+---
+required for wallpapers 
+sudo apt-get install feh
+
+
+BlueTooth:
+-----
+
+Use - sudo bluez.bluetoothctl
+- pair, connect, disconnect
