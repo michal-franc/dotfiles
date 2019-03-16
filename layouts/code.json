@@ -1,6 +1,4 @@
-// vim:ts=4:sw=4:et
 {
-    // splitv split container with 2 children
     "border": "pixel",
     "floating": "auto_off",
     "layout": "splitv",
@@ -21,10 +19,7 @@
             "percent": 0.8,
             "swallows": [
                {
-               // "class": "^Google\\-chrome$",
-               // "instance": "^google\\-chrome$",
-               // "title": "^New\\ Tab\\ \\-\\ Google\\ Chrome$",
-               // "window_role": "^browser$"
+                 "class": "^Google\\-chrome$"
                }
             ],
             "type": "con"
@@ -43,9 +38,7 @@
             "percent": 0.2,
             "swallows": [
                {
-               // "class": "^Termite$",
-               // "instance": "^termite$",
-               // "title": "^i3\\-save\\-tree\\ \\-\\-workspace\\ 3\\ \\>\\ \\~\\/layouts\\/code\\.json$"
+                "class": "^Termite$"
                }
             ],
             "type": "con"
@@ -54,7 +47,6 @@
 }
 
 {
-    // splitv split container with 2 children
     "border": "pixel",
     "floating": "auto_off",
     "layout": "splitv",
@@ -62,7 +54,6 @@
     "type": "con",
     "nodes": [
         {
-            // splitv split container with 1 children
             "border": "pixel",
             "floating": "auto_off",
             "layout": "splitv",
@@ -83,10 +74,7 @@
                     "percent": 1,
                     "swallows": [
                        {
-                       // "class": "^Code$",
-                       // "instance": "^code$",
-                       // "title": "^Welcome\\ \\-\\ mfranc\\ \\-\\ Visual\\ Studio\\ Code$",
-                       // "window_role": "^browser\\-window$"
+                        "class": "^Code"
                        }
                     ],
                     "type": "con"
@@ -94,7 +82,6 @@
             ]
         },
         {
-            // splith split container with 2 children
             "border": "pixel",
             "floating": "auto_off",
             "layout": "splith",
@@ -115,9 +102,7 @@
                     "percent": 0.5,
                     "swallows": [
                        {
-                       // "class": "^Termite$",
-                       // "instance": "^termite$",
-                       // "title": "^mfranc\\@mfranc\\-VirtualBox\\:\\ \\~$"
+                        "class": "^Termite$"
                        }
                     ],
                     "type": "con"
@@ -136,9 +121,7 @@
                     "percent": 0.5,
                     "swallows": [
                        {
-                       // "class": "^Termite$",
-                       // "instance": "^termite$",
-                       // "title": "^mfranc\\@mfranc\\-VirtualBox\\:\\ \\~$"
+                        "class": "^Termite$"
                        }
                     ],
                     "type": "con"

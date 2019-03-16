@@ -1,20 +1,23 @@
 #!/bin/bash
 
-data=$(</dev/stdin)"\n---------------------------"
+function usage() {
+  echo code
+  echo "usage: social w"
+  echo "w -> workspace number"
+  echo example: social 5
+  echo
+  echo Opens up a layout with typical social media things
+}
 
-if [ $# -eq 0 ]; then
-  echo -e "$data" >> ~/notes/twitter.md  
-  echo -e "$data" >> ~/notes/newsletter.md  
-  echo note sent to twitter and newsletter
+if [ -z "$1" ]; then
+  usage
   exit
 fi
 
-if [ -z "$1" ]; then
-  echo -e "$data" >> ~/notes/twitter.md  
-  echo note sent to twitter
-fi
+workspace=$1
 
-if [ -z "$2" ]; then
-  echo -e "$data" >> ~/notes/newsletter.md
-  echo note sent to newsletter
-fi
+i3-msg "workspace $workspace; append_layout /home/mfranc/layouts/social.json"
+
+google-chrome --new-window https://tweetdeck.twitter.com/ &
+termite &
+slack 

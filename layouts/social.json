@@ -1,6 +1,4 @@
-// vim:ts=4:sw=4:et
 {
-    // splitv split container with 2 children
     "border": "pixel",
     "floating": "auto_off",
     "layout": "splitv",
@@ -21,10 +19,7 @@
             "percent": 0.8,
             "swallows": [
                {
-               // "class": "^Google\\-chrome$",
-               // "instance": "^google\\-chrome$",
-               // "title": "^New\\ Tab\\ \\-\\ Google\\ Chrome$",
-               // "window_role": "^browser$"
+                "class": "^Google\\-chrome$"
                }
             ],
             "type": "con"
@@ -43,9 +38,7 @@
             "percent": 0.2,
             "swallows": [
                {
-               // "class": "^Termite$",
-               // "instance": "^termite$",
-               // "title": "^i3\\-save\\-tree\\ \\-\\-workspace\\ 3\\ \\>\\ \\~\\/layouts\\/social\\.json$"
+                "class": "^Termite$"
                }
             ],
             "type": "con"
@@ -67,10 +60,7 @@
     "percent": 0.6,
     "swallows": [
        {
-       // "class": "^Slack$",
-       // "instance": "^slack$",
-       // "title": "^Slack\\ \\-\\ Devs\\ PL$",
-       // "window_role": "^browser\\-window$"
+        "class": "^Slack$"
        }
     ],
     "type": "con"

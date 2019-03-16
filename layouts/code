@@ -1,0 +1,27 @@
+#!/bin/bash
+
+function usage() {
+  echo code
+  echo "usage: code f w"
+  echo "f -> folder path"
+  echo "w -> workspace number"
+  echo example: pocket 5
+  echo
+  echo Opens up a layout with vs code, chrome and 3 terminals for coding tasks
+}
+
+if [ -z "$1" ] || [ -z "$2" ]; then
+  usage
+  exit
+fi
+
+workspace=$2
+folder=$1
+
+i3-msg "workspace $workspace; append_layout /home/mfranc/layouts/code.json"
+
+google-chrome --new-window &
+termite -d $folder &
+termite -d $folder &
+termite -d $folder &
+code $folder

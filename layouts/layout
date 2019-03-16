@@ -1,0 +1,16 @@
+#!/bin/bash
+
+if [ $# -eq 0 ]
+then
+  echo available layouts:
+  echo 
+  ls ~/layouts | grep json | sed -e "s/.json//g"
+  echo 
+  echo usage layout book -args
+else
+  # ${@:2} pprocesses all arguments expect 1
+  # otherwise I would need to use "$2" 
+  # as a way o pass params to underlaying script
+  ~/layouts/$1 ${@:2}
+fi
+
