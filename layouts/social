@@ -18,6 +18,6 @@ workspace=$1
 
 i3-msg "workspace $workspace; append_layout /home/mfranc/layouts/social.json"
 
-google-chrome --new-window https://tweetdeck.twitter.com/ &
+google-chrome --new-window https://tweetdeck.twitter.com/ https://news.ycombinator.com/ &
 termite &
 slack 
