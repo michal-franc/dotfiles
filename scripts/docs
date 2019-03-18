@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# creates documents for projects base on context
+
+context=$(task _get rc.context)
+project=$(tdir)
+if [ "$context" = "form3" ]; then
+  vim ~/Work/docs/$project.md
+else
+  vim ~/notes/docs/$project.md
+fi

@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# script for showing google calendar
+gcalcli calw --calendar michal.franc@just-eat.com --monday -w 30

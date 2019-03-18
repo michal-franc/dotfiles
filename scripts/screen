@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# script to take selection screenshot
+
+maim --noopengl -s -d 1 | xclip -selection clipboard -t image/png
