@@ -507,3 +507,10 @@ BlueTooth:
 
 Use - sudo bluez.bluetoothctl
 - pair, connect, disconnect
+
+on Xubuntu install Xviewer
+---
+sudo add-apt-repository ppa:embrosyn/xapps
+sudo apt-get update
+
+sudo apt-get install xviewer
