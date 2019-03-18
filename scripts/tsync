@@ -2,8 +2,12 @@
 # Script for syncing my todo list
 # git add -> commit -> pull -> auto merge and push
 pushd ~/todo
-  git add -A
-  git commit -m 'syncing todo'
-  git pull origin master --no-edit
-  git push origin master
+  git status
+  read -p "are you sure you want to commit these changes? y/n " pick
+  if [ "$pick" == "y" ]; then
+    git add .task
+    git commit -m 'syncing todo'
+    git pull origin master --no-edit
+    git push origin master
+  fi
 popd
