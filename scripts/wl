@@ -4,7 +4,7 @@
 
 context=$(task _get rc.context)
 if [ "$context" = "form3" ]; then
-  file=~/Work/worklog.md
+  file=~/Work/docs/worklog.md
 else
   file=~/notes/work/worklog.md
 fi
