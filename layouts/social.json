@@ -39,6 +39,9 @@
             "swallows": [
                {
                 "class": "^Termite$"
+               },
+               {
+                "class": "^zoom$"
                }
             ],
             "type": "con"

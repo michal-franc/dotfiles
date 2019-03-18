@@ -18,6 +18,11 @@ workspace=$1
 
 i3-msg "workspace $workspace; append_layout /home/mfranc/layouts/social.json"
 
-google-chrome --new-window https://tweetdeck.twitter.com/ https://news.ycombinator.com/ &
-termite &
-slack 
+google-chrome --new-window https://tweetdeck.twitter.com/ https://news.ycombinator.com/ https://outlook.office365.com/owa/ &
+slack &
+
+if [ -x "$(command -v zoom)" ]; then
+  zoom &
+else
+  termite &
+fi
