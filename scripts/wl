@@ -10,7 +10,11 @@ else
 fi
 
 if [[ $# -eq 0 ]] ; then
-  cat $file | tail;
+  cat $file | tail
 else
-  echo "- $@" >> $file;
+  if [[ "$1" == "vim" ]] ; then
+    vim $file
+  else
+    echo "- $@" >> $file
+  fi
 fi 
