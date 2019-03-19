@@ -514,3 +514,7 @@ sudo add-apt-repository ppa:embrosyn/xapps
 sudo apt-get update
 
 sudo apt-get install xviewer
+
+RUBY ENV
+---
+https://stackoverflow.com/questions/37720892/you-dont-have-write-permissions-for-the-var-lib-gems-2-3-0-directory -> just do the clones paths and eval is already in .zshrc
