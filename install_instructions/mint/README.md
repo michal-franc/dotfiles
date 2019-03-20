@@ -166,28 +166,12 @@ install VIM
 sudo apt-get install vim.nox-py2
 ```
 
-or
-
-```bash
-sudo apt-get install gtk-py2 -> has clipboard
-
-ln dotfiles/unix/_vimrc _vimrc
-```
-
 install plug
 https://github.com/junegunn/vim-plug
 
 run PlugInstall
 
 Install vim 8
-
-```bash
-sudo add-apt-repository ppa:jonathonf/vim
-sudo apt update
-sudo apt install vim
-```
-
-youcompleteme - requires compliation of ycm server -> https://github.com/Valloric/YouCompleteMe#installation
 
 --------------------------------------
 Go to main site download deb and use sudo dpkg -i on poackage 
