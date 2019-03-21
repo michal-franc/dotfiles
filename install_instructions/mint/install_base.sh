@@ -89,6 +89,9 @@ apt-get update
 apt-get install xviewer -y
 
 echo isntalling docker and dive
+
+sudo apt-get install docker-compose -y
+
 pushd ~/Downloads
   wget https://github.com/wagoodman/dive/releases/download/v0.7.0/dive_0.7.0_linux_amd64.deb
   apt install ./dive_0.7.0_linux_amd64.deb
@@ -175,3 +178,6 @@ popd
 apt-get install apt-transport-https
 apt-get update
 apt-get install code # or code-insiders
+
+echo AWS
+apt-get install aws-cli -y

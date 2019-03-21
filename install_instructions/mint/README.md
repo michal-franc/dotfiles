@@ -86,3 +86,13 @@ copy paste key to /tmp
 `gpg --import key` -> passphrase should be stored somewhere
 git config --global commit.gpgsign true
 git config --global user.signingkey <fingerprint>
+
+#install antivirus
+https://www.sophos.com/en-us/products/free-tools/sophos-antivirus-for-linux.aspx
+
+#instlaling iptables
+sudo apt-get install iptables-persistent
+Yes, Yes
+
+#git secrets
+- git clone git@github.com:awslabs/git-secrets.git
