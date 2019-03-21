@@ -1,55 +1,20 @@
+### Mint install process
 Take the mint with xfce (not cinammon) image and install it just like usual.
+Pick English US keyboard. Install third party software. Enable encryption - pick a passphrase.
 
-Dont install third party software - we are generating smallest possible Mint installation. We dont need that.
+### install_base.sh
 
-Pick English US keyboard
+Run install.sh. It does.
+- upgrades the base kernel, distro
+- installs xclip, git, zsh, vim, i3, termite, rofi
 
+#### If running on VM - install Guest Additions
 Before procedding install Guest Additions and make sure software rendering message is gone
-
-Sometimes To be able to install Additions you need to run
-
-```bash
-sudo apt-get install build-essential
-sudo apt-get update -y
-sudo apt-get upgrade -y
-sudo apt-get dist-upgrade -y
-sudo apt-get install linux-headers-generic
-```
-
-Virtual box 5.14 had a bug with 'generic' kernel ( mint is generic ) - so make sure you use VBox > 5.14
-
-This is the tutorial on how to convert Mint installation to system with I3WM.
-
 Installing Guest Addtions is simple - just add image and in terminal on admin rights run the sh. Then restart.
 
-removing XFCE  
-----------------------------------------------------
+### Run install_additions.sh
 
-In my case (Mint with cinnamon and XFCE) I did: 
-
-```bash
-sudo apt-get install i3
-sudo apt-get install libanyevent-i3-perl <- required for saving workspaces
-```
-
-reboot and switch to i3 from logon screen
-Just logout and select i3 as your interface
-
-```bash
-sudo apt-get remove --purge xfce*
-sudo apt-get remove --purge libreoffice*
-sudo apt-get remove --purge thunderbird*
-sudo apt-get remove --purge gimp*
-sudo apt-get remove --purge firefox*
-sudo apt-get clean
-sudo apt-get autoremove
-
-sudo rm -rf /usr/share/backgrounds 
-sudo rm -rf /usr/share/icons
-
-sudo apt-get install git
-sudo apt-get install xclip
-```
+### Github SSH
 
 Configure Github ssh key
 
@@ -57,47 +22,24 @@ Configure Github ssh key
 cat id_rsa.pub | xclip -selection c
 ```
 
-This will copy your ssh key to clipboard - use it on github
-
-Clone dotfiles to main ~
+### Cloning doftiles
+Clone dotfiles to main ~ by creatin empty repo and adding remote and feetching all :)
 
 ```bash
 cd ~
-git clone https://github.com/michal-franc.com/dotfiles
+git init
+git remote add origin https://github.com/michal-franc.com/dotfiles
+git fetch --all
 ```
 
-Create Tools Folder.
+### Troubleshooting
+Termite - https://askubuntu.com/questions/739163/how-to-install-termite
 
-----------------------------------------------------------
-Termite installation 
 
-From tools folder run
-
-```bash
-mkdir -p ~/tools
-cd $_
-curl https://raw.githubusercontent.com/Corwind/termite-install/master/termite-install.sh > termite_install.sh 
-sudo apt install libtool 
-
-sudo add-apt-repository ppa:jasonpleau/rofi
-sudo apt update
-sudo apt install rofi
-
-sudo ./termite_install.shk
-cd ~
-mkdir .config/termite 
-sudo ln dotfiles/unix/.config/termite/config .config/termite/config 
-sudo ln dotfiles/unix/.config/i3/config .config/i3/config 
-```
-
-if problems https://askubuntu.com/questions/739163/how-to-install-termite
+#### Down Below spam :)
 
 ZSH 
 ---------------------------------------
-
-```bash
-sudo apt-get install zsh 
-```
 
 * https://github.com/robbyrussell/oh-my-zsh 
 * https://github.com/zplug/zplug
@@ -105,11 +47,7 @@ sudo apt-get install zsh
 ```bash
 zplug install
 ln dotfiles/unix/.zshrc ~/.zshrc
-
-xset r rate 150 40 - to auto 
 ```
-
-My i3 config uses i3-vim-nav for navigation beetwen panels. This soft is used to easilly navigate to i3 context using same controls. This step is necessary now to enable pane jumpiong.
 
 ---------------------
 Installing go and GOPATH for i3-vim-nav
