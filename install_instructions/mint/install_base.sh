@@ -70,6 +70,7 @@ pushd ~/Downloads
   go get golang.org/x/tools/cmd/godoc
   go get github.com/michal-franc/i3-vim-nav # custom go app for jumping from go to vim etc
   go get github.com/kevinschoon/pomo # pomodoro script
+  go get github.com/michal-franc/mf-cli # cli app with helper scripts
 popd
 
 echo installing ripgrep
