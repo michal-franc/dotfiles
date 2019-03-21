@@ -76,3 +76,13 @@ connect <device>
 Termite - https://askubuntu.com/questions/739163/how-to-install-termite
 
 #### Down Below spam :)
+
+NVIDIA DRIVErs
+sudo add-apt-repository ppa:graphics-drivers
+sudo apt-get install nvidia-xxx
+
+installing GPG key from 1pass or last pass to sign commits
+copy paste key to /tmp
+`gpg --import key` -> passphrase should be stored somewhere
+git config --global commit.gpgsign true
+git config --global user.signingkey <fingerprint>
