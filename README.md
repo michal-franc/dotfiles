@@ -1,3 +1,5 @@
+# Michal Franc dotfiles
+
 Welcome to my dotfiles.
 This is still work in progress.
 
