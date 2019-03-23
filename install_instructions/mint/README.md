@@ -1,504 +1,98 @@
+### Mint install process
 Take the mint with xfce (not cinammon) image and install it just like usual.
+Pick English US keyboard. Install third party software. Enable encryption - pick a passphrase.
 
-Dont install third party software - we are generating smallest possible Mint installation. We dont need that.
+### SETTINGS - TODO env variable passed by user or in config file:
+- pick go version
+- pick ripgrep version
+  - https://github.com/BurntSushi/ripgrep/releases
 
-Pick English US keyboard
+### install_base.sh
 
+Run install.sh. It does.
+- upgrades the base kernel, distro
+- installs xclip, git, zsh, vim, i3, termite, rofi, maim, zoom, chrome, slack, ohmyzsh and more
+
+#### If running on VM - install Guest Additions
 Before procedding install Guest Additions and make sure software rendering message is gone
-
-Sometimes To be able to install Additions you need to run
-
-```bash
-sudo apt-get install build-essential
-sudo apt-get update -y
-sudo apt-get upgrade -y
-sudo apt-get dist-upgrade -y
-sudo apt-get install linux-headers-generic
-```
-
-Virtual box 5.14 had a bug with 'generic' kernel ( mint is generic ) - so make sure you use VBox > 5.14
-
-This is the tutorial on how to convert Mint installation to system with I3WM.
-
 Installing Guest Addtions is simple - just add image and in terminal on admin rights run the sh. Then restart.
 
-removing XFCE  
-----------------------------------------------------
+### Run install_additions.sh
 
-In my case (Mint with cinnamon and XFCE) I did: 
-
-```bash
-sudo apt-get install i3
-sudo apt-get install libanyevent-i3-perl <- required for saving workspaces
-```
-
-reboot and switch to i3 from logon screen
-Just logout and select i3 as your interface
-
-```bash
-sudo apt-get remove --purge xfce*
-sudo apt-get remove --purge libreoffice*
-sudo apt-get remove --purge thunderbird*
-sudo apt-get remove --purge gimp*
-sudo apt-get remove --purge firefox*
-sudo apt-get clean
-sudo apt-get autoremove
-
-sudo rm -rf /usr/share/backgrounds 
-sudo rm -rf /usr/share/icons
-
-sudo apt-get install git
-sudo apt-get install xclip
-```
-
+### Github SSH
 Configure Github ssh key
 
 ```bash
-cat id_rsa.pub | xclip -selection c
+ssh-keygen -t rsa -b 4096 -C "email"
+cat ~/.ssh/id_rsa.pub | xclip -selection c
 ```
 
-This will copy your ssh key to clipboard - use it on github
+Paste the key from clipboard to github.
 
-Clone dotfiles to main ~
+### Configure GIT
+
+```bash
+git config --global user.name "Michal Franc"
+git config --global user.email "<email>"
+```
+
+# TODO race condition when to clone or not - there is no ohmyzsh installation that requires .zshrc
+### Cloning doftiles
+Clone dotfiles to main ~ by creatin empty repo and adding remote and feetching all :)
 
 ```bash
 cd ~
-git clone https://github.com/michal-franc.com/dotfiles
+git init
+git remote add origin git@github.com:michal-franc/dotfiles.git
+git fetch --all
+git checkout master
 ```
 
-Create Tools Folder.
+### Bonus
 
-----------------------------------------------------------
-Termite installation 
+clone todo and notes from private repos
 
-From tools folder run
+For Chrome I usually install:
+- 1password
+- ublock origin
+- lastpass
+- vimium
 
-```bash
-mkdir -p ~/tools
-cd $_
-curl https://raw.githubusercontent.com/Corwind/termite-install/master/termite-install.sh > termite_install.sh 
-sudo apt install libtool 
-
-sudo add-apt-repository ppa:jasonpleau/rofi
-sudo apt update
-sudo apt install rofi
-
-sudo ./termite_install.shk
-cd ~
-mkdir .config/termite 
-sudo ln dotfiles/unix/.config/termite/config .config/termite/config 
-sudo ln dotfiles/unix/.config/i3/config .config/i3/config 
-```
-
-if problems https://askubuntu.com/questions/739163/how-to-install-termite
-
-ZSH 
----------------------------------------
-
-```bash
-sudo apt-get install zsh 
-```
-
-* https://github.com/robbyrussell/oh-my-zsh 
-* https://github.com/zplug/zplug
-
-```bash
-zplug install
-ln dotfiles/unix/.zshrc ~/.zshrc
-
-xset r rate 150 40 - to auto 
-```
-
-My i3 config uses i3-vim-nav for navigation beetwen panels. This soft is used to easilly navigate to i3 context using same controls. This step is necessary now to enable pane jumpiong.
-
----------------------
-Installing go and GOPATH for i3-vim-nav
----------------------
-
-Go Installation
-
-https://github.com/golang/go/wiki/Ubuntu
-dont install with apt-get just take the binary
-
-When installing new version you need to setup proper path
-
-```bash
-export PATH="$PATH:/user/lib/go-1.9/bin"
-```
-
-this is also added .zshrc so will be added automaticaly after all the other steps are finished :P
-
-```bash
-go get -u golang.org/x/lint/golint
-```
-
-install go watcher from github
-
-install godoc https://michaelheap.com/installing-godoc-for-golang-go-1-2/
-
-```bash
-go get golang.org/x/tools/cmd/godoc
-```
-
-//THIS is at the moment broken and optional
-----------------------
-
-If you want to test i3-vim-nav uncommet special config in i3
-
-```bash
-sudo apt-get install libxdo-dev
-sudo apt-get install xdotool
-```
-
-https://github.com/termhn/i3-vim-nav
-
-```bash
-go get -u github.com/michal-franc/i3-vim-nav
-```
-
-if it cant find GOPATH remember that sudo might be using different ENV variables
-
------------------------
-
-install VIM
-
-```bash
-sudo apt-get install vim.nox-py2
-```
-
-install plug
-https://github.com/junegunn/vim-plug
-
-run PlugInstall
-
-Install vim 8
-
---------------------------------------
-Go to main site download deb and use sudo dpkg -i on poackage 
--------------------------------------------
-Install Chrome 
-
-```bash
-wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb 
-sudo dpkg -i google-chrome-stable_current_amd64.deb 
-```
-
---------------------------------------------
-
-dotnet installation 
---------------------------------
-https://www.microsoft.com/net/core#linuxubuntu 
-
-
-Installing VBox guest addtions 
-------------------------------------
-http://www.techrepublic.com/article/how-to-install-virtualbox-guest-additions-on-a-gui-less-ubuntu-server-host/ 
-
-when mounting and /mount/cdrom is missing -> just create this folder with mkdir
-
-you still need to do this step from cli
-
-```bash
-ln .xinitrc -> script 
-```
-
-
-RipgRep instlal 
-----------------
-download package  -> ripgrep x86_64
-unpack 
-
-```bash
-tar -xvzf community_images.tar.gz 
-```
-
-move to tools 
-
-```bash
-ln rg /usr/bin/rg 
-```
-
-Linking all the settings
---------------------------
-
-```bash
-ln dotfiles/unix/.xinitrc .xinitrc
-ln dotfiles/unix/.Xresources .Xresources
-```
-
-Installing Mono 
-------------------
-https://github.com/OmniSharp/omnisharp-server/wiki 
-
-Installing Omnisharp 
-https://github.com/OmniSharp/omnisharp-server/wiki 
-https://vamseek.com/blog/2016/04/23/error-building-omnisharp-vim-on-ubuntu-xenialxerus/ 
-https://askubuntu.com/questions/575505/glibcxx-3-4-20-not-found-how-to-fix-this-error 
-
-
-------------------
-Visual Studio Code Settings file
-
-Dont forget to install tig :)
-
-```bash
-sudo apt-get install tig
-```
-
-----------------------
-Fonts
-----------------------
-
-only inconsolata is used at the moment
-
-```bash
-sudo apt-get install fonts-inconsolata
-```
-
-#https://github.com/source-foundry/Hack
-
-----------------------
-Great Tools
-----------------------
-
-```bash
-sudo apt-get install entr -> auto running files on file change:
-pip install grip -> great tool to preview github readme files
-```
-
-----------------------
-Python
----------------------
-
-```bash
-sudo apt-get install python-pip 
-sudo apt-get install python3-pip 
-
-sudo apt-get install python-dev
-sudo apt-get install python3-dev
-
-pip install setuptools 
-pip install locust 
-
-sudo apt-get install pylint
-sudo ln dotfiles/unix/.pylintrc .pylintrc
-
-
-Usefull libs:
-https://github.com/joowani/binarytree
-```
-
-Docker
-------------------
-https://docs.docker.com/engine/installation/linux/ubuntu/#install-using-the-repository
-
-beacuse you are using mint you need to check on release page which ubuntu build your version derive from and then replace lsb_release with the name of ubuntu
-for instance sylvia -> based on xenial then use xenial
-
-If getting docker socket permission then run
-
-```bash
-sudo usermod -a -G docker $USER
-```
-
-
-MiniKube
-------------------
-https://kubernetes.io/docs/tasks/tools/install-kubectl/
-
-Follow installation guide and remember to use --vm-driver=none
-https://github.com/kubernetes/minikube
-
-Chrome Extensions and setup
---------------------------
-
-Install lastpass, vimium -> set up account login withut any synchronization
-
-Things Needed for the BLog
----------------------------
-
-```bash
-sudo apt-get install ruby-dev
-sudo apt-get install nodejs
-gem install jekyll bundler
-```
-
-Dropbox
------------------------------
-Mostly using dropbox to sync files from host or other machines in a simple way
-
-Install from dropbox instruction
-then run the script
-
-and https://unix.stackexchange.com/questions/35624/how-to-run-dropbox-daemon-in-background
-
-Workflow used to send images from windows box to the unix box assumes that github repo kept in Dropbox/blog/ is used to create blog posts
-
-Maim
-------------------------------
-
-```bash
-sudo apt-get install cmake libglm-dev libxrandr-dev libglew-dev libjpeg-dev
-```
-
-https://github.com/naelstrof/maim
-
-usage:
-
-```bash
-maim --noopengl -s | xclip -selection clipboard -t image/png
-```
-
-TaskWarrior - local todo
---------------------------------
-
-```bash
-sudo apt-get install taskwarrior
-```
-
-In every repo project i create a folder .todo this folder is used to keep todo list per project
-Then i have an alias in bashrc to use taskwarrior with overrider folder .todo
-
-tasksh is a usefull packagee you will need to manually install it with dpkg
+Taskwarrior SH 
 Install instructions
 https://github.com/GothenburgBitFactory/taskwarrior/issues/2003
-
 you will also need to install libreaddline7 deb - download it somewhere :)
 
-I3blocks
-------------------------------------
+### Installing VS code config
+./.config/Code/install-vs-code-extensions.sh
 
-```bash
-sudo apt-get install i3blocks
+### BlueTooth:
+sudo bluetoothtc
+scan on
+pair <device>
+connect <device>
 
-ln dotfiles/unix/.config/i3/i3blocks.conf ~/.config/i3/i3blocks.conf
-```
+### Troubleshooting
+Termite - https://askubuntu.com/questions/739163/how-to-install-termite
 
-htop - mem usage and cpu
---------------------------------
+#### Down Below spam :)
 
-```bash
-sudo apt-get install htop
-```
+NVIDIA DRIVErs
+sudo add-apt-repository ppa:graphics-drivers
+sudo apt-get install nvidia-xxx
 
-Bash
--------------------
-bats
+installing GPG key from 1pass or last pass to sign commits
+copy paste key to /tmp
+`gpg --import key` -> passphrase should be stored somewhere
+git config --global commit.gpgsign true
+git config --global user.signingkey <fingerprint>
 
-```bash
-sudo apt-get install bats 
-```
+#install antivirus
+https://www.sophos.com/en-us/products/free-tools/sophos-antivirus-for-linux.aspx
 
-Rust:
-------------------
-https://www.rust-lang.org/en-US/install.html
+#instlaling iptables
+sudo apt-get install iptables-persistent
+Yes, Yes
 
-Json parsing tool
--------------------------
-
-```bash
-sudo apt-get install jqk
-```
-
-WeeChat for slack
--------------------
-
-```bash
-sudo apt-get install weechat-curses weechat-plugins
-```
-
-https://github.com/wee-slack/wee-slack
-
-C#
--------------------
-
-```bash
-sudo apt-get install mono-xbuild
-```
-
-https://remysharp.com/2018/08/23/cli-improved
-
-bat - good replacement for cat:
--------------------
-https://github.com/sharkdp/bat#installation
-create aliast to use bat instead of cat
-
-prettyping - replacement for ping:
--------------------
-http://denilson.sa.nom.br/prettyping/
-
-fzf - ctrl+p replacement
--------------------
-
-Scripts in the zsh:
-- prlist -> hub pr list through all the folders
-- autotest (python, rust, bash) -> sets entr automation that runs unit tests if if file changes (requries cargo, python unit test and bats)
-- screen -> uses maim  - enables screen selection and copies scren to clipboard
-- screenf -> uses maim -> saves screen to folder (Pictures by default with date as filename, or current folder with filename)
-- calendar -> shortuct for calw 
-- n -> used to open or append .notes file
-- t -> alias for taskwarrior using local .todo folder
-
-
-i3gaps
-----------------
-https://github.com/Airblader/i3/wiki/Compiling-&-Installing
-
-i3polybar
-----------------
-```bash
-sudo apt-get install libxcb-ewmh-dev
-sudo apt install python-xcbgen
-sudo apt install xcb-proto
-```
-https://github.com/jaagr/polybar
-
-compton
-sudo apt-get instlal compton
-
-PDF viewer zathura
-sudo apt-get install zathura or dpkg
-
-# usefull for traccing where the files are getting lost
-sudo apt-get install ncdu
-
-# dive usefull tool for Docker
-https://github.com/wagoodman/dive
-
-# required for i3 layouts saving
-sudo apt-get install libanyevent-i3-perl
-
-WTF
----
-https://github.com/wtfutil/wtf
-
-Pomo
-----
-https://kevinschoon.github.io/pomo/
-
-Mutt
-----
-install mutt a great email client
-
-FEH
----
-required for wallpapers 
-sudo apt-get install feh
-
-
-BlueTooth:
------
-
-Use - sudo bluez.bluetoothctl
-- pair, connect, disconnect
-
-on Xubuntu install Xviewer
----
-sudo add-apt-repository ppa:embrosyn/xapps
-sudo apt-get update
-
-sudo apt-get install xviewer
-
-RUBY ENV
----
-https://stackoverflow.com/questions/37720892/you-dont-have-write-permissions-for-the-var-lib-gems-2-3-0-directory -> just do the clones paths and eval is already in .zshrc
+#git secrets
+- git clone git@github.com:awslabs/git-secrets.git
