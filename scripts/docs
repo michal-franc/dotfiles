@@ -7,5 +7,6 @@ project=$(tdir)
 if [ "$context" = "form3" ]; then
   vim ~/Work/docs/$project.md
 else
-  vim ~/notes/docs/$project.md
+  mkdir ~/notes/projects/$project
+  vim ~/notes/projects/$project/README.md
 fi
