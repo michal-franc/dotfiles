@@ -181,3 +181,6 @@ apt-get install code # or code-insiders
 
 echo AWS
 apt-get install aws-cli -y
+
+echo installing shutter
+apt-get install shutter gnome-web-photo libgoo-canvas-perl
