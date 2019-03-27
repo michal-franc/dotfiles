@@ -21,7 +21,7 @@ folder=$1
 i3-msg "workspace $workspace; append_layout /home/mfranc/layouts/code.json"
 
 google-chrome --new-window &
+code $folder &
 termite -d $folder &
 termite -d $folder &
 termite -d $folder &
-code $folder
