@@ -22,6 +22,10 @@ apt-get install git xclip zsh vim-gnome curl jq tig entr taskwarrior feh mutt nc
 apt-get install htop bats -y
 apt-get install libxdo-dev xdotool compton -y
 
+echo installing hunspell
+# required for spell checking in vscode
+apt-get install hunspell
+
 echo installing vim-plug
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
