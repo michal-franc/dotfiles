@@ -22,5 +22,5 @@ i3-msg "workspace $workspace; append_layout /home/mfranc/layouts/notes.json"
 
 termite -d $HOME/notes/ &
 termite -d $HOME/notes/ &
-xviewer ~/images/link_flow_diagram.png &
-google-chrome --new-window $url
+xviewer ~/images/keep_flow_diagram.png &
+google-chrome --new-window $url &
