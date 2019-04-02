@@ -14,7 +14,9 @@ if [ -z "$1" ] || [ -z "$2" ]; then
 fi
 
 declare -A urls=(["pocket"]="https://getpocket.com/a/queue/" ["feedly"]="https://feedly.com/i/index" ["keep"]="https://keep.google.com/")
+declare -A diagrams=(["pocket"]="link_flow_diagram.png" ["feedly"]="link_flow_diagram.png" ["keep"]="keep_flow_diagram.png")
 url="${urls[$1]}"
+diagram="${diagrams[$1]}"
 
 workspace=$2
 
@@ -22,5 +24,5 @@ i3-msg "workspace $workspace; append_layout /home/mfranc/layouts/notes.json"
 
 termite -d $HOME/notes/ &
 termite -d $HOME/notes/ &
-xviewer ~/images/keep_flow_diagram.png &
+xviewer ~/images/$diagram &
 google-chrome --new-window $url &
