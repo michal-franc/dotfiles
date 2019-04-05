@@ -10,7 +10,7 @@ fi
 export VISUAL='vim'
 export EDITOR='vim'
 
-plugins=(git z)
+plugins=(git z aws common-aliases docker extract fasd sudo taskwarrior vi-mode)
 source $ZSH/oh-my-zsh.sh
 
 if [ -x "$(command -v cargo)" ]; then
@@ -19,6 +19,7 @@ fi
 
 alias tlocal="task rc.data.location=.todo"
 alias tall="task"
+alias gs="git status"
 
 if [ -x "$(command -v bat)" ]; then
   alias cat='bat'
@@ -34,11 +35,5 @@ source ~/.zplug/init.zsh
 zplug denysdovhan/spaceship-prompt, use:spaceship.zsh, from:github, as:theme
 zplug zsh-users/zsh-autosuggestions, from:github, as:plugin
 zplug load
- 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/home/mfranc/tools/google-cloud-sdk/path.zsh.inc' ]; then source '/home/mfranc/tools/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/home/mfranc/tools/google-cloud-sdk/completion.zsh.inc' ]; then source '/home/mfranc/tools/google-cloud-sdk/completion.zsh.inc'; fi
 
 source ~/.secret
