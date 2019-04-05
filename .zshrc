@@ -10,7 +10,7 @@ fi
 export VISUAL='vim'
 export EDITOR='vim'
 
-plugins=(git z zsh-autosuggestions)
+plugins=(git z)
 source $ZSH/oh-my-zsh.sh
 
 if [ -x "$(command -v cargo)" ]; then
