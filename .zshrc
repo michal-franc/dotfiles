@@ -43,4 +43,6 @@ zplug denysdovhan/spaceship-prompt, use:spaceship.zsh, from:github, as:theme
 zplug zsh-users/zsh-autosuggestions, from:github, as:plugin
 zplug load
 
-source ~/.secret
+if [ -f ~/.secret ]; then
+  source ~/.secret
+fi
