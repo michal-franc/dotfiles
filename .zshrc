@@ -14,11 +14,14 @@ plugins=(git z aws common-aliases docker extract fasd sudo taskwarrior vi-mode)
 source $ZSH/oh-my-zsh.sh
 
 # sudo command overrides
-bindkey "ss" sudo-command-line
+bindkey "xx" sudo-command-line
 # overrides default vi-mode key timeout
 export KEYTIMEOUT=20
 # bind vi-mode cmd mode to kk
 bindkey -M viins 'kk' vi-cmd-mode
+
+# disable default taskwarrior alias for t
+unalias t
 
 if [ -x "$(command -v cargo)" ]; then
   source $HOME/.cargo/env
