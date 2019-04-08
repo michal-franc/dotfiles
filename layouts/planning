@@ -1,0 +1,22 @@
+#!/bin/bash
+
+function usage() {
+  echo planning
+  echo "planning:  w"
+  echo "w -> workspace number"
+  echo example: planning
+}
+
+if [ -z "$1" ]; then
+  usage
+  exit
+fi
+
+workspace=$1
+
+i3-msg "workspace $workspace; append_layout /home/mfranc/layouts/planning.json"
+
+code ~/todo/goals &
+termite -d ~/ &
+xviewer ~/images/planning.png &
+termite -d ~/ &

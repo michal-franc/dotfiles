@@ -1,0 +1,114 @@
+{
+    "border": "pixel",
+    "floating": "auto_off",
+    "layout": "splith",
+    "percent": 0.8,
+    "type": "con",
+    "nodes": [
+        {
+            "border": "none",
+            "current_border_width": 2,
+            "floating": "auto_off",
+            "geometry": {
+               "height": 515,
+               "width": 2544,
+               "x": 8,
+               "y": 33
+            },
+            "name": "FORM3.md - goals - Visual Studio Code",
+            "percent": 0.6,
+            "swallows": [
+               {
+                "class": "^Code$"
+               }
+            ],
+            "type": "con"
+        },
+        {
+            "border": "pixel",
+            "floating": "auto_off",
+            "layout": "splitv",
+            "percent": 0.4,
+            "type": "con",
+            "nodes": [
+                {
+                    "border": "pixel",
+                    "current_border_width": 2,
+                    "floating": "auto_off",
+                    "geometry": {
+                       "height": 362,
+                       "width": 575,
+                       "x": 0,
+                       "y": 0
+                    },
+                    "name": "mfranc@mfranc-VirtualBox: ~/todo",
+                    "percent": 1,
+                    "swallows": [
+                       {
+                        "class": "^Termite$"
+                       }
+                    ],
+                    "type": "con"
+                }
+            ]
+        }
+    ]
+}
+
+{
+    "border": "pixel",
+    "floating": "auto_off",
+    "layout": "splitv",
+    "percent": 0.2,
+    "type": "con",
+    "nodes": [
+        {
+            "border": "pixel",
+            "floating": "auto_off",
+            "layout": "splitv",
+            "percent": 0.7,
+            "type": "con",
+            "nodes": [
+                {
+                    "border": "pixel",
+                    "current_border_width": 2,
+                    "floating": "auto_off",
+                    "geometry": {
+                       "height": 450,
+                       "width": 540,
+                       "x": 1010,
+                       "y": 315
+                    },
+                    "name": "planning.png",
+                    "percent": 1,
+                    "swallows": [
+                       {
+                        "class": "^Xviewer$"
+                       }
+                    ],
+                    "type": "con"
+                }
+            ]
+        },
+        {
+            "border": "pixel",
+            "current_border_width": 2,
+            "floating": "auto_off",
+            "geometry": {
+               "height": 362,
+               "width": 575,
+               "x": 0,
+               "y": 0
+            },
+            "name": "i3-save-tree --workspace 1 >> planning.json",
+            "percent": 0.3,
+            "swallows": [
+               {
+                "class": "^Termite$"
+               }
+            ],
+            "type": "con"
+        }
+    ]
+}
+
