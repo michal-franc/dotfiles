@@ -3,6 +3,8 @@ export GOPATH=$HOME/go
 export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin:$HOME/scripts
 export GO111MODULE=on
 
+export NOTES_DIR=$HOME/notes
+
 if [ -x "$(command -v luarocks)" ]; then
   eval $(luarocks path --bin)
 fi
