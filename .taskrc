@@ -47,5 +47,7 @@ report._reviewed.filter=( reviewed.none: or reviewed.before:now-6days ) and ( +P
 
 urgency.user.project.sns-sqs-go.coefficient=2.0
 context.home=-form3
+context.homefocus=-form3 and +today
 context.form3=+form3
-context=home
+context.workfocus=+form3 and +today
+context=workfocus
