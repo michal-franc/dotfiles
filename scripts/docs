@@ -4,7 +4,7 @@
 
 context=$(task _get rc.context)
 project=$(tdir)
-if [ "$context" = "form3" ]; then
+if [ "$context" = "form3" ] || [ "$context" = "workfocus" ]; then
   vim ~/Work/docs/$project.md
 else
   mkdir ~/notes/projects/$project
