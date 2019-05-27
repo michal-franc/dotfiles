@@ -15,3 +15,11 @@ fi
 if  [[ $1 == 'go' ]]; then
   rg --files -tgo | entr go test $2
 fi
+
+if  [[ $1 == 'lua' ]]; then
+  rg --files -tlua | entr lua $2
+fi
+
+if  [[ $1 == 'ruby' ]]; then
+  rg --files -truby | entr ruby $2
+fi
