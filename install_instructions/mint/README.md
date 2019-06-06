@@ -77,6 +77,10 @@ Termite - https://askubuntu.com/questions/739163/how-to-install-termite
 
 #### Down Below spam :)
 
+### JAVA
+Use SDkman to manage java
+https://sdkman.io/install
+
 NVIDIA DRIVErs
 sudo add-apt-repository ppa:graphics-drivers
 sudo apt-get install nvidia-xxx
@@ -96,3 +100,6 @@ Yes, Yes
 
 #git secrets
 - git clone git@github.com:awslabs/git-secrets.git
+
+# HACK font new one
+https://github.com/source-foundry/Hack

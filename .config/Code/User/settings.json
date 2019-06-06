@@ -12,11 +12,11 @@
     "workbench.colorTheme": "Dracula",
     "workbench.enableExperiments": false,
     "workbench.statusBar.feedback.visible": false,
-    "editor.fontFamily": "'Droid Sans Mono', 'Courier New', monospace, 'Droid Sans Fallback'",
+    "editor.fontFamily": "Hack, Menlo, monospace",
     "editor.renderWhitespace": "all",
     "editor.wordWrap":"on",
     "editor.codeLens": false,
-    "editor.fontSize": 12,
+    "editor.fontSize": 10,
     "editor.minimap.enabled": false,
     "files.enableTrash": false,
     "telemetry.enableCrashReporter": false,
@@ -28,5 +28,6 @@
     "vim.disableAnnoyingNeovimMessage": true,
     "zenMode.restore": true,
     "keyboard.dispatch": "keyCode",
-    "spellright.recheckOnSave": false
+    "spellright.recheckOnSave": false,
+    "editor.fontLigatures": true
 }
