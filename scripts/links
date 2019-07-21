@@ -8,8 +8,9 @@ link=$2
 dir=~/notes/links
 
 if [ -z "$tag" ] ; then
-  echo list of tags
-  ls $dir
+  echo list of tags:
+  echo 
+  ls $dir -A1
   exit 0
 fi
 
