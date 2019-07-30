@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# script for adding links to notes
+
+tag=$1
+link=$2
+
+dir=~/notes/links
+
+if [ -z "$tag" ] ; then
+  echo list of tags
+  ls $dir
+  exit 0
+fi
+
+file=$dir/$tag.md
+
+if [ ! -f $file ]; then
+ touch $file
+fi
+
+if [ -z "$link" ] ; then
+  cat $file;
+else
+  echo "- $link" >> $file;
+  echo added to $file
+fi 
