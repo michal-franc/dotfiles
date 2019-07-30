@@ -136,7 +136,6 @@ hide_edge_borders smart
 
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh 
 exec --no-startup-id $HOME/.config/startup.sh
-exec_always compton -c --config ~/.config/compton.conf
 
 # i3gaps
 gaps inner 8
