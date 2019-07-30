@@ -55,14 +55,12 @@ font-0 = fixed:pixelsize=10;1
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = siji:pixelsize=10;1
 
-
-modules-left = main-goal
 modules-right = battery memory cpu filesystem date
-modules-center = bspwm i3
+modules-center = focus bspwm i3
 
-[module/main-goal]
+[module/focus]
 type = custom/script
-exec = ~/main_goal.sh
+exec = ~/focus.sh
 tail = true
 interval = 30
 
