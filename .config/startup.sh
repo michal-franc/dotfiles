@@ -19,3 +19,10 @@ xmodmap -e "clear mod1"
 xset r rate 200 70
 
 echo keyboard settings set
+
+touch $HOME/.dbus/Xdbus
+chmod 666 $HOME/.dbus/Xdbus
+env | grep DBUS_SESSION_BUS_ADDRESS > $HOME/.dbus/Xdbus
+echo 'export DBUS_SESSION_BUS_ADDRESS' >> $HOME/.dbus/Xdbus
+
+exit 0

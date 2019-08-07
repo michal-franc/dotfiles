@@ -103,3 +103,7 @@ Yes, Yes
 
 # HACK font new one
 https://github.com/source-foundry/Hack
+
+### CRONTAB
+~/scripts/cron should be in crontab running
+add automated installation
