@@ -51,3 +51,5 @@ zplug load
 if [ -f ~/.secret ]; then
   source ~/.secret
 fi
+
+alias git=~/scripts/.git_wrapper.sh
