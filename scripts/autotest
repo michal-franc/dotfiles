@@ -1,7 +1,39 @@
 #!/bin/bash
+
+#usage
+if [[ $# -eq 0 ]] ; then
+  echo Autotest script - how to use?
+  echo '  python2 or 3:'
+  echo '    - autotest python      - monitors all the .py files and starts unittests bases tests'
+  echo '    - autotest python file - monitors all the .py files and runs the file'
+  echo '  rust:'
+  echo '    - autotest rust        - monitors all the rust files and starts cargo test for project'
+  echo '  bash:'
+  echo '    - autotest bash file   - monitors all the sh files and starts bats with file as a test file'
+  echo '  go:'
+  echo '    - autotest go file     - monitors all the go files and starts go test with file as a test file'
+  echo '  lua:'
+  echo '    - autotest lua file    - monitors all the lua files and starts lua with file as a test file'
+  exit 0
+fi
+
 # script to start test that run on file change
-if  [[ $1 == 'python' ]]; then
-  rg --files -tpy | entr python3 -m unittest
+if  [[ $1 == 'python3' ]]; then
+  if [ -z "$2" ]
+  then
+    rg --files -tpy | entr python3 -m unittest
+  else
+    rg --files -tpy | entr python3 $2
+  fi
+fi
+
+if  [[ $1 == 'python2' ]]; then
+  if [ -z "$2" ]
+  then
+    rg --files -tpy | entr python2 -m unittest
+  else
+    rg --files -tpy | entr python2 $2
+  fi
 fi
 
 if  [[ $1 == 'rust' ]]; then
