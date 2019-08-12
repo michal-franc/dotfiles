@@ -1,7 +1,7 @@
 export ZSH=/home/mfranc/.oh-my-zsh
 export GOPATH=$HOME/go
-export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin:$HOME/scripts
 export GO111MODULE=on
+export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin:$HOME/tools:$HOME/scripts
 
 export NOTES_DIR=$HOME/notes
 
