@@ -12,7 +12,7 @@ fi
 export VISUAL='vim'
 export EDITOR='vim'
 
-plugins=(git z aws common-aliases docker extract fasd sudo taskwarrior vi-mode)
+plugins=(git gitfast z aws common-aliases docker extract fasd sudo taskwarrior vi-mode)
 source $ZSH/oh-my-zsh.sh
 
 # sudo command overrides
@@ -32,6 +32,8 @@ fi
 alias tlocal="task rc.data.location=.todo"
 alias tall="task"
 alias gs="git status"
+
+git config --global alias.force "push --force-with-lease"
 
 if [ -x "$(command -v bat)" ]; then
   alias cat='bat'
