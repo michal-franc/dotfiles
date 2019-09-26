@@ -1,0 +1,5 @@
+# !/bin/bash
+
+modprobe bbswitch
+tee /proc/acpi/bbswitch <<<OFF
+
