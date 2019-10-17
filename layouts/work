@@ -1,0 +1,28 @@
+#!/bin/bash
+
+function usage() {
+  echo code
+  echo "usage: work w"
+  echo "w -> workspace number"
+  echo example: work 5
+  echo
+  echo Opens up a layout with typical work media things
+}
+
+if [ -z "$1" ]; then
+  usage
+  exit
+fi
+
+workspace=$1
+
+i3-msg "workspace $workspace; append_layout /home/mfranc/layouts/work.json"
+
+termite -e 'wl vim'&
+slack &
+
+if [ -x "$(command -v zoom)" ]; then
+  zoom &
+else
+  termite &
+fi

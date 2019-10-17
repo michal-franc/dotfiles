@@ -20,6 +20,9 @@
             "swallows": [
                {
                 "class": "^Google\\-chrome$"
+               },
+               {
+                "class": "^Termite$"
                }
             ],
             "type": "con"
