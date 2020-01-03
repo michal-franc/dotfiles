@@ -1,6 +1,8 @@
 [options]
 font = Hack 8
 
+scrollback_lines=10000
+
 [colors]
 
 # special
