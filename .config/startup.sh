@@ -1,8 +1,8 @@
 #!/bin/bash
 
-xrandr --output DP-1-1 --right-of eDP-1-1
-xrandr --output DP-1-1 --brightness 0.7
-xrandr --output eDP-1-1 --brightness 0.6
+xrandr --output DP-1-1 --left-of eDP-1-1
+xrandr --output DP-1-1 --brightness 0.9
+xrandr --output eDP-1-1 --brightness 0.9
 
 echo monitors set
 
@@ -17,6 +17,7 @@ xmodmap -e "keycode 108 = space"
 xmodmap -e "clear mod1"
 
 xset r rate 200 70
+xset s off -dpms
 
 echo keyboard settings set
 
