@@ -61,7 +61,10 @@ bindsym $mod+b split h exec termite
 bindsym $mod+v split v exec termite
 
 # enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen toggle
+#bindsym $mod+f fullscreen toggle
+
+# enter fullscreen mode for the focused container - chrome 79 workaround
+bindsym $mod+f split v; focus parent; fullscreen toggle; focus child
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
