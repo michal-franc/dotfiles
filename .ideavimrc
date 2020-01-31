@@ -1,1 +1,3 @@
-:imap kk <Esc>
+imap kk <Esc>
+set clipboard+=unnamed
+
