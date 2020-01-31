@@ -24,6 +24,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'rust-lang/rust.vim'
 Plug 'kien/ctrlp.vim'
+Plug 'junegunn/vim-easy-align'
 
 " nice glyphs
 " Plug 'ryanoasis/vim-devicons'
@@ -119,6 +120,9 @@ let NERDTreeShowHidden=1
 " add shortcut to open NERDTree something like CTRL+TAB NERDTreeToogle
 " doesnt work het with startify
 " autocmd VimEnter * NERDTree 
+"
+"" Align GitHub-flavored Markdown tables
+au FileType markdown vmap <Leader><Bslash> :EasyAlign*<Bar><Enter>
 
 set backspace=indent,eol,start
 set tabstop=2 softtabstop=0 expandtab shiftwidth=2
