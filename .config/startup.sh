@@ -23,6 +23,9 @@ xmodmap -e "clear mod1"
 xset r rate 200 70
 xset s off -dpms
 
+# lowering mouse acceleration
+xinput --set-prop "Logitech Wireless Mouse" "Coordinate Transformation Matrix" 0.5 0 0 0 0.5 0 0 0 1
+
 echo keyboard settings set
 
 touch $HOME/.dbus/Xdbus
