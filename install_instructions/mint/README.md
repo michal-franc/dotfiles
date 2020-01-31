@@ -107,3 +107,9 @@ https://github.com/source-foundry/Hack
 ### CRONTAB
 ~/scripts/cron should be in crontab running
 add automated installation
+
+### GVM
+https://github.com/moovweb/gvm
+
+### scrot  - required by lock functionality
+sudo apt-get install scrot
