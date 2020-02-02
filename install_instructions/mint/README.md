@@ -113,3 +113,9 @@ https://github.com/moovweb/gvm
 
 ### scrot  - required by lock functionality
 sudo apt-get install scrot
+
+### taskw_gcal_sync
+https://github.com/bergercookie/taskw_gcal_sync
+Create calendar go to settings get calendar id
+Set cronjob to sync calendar or to remind about sync
+*/10 * * * * tw_gcal_sync -c "<calendar>" -t "remind" 2>&1 1>~/tw_remind_latest.log
