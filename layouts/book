@@ -21,5 +21,5 @@ i3-msg "workspace $workspace; append_layout /home/mfranc/layouts/book.json"
 
 termite -d $HOME/notes/books &
 termite &
-termite & 
 zathura $book &
+xviewer ~/images/book_reading.png &

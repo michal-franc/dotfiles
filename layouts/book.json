@@ -34,7 +34,7 @@
                "x": 0,
                "y": 0
             },
-            "name": "mfranc@mfranc-VirtualBox: ~",
+            "name": "i3-save-tree > book.json",
             "percent": 0.3,
             "swallows": [
                {
@@ -48,41 +48,59 @@
 
 {
     "border": "pixel",
-    "current_border_width": 1,
     "floating": "auto_off",
-    "geometry": {
-       "height": 600,
-       "width": 800,
-       "x": 0,
-       "y": 0
-    },
-    "name": "zathura",
+    "layout": "splitv",
     "percent": 0.333333333333333,
-    "swallows": [
-       {
-        "class": "^Zathura$"
-       }
-    ],
-    "type": "con"
+    "type": "con",
+    "nodes": [
+        {
+            "border": "pixel",
+            "current_border_width": 1,
+            "floating": "auto_off",
+            "geometry": {
+               "height": 600,
+               "width": 800,
+               "x": 0,
+               "y": 0
+            },
+            "name": "/home/mfranc/Books/go_programming_lang.pdf",
+            "percent": null,
+            "swallows": [
+               {
+                "class": "^Zathura$"
+               }
+            ],
+            "type": "con"
+        }
+    ]
 }
 
 {
     "border": "pixel",
-    "current_border_width": 1,
     "floating": "auto_off",
-    "geometry": {
-       "height": 410,
-       "width": 642,
-       "x": 0,
-       "y": 0
-    },
-    "name": "mfranc@mfranc-VirtualBox: ~",
+    "layout": "splitv",
     "percent": 0.333333333333333,
-    "swallows": [
-       {
-        "class": "^Termite$"
-       }
-    ],
-    "type": "con"
+    "type": "con",
+    "nodes": [
+        {
+            "border": "pixel",
+            "current_border_width": 2,
+            "floating": "auto_off",
+            "geometry": {
+               "height": 599,
+               "width": 440,
+               "x": 1060,
+               "y": 218
+            },
+            "name": "book_reading.png",
+            "percent": 1,
+            "swallows": [
+               {
+                "class": "^Xviewer$"
+               }
+            ],
+            "type": "con"
+        }
+    ]
 }
 
