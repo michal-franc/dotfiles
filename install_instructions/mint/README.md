@@ -118,4 +118,8 @@ sudo apt-get install scrot
 https://github.com/bergercookie/taskw_gcal_sync
 Create calendar go to settings get calendar id
 Set cronjob to sync calendar or to remind about sync
-*/10 * * * * tw_gcal_sync -c "<calendar>" -t "remind" 2>&1 1>~/tw_remind_latest.log
+use your own user to do that as root doesnt have this script installed
+*/1 * * * * tw_gcal_sync -c <calendar> -t remind > ~/tw_remind_latest.log 2>&1
+
+### tfenv
+https://github.com/tfutils/tfenv
