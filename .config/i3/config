@@ -134,7 +134,7 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-default_border pixel 2
+default_border pixel 3
 hide_edge_borders smart
 
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh 
