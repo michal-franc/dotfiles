@@ -154,7 +154,7 @@ client.urgent           #2f343a #900000 #ffffff #900000   #900000
 client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 
 exec xset r rate 150 40
-exec_always feh --randomize --bg-fill $HOME/images/wallpapers/*.jpg
+exec_always ~/scripts/wall_reload
 
 # to make sure that bluetooth module runs after x11 has loaded otherwise you might get an error
 # https://raspberrypi.stackexchange.com/questions/67617/bluetoothctl-fails-to-connect-to-any-device-failed-to-connect-org-bluez-erro

@@ -1,0 +1,3 @@
+#!/bin/bash
+
+feh --randomize --bg-fill $HOME/images/wallpapers/*.jpg
