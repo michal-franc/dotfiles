@@ -1,0 +1,133 @@
+{
+    "border": "pixel",
+    "floating": "auto_off",
+    "layout": "splitv",
+    "percent": 0.3,
+    "type": "con",
+    "nodes": [
+        {
+            "border": "pixel",
+            "current_border_width": 1,
+            "floating": "auto_off",
+            "geometry": {
+               "height": 997,
+               "width": 1266,
+               "x": 1295,
+               "y": 44
+            },
+            "name": "New Tab - Google Chrome",
+            "percent": 0.8,
+            "swallows": [
+               {
+                 "class": "^Google\\-chrome$"
+               }
+            ],
+            "type": "con"
+        },
+        {
+            "border": "pixel",
+            "current_border_width": 1,
+            "floating": "auto_off",
+            "geometry": {
+               "height": 410,
+               "width": 655,
+               "x": 0,
+               "y": 0
+            },
+            "name": "i3-save-tree --workspace 3 > ~/layouts/goland.json",
+            "percent": 0.2,
+            "swallows": [
+               {
+                "class": "^Termite$"
+               }
+            ],
+            "type": "con"
+        }
+    ]
+}
+
+{
+    "border": "pixel",
+    "floating": "auto_off",
+    "layout": "splitv",
+    "percent": 0.7,
+    "type": "con",
+    "nodes": [
+        {
+            "border": "pixel",
+            "floating": "auto_off",
+            "layout": "splitv",
+            "percent": 0.8,
+            "type": "con",
+            "nodes": [
+                {
+                    "border": "none",
+                    "current_border_width": 1,
+                    "floating": "auto_off",
+                    "geometry": {
+                       "height": 999,
+                       "width": 1268,
+                       "x": 1284,
+                       "y": 33
+                    },
+                    "name": "Welcome - mfranc - Visual Studio Code",
+                    "percent": 1,
+                    "swallows": [
+                       {
+                        "class": "^jetbrains-goland"
+                       }
+                    ],
+                    "type": "con"
+                }
+            ]
+        },
+        {
+            "border": "pixel",
+            "floating": "auto_off",
+            "layout": "splith",
+            "percent": 0.2,
+            "type": "con",
+            "nodes": [
+                {
+                    "border": "pixel",
+                    "current_border_width": 1,
+                    "floating": "auto_off",
+                    "geometry": {
+                       "height": 410,
+                       "width": 655,
+                       "x": 0,
+                       "y": 0
+                    },
+                    "name": "mfranc@mfranc-VirtualBox: ~",
+                    "percent": 0.5,
+                    "swallows": [
+                       {
+                        "class": "^Termite$"
+                       }
+                    ],
+                    "type": "con"
+                },
+                {
+                    "border": "pixel",
+                    "current_border_width": 1,
+                    "floating": "auto_off",
+                    "geometry": {
+                       "height": 410,
+                       "width": 655,
+                       "x": 0,
+                       "y": 0
+                    },
+                    "name": "mfranc@mfranc-VirtualBox: ~",
+                    "percent": 0.5,
+                    "swallows": [
+                       {
+                        "class": "^Termite$"
+                       }
+                    ],
+                    "type": "con"
+                }
+            ]
+        }
+    ]
+}
+
