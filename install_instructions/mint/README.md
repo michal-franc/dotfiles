@@ -123,3 +123,6 @@ use your own user to do that as root doesnt have this script installed
 
 ### tfenv
 https://github.com/tfutils/tfenv
+
+### fix problems with bluetooth connection 
+https://askubuntu.com/questions/1086658/no-sound-audio-in-chrome-ubuntu-18-04lts

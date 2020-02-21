@@ -1,8 +1,8 @@
 #!/bin/bash
 
 xrandr --output DP-1-1 --primary --auto --brightness 0.9 --rotate normal
-xrandr --output eDP-1-1 --auto --below DP-1-1 --brightness 0.9 --rotate normal 
 xrandr --output HDMI-0 --auto --right-of DP-1-1 --rotate normal --brightness 0.9
+xrandr --output eDP-1-1 --auto --below HDMI-0 --brightness 0.9 --rotate normal 
 
 echo monitors set
 
