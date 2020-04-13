@@ -30,4 +30,6 @@
     "keyboard.dispatch": "keyCode",
     "spellright.recheckOnSave": false,
     "editor.fontLigatures": true
+    "go.formatTool": "goimports",
+    "go.useLanguageServer": true
 }
