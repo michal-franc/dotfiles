@@ -1,0 +1,22 @@
+#!/bin/bash
+
+function usage() {
+  echo blog 
+  echo "blog:  w"
+  echo "w -> workspace number"
+  echo example: blog 2 
+}
+
+if [ -z "$1" ]; then
+  usage
+  exit
+fi
+
+workspace=$1
+
+i3-msg "workspace $workspace; append_layout /home/mfranc/layouts/blog.json"
+
+termite -d ~/Work/mfranc-blog &
+termite -d ~/Work/mfranc-blog &
+code ~/Work/mfranc-blog &
+google-chrome --new-window http://localhost:4000/drafts &

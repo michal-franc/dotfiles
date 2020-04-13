@@ -1,0 +1,97 @@
+{
+    "border": "pixel",
+    "floating": "auto_off",
+    "layout": "splitv",
+    "percent": 0.333333333333333,
+    "type": "con",
+    "nodes": [
+        {
+            "border": "pixel",
+            "current_border_width": 2,
+            "floating": "auto_off",
+            "geometry": {
+               "height": 314,
+               "width": 575,
+               "x": 0,
+               "y": 0
+            },
+            "name": "make run",
+            "percent": 0.5,
+            "swallows": [
+               {
+                "class": "^Termite$"
+               }
+            ],
+            "type": "con"
+        },
+        {
+            "border": "pixel",
+            "current_border_width": 2,
+            "floating": "auto_off",
+            "geometry": {
+               "height": 314,
+               "width": 575,
+               "x": 0,
+               "y": 0
+            },
+            "name": "i3-save-tree > ~/layouts/blog.json",
+            "percent": 0.5,
+            "swallows": [
+               {
+                "class": "^Termite$"
+               }
+            ],
+            "type": "con"
+        }
+    ]
+}
+
+{
+    "border": "pixel",
+    "floating": "auto_off",
+    "layout": "splitv",
+    "percent": 0.4,
+    "type": "con",
+    "nodes": [
+        {
+            "border": "none",
+            "current_border_width": 2,
+            "floating": "auto_off",
+            "geometry": {
+               "height": 768,
+               "width": 1024,
+               "x": 768,
+               "y": 134
+            },
+            "name": "2019-10-14-dns-from-single-file-to-globally-distributed-database.md - _drafts - Visual Studio Code",
+            "percent": 1,
+            "swallows": [
+               {
+                "class": "^Code$"
+               }
+            ],
+            "type": "con"
+        }
+    ]
+}
+
+{
+    "border": "pixel",
+    "current_border_width": 2,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 490,
+       "width": 752,
+       "x": 1808,
+       "y": 546
+    },
+    "name": "DNS Architecture from a single file to globally distributed database | Michal Franc - Google Chrome",
+    "percent": 0.266666666666667,
+    "swallows": [
+       {
+        "class": "^Google\\-chrome$"
+       }
+    ],
+    "type": "con"
+}
+
