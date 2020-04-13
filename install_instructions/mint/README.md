@@ -120,9 +120,21 @@ Create calendar go to settings get calendar id
 Set cronjob to sync calendar or to remind about sync
 use your own user to do that as root doesnt have this script installed
 */1 * * * * tw_gcal_sync -c <calendar> -t remind > ~/tw_remind_latest.log 2>&1
+or
+*/1 * * * * ~/.local/bin/tw_gcal_sync -c <calenda> -t remind > ~/tw_remind_latest.log2>&1
 
 ### tfenv
 https://github.com/tfutils/tfenv
 
 ### fix problems with bluetooth connection 
 https://askubuntu.com/questions/1086658/no-sound-audio-in-chrome-ubuntu-18-04lts
+
+### anki droid
+this doesnt work properly now on linux virtual box based machines
+https://apps.ankiweb.net/
+
+### xmind
+xmind - https://www.xmind.net/download/
+how to install rpm file - it takes some time to finish this
+https://askubuntu.com/questions/30770/how-to-get-rpm-install-in-my-ubuntu-linux-system
+then use `XMind`
