@@ -8,7 +8,7 @@ function usage() {
   echo example: pocket 5
 }
 
-if [ -z "$1" ] || [ -z "$2" ]; then
+if [ -z "$1" ] ; then
   usage
   exit
 fi
@@ -19,6 +19,12 @@ url="${urls[$1]}"
 diagram="${diagrams[$1]}"
 
 workspace=$2
+
+if [ -z "$2" ]
+then
+  echo "No workspace supplied - assuming default 9: Notes/Anki"
+  workspace="9: Notes/Anki"
+fi
 
 i3-msg "workspace $workspace; append_layout /home/mfranc/layouts/notes.json"
 
