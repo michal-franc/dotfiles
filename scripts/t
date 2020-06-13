@@ -10,7 +10,7 @@ if [ "$context" = "form3" ]; then
 elif [ "$context" = "workfocus" ]; then
   task +form3 +today  pro:$dir $@
 elif [ "$context" = "homefocus" ]; then
-  task +today  pro:$dir $@
+  task +today pro:$dir $@
 else
-  task pro:$dir $@
+  task pro:$dir or pro: $@
 fi
