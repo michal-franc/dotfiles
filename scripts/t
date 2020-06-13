@@ -4,6 +4,10 @@
 
 dir=$(tdir)
 
+if [ "$dir" = "$USER" ]; then
+  dir=
+fi
+
 context=$(task _get rc.context)
 if [ "$context" = "form3" ]; then
   task +$context pro:$dir $@
@@ -12,5 +16,5 @@ elif [ "$context" = "workfocus" ]; then
 elif [ "$context" = "homefocus" ]; then
   task +today pro:$dir $@
 else
-  task pro:$dir or pro: $@
+  task pro:$dir $@
 fi
