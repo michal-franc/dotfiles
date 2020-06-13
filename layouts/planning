@@ -17,7 +17,7 @@ workspace=$1
 i3-msg "workspace $workspace; append_layout /home/mfranc/layouts/planning.json"
 
 google-chrome --new-window &
-code ~/todo/goals &
+code -n ~/todo &
 termite -d ~/ &
 xviewer ~/images/planning.png &
 google-chrome --new-window https://calendar.google.com/calendar/r &
