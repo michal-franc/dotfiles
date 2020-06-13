@@ -5,7 +5,8 @@
 dir=$(tdir)
 
 if [ "$dir" = "$USER" ]; then
-  dir=
+  task $@
+  exit
 fi
 
 context=$(task _get rc.context)
