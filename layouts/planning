@@ -16,7 +16,7 @@ workspace=$1
 
 i3-msg "workspace $workspace; append_layout /home/mfranc/layouts/planning.json"
 
-google-chrome --new-window &
+google-chrome --new-window https://miro.com &
 code -n ~/todo &
 termite -d ~/ &
 xviewer ~/images/planning.png &
