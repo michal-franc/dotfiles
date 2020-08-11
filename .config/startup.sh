@@ -21,6 +21,7 @@ xset s off -dpms
 
 # lowering mouse acceleration
 xinput --set-prop "Logitech Wireless Mouse" "Coordinate Transformation Matrix" 0.5 0 0 0 0.5 0 0 0 1
+xinput --set-prop "Logitech M215" "Coordinate Transformation Matrix" 0.5 0 0 0 0.5 0 0 0 1
 
 echo keyboard settings set
 
