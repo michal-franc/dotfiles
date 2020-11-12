@@ -2,7 +2,7 @@
 
 # script for taking quick notes
 
-todayFileFolder=~/notes/quick-notes/"$(date +%Y-%m-%d).md"
+todayFileFolder=~/notes/_miszmasz/quick-notes/"$(date +%Y-%m-%d).md"
 
 if [ ! -f todayFileFolder ]; then
  echo Creating quick note for today
