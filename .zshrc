@@ -1,7 +1,8 @@
 export ZSH=/home/mfranc/.oh-my-zsh
-export GOPATH=$HOME/go
+source ~/.gvm/scripts/gvm
+export GOPATH=$HOME/Work/go-src
 export GO111MODULE=on
-export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin:$HOME/tools:$HOME/scripts
+export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin:$HOME/tools:$HOME/scripts:$HOME/.tfenv/bin:$GOPATH/bin/mockery
 
 export NOTES_DIR=$HOME/notes
 
@@ -31,6 +32,7 @@ fi
 
 alias tlocal="task rc.data.location=.todo"
 alias tall="task"
+alias tw="timew"
 alias gs="git status"
 
 git config --global alias.force "push --force-with-lease"
@@ -54,4 +56,11 @@ if [ -f ~/.secret ]; then
   source ~/.secret
 fi
 
-alias git=~/scripts/.git_wrapper.sh
+# added by travis gem
+[ -f /home/mfranc/.travis/travis.sh ] && source /home/mfranc/.travis/travis.sh
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/home/mfranc/.sdkman"
+[[ -s "/home/mfranc/.sdkman/bin/sdkman-init.sh" ]] && source "/home/mfranc/.sdkman/bin/sdkman-init.sh"
+
+
