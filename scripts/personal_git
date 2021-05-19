@@ -1,0 +1,4 @@
+#!/bin/bash
+git config user.signingkey D601B52A09CB37801C683B977B3513AA7AE99621
+git config user.email lam.michal.franc@gmail.com
+

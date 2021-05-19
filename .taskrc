@@ -11,7 +11,7 @@
 # Use the command 'task show' to see all defaults and overrides
 
 # Files
-data.location=~/todo/.task
+data.location=~/todo.work/.task
 color=on
 
 # Color theme (uncomment one to use)
@@ -50,4 +50,4 @@ context.home=-form3
 context.homefocus=-form3 and +today
 context.form3=+form3
 context.workfocus=+form3 and +today
-context=workfocus
+context=form3

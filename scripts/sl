@@ -1,0 +1,12 @@
+#!/bin/bash
+
+FORM3_TEAM=T24H2GN3D
+
+declare -A channel_map
+channel_map["tech"]="C54NYKFCL"
+
+TYPE=$1
+ARG=$2
+
+echo slack://channel?team=$FORM3_TEAM\&id=${channel_map[ARG]}
+#xdg-open slack://channel?team=$FORM3_TEAM&id=${channel_map[ARG]}
