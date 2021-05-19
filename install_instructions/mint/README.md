@@ -73,7 +73,6 @@ pair <device>
 connect <device>
 
 ### Troubleshooting
-Termite - https://askubuntu.com/questions/739163/how-to-install-termite
 
 #### Down Below spam :)
 
@@ -90,9 +89,9 @@ copy paste key to /tmp
 `gpg --import key` -> passphrase should be stored somewhere
 git config --global commit.gpgsign true
 git config --global user.signingkey <fingerprint>
-
-#install antivirus
-https://www.sophos.com/en-us/products/free-tools/sophos-antivirus-for-linux.aspx
+git config --global user.name ""
+git config --global user.email ""
+git config --global core.editor vim
 
 #instlaling iptables
 sudo apt-get install iptables-persistent
@@ -138,3 +137,6 @@ xmind - https://www.xmind.net/download/
 how to install rpm file - it takes some time to finish this
 https://askubuntu.com/questions/30770/how-to-get-rpm-install-in-my-ubuntu-linux-system
 then use `XMind`
+
+### multi ssh key support
+script description how to configure

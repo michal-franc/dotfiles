@@ -1,4 +1,4 @@
-export ZSH=/home/mfranc/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 export GOPATH=$HOME/go
 export GO111MODULE=on
 export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin:$HOME/tools:$HOME/scripts

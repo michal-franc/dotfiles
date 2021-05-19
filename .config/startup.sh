@@ -8,6 +8,7 @@ echo monitors set
 
 setxkbmap -option caps:backspace
 setxkbmap -option shift:both_capslock
+setxkbmap -layout us
 
 xmodmap -e "clear Lock"
 # just in case caps lock on ctrl r
