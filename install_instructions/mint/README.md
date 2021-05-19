@@ -140,3 +140,20 @@ then use `XMind`
 
 ### multi ssh key support
 script description how to configure
+
+add this to .ssh/config
+
+```
+Host github.com
+	HostName github.com
+	User git
+	IdentityFile ~/.ssh/id_rsa
+
+Host github.com-personal
+	HostName github.com-michal-franc
+	User git
+	IdentityFile ~/.ssh/id_rsa_michal_franc
+```
+generate new key with id_rsa_michal_franc and add it in to github 
+
+everytime you clone repo run `personal_git` command to configure local repo value correctly
