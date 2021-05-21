@@ -3,7 +3,7 @@ export GOPATH=$HOME/go
 source ~/.gvm/scripts/gvm
 export GOPATH=$HOME/Work/go-src
 export GO111MODULE=on
-export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin:$HOME/tools:$HOME/scripts:$HOME/.tfenv/bin:$GOPATH/bin/mockery
+export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin:$HOME/tools:$HOME/scripts:$HOME/.tfenv/bin:$GOPATH/bin/mockery:/home/linuxbrew/.linuxbrew/bin
 
 export NOTES_DIR=$HOME/notes
 
