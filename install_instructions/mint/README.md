@@ -157,3 +157,26 @@ Host github.com-personal
 generate new key with id_rsa_michal_franc and add it in to github 
 
 everytime you clone repo run `personal_git` command to configure local repo value correctly
+
+
+### run keyboard  config script  on keyboard plugin 
+sudo apt-get install inotify-tools
+lsusb - find yourkeyboard and two ids
+
+then create file 80-local.rules in rules.d
+```
+SUBSYSTEM=="usb", ATTRS{idVendor}=="045e", ATTRS{idProduct}=="00db", RUN+="/usr/local/bin/keyboard-udev"
+```
+
+then copy keyboard-udev
+
+```
+#!/bin/bash
+# will wrtite to keyboard.lock on each keyboard plugin - executed by udev
+
+echo '' > /tmp/keyboard.lock &
+```
+then configure inotify-tools and inotifywait to run .config/keyboard.sh everytime /tmp/keyboard.lock changes
+
+# this should be added to xinitrc
+while inotifywait -r /tmp/keyboard.lock; do { bash $HOME/.config/keyboard.sh; }; done

@@ -25,7 +25,9 @@ apt install rofi
 
 echo installing essential tools
 apt-get install git xclip zsh curl jq tig entr taskwarrior feh ncdu zathura -y
+# install vim with clipboard
 #apt-get install mutt vim-gnome
+#apt-get install mutt vim-gtk
 apt-get install htop bats -y
 apt-get install libxdo-dev xdotool compton -y
 

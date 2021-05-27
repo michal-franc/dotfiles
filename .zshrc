@@ -11,8 +11,8 @@ if [ -x "$(command -v luarocks)" ]; then
   eval $(luarocks path --bin)
 fi
 
-export VISUAL='vim'
-export EDITOR='vim'
+export VISUAL='nvim'
+export EDITOR='nvim'
 
 plugins=(git gitfast z aws common-aliases docker extract fasd sudo taskwarrior vi-mode)
 source $ZSH/oh-my-zsh.sh

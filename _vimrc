@@ -18,6 +18,18 @@ Plug 'junegunn/goyo.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'vim-syntastic/syntastic'
 
+" neovim
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/playground'
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/nvim-compe'
+
+" dependencies
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+" telescope
+Plug 'nvim-telescope/telescope.nvim'
+
 " testing new
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'tpope/vim-surround'
