@@ -1,0 +1,9 @@
+#!/bin/bash
+
+
+if [ "$1" == "low" ]; then
+  echo 40000 | sudo tee /sys/class/backlight/intel_backlight/brightness
+else
+  echo 120000 | sudo tee /sys/class/backlight/intel_backlight/brightness
+fi
+
