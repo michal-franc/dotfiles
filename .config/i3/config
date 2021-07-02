@@ -83,8 +83,8 @@ bindsym $mod+space focus mode_toggle
 # focus the parent container
 bindsym $mod+a focus parent
 
-set $workspace9 "9: Notes/Anki"
-set $workspace10 "10: Book"
+set $workspace9 "9: 9:Notes/Anki"
+set $workspace10 "10: 10:Book"
 
 # switch to workspace
 bindsym $mod+1 workspace number 1
