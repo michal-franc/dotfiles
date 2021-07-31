@@ -5,7 +5,7 @@
 tag=$1
 link=$2
 
-dir=~/notes/links
+dir=~/Work/notes/links
 
 if [ -z "$tag" ] ; then
   echo list of tags:

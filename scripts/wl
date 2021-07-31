@@ -3,17 +3,17 @@
 # script for quick worklog creation
 
 context=$(task _get rc.context)
-if [ "$context" = "form3" ]; then
+#if [ "$context" = "form3" ]; then
   file=~/Work/docs/worklog.md
-else
-  file=~/notes/work/worklog.md
-fi
+#else
+#  file=~/notes/work/worklog.md
+#fi
 
 if [[ $# -eq 0 ]] ; then
   cat $file | tail
 else
-  if [[ "$1" == "vim" ]] ; then
-    vim $file
+  if [[ "$1" == "nvim" ]] ; then
+    nvim $file
   else
     echo "- $@" >> $file
   fi

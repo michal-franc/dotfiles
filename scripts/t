@@ -10,6 +10,7 @@ if [ "$dir" = "$USER" ]; then
 fi
 
 context=$(task _get rc.context)
+print $context
 if [ "$context" = "form3" ]; then
   task +$context pro:$dir $@
 elif [ "$context" = "workfocus" ]; then

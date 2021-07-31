@@ -1,12 +1,24 @@
 #!/bin/bash
 
 # creates documents for projects base on context
+# TODO:
+# docs . opens documentation based on currenct folder context
+# docs x open specified docuemntation
 
 context=$(task _get rc.context)
 project=$(tdir)
-if [ "$context" = "form3" ] || [ "$context" = "workfocus" ]; then
-  vim ~/Work/docs/$project.md
-else
-  mkdir ~/notes/projects/$project
-  vim ~/notes/projects/$project/README.md
+pick=$1
+
+# docs list all the available documentations
+if [ "$pick" = "" ]; then
+  echo displaying available docs
+  ls ~/Work/docs
+  exit
 fi
+
+if [ "$pick" = "." ]; then
+    nvim ~/Work/docs/$project.md
+    exit
+fi
+
+nvim ~/Work/docs/$pick.md

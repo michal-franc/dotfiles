@@ -185,3 +185,4 @@ function! s:fzf_statusline()
 endfunction
 
 autocmd! User FzfStatusLine call <SID>fzf_statusline()
+nmap gx :silent execute "!xdg-open " . shellescape("<cWORD>")<CR>

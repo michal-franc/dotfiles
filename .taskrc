@@ -15,28 +15,27 @@ data.location=~/todo.work/.task
 color=on
 
 # Color theme (uncomment one to use)
-#include /usr/share/doc/task/rc/light-16.theme
-#include /usr/share/doc/task/rc/light-256.theme
-#include /usr/share/doc/task/rc/dark-16.theme
-#include /usr/share/doc/task/rc/dark-256.theme
-#include /usr/share/doc/task/rc/dark-red-256.theme
-#include /usr/share/doc/task/rc/dark-green-256.theme
-#include /usr/share/doc/task/rc/dark-blue-256.theme
-#include /usr/share/doc/task/rc/dark-violets-256.theme
-#include /usr/share/doc/task/rc/dark-yellow-green.theme
-#include /usr/share/doc/task/rc/dark-gray-256.theme
-#include /usr/share/doc/task/rc/dark-gray-blue-256.theme
-#include /usr/share/doc/task/rc/solarized-dark-256.theme
-#include /usr/share/doc/task/rc/solarized-light-256.theme
-#include /usr/share/doc/task/rc/no-color.theme
-
-urgency.uda.priority.H.coefficient=2.0
-urgency.uda.priority.M.coefficient=1
-urgency.uda.priority.L.coefficient=0.5
-
-urgency.user.tag.later.coefficient=-6.0
-
-urgency.due.coefficient=2.0
+include ~/todo.work/task.theme
+#
+#
+urgency.active.coefficient                  =20.0 # already started tasks
+urgency.user.tag.next.coefficient           =15.0 # +next tag
+urgency.due.coefficient                     =12.0 # overdue or near due date
+urgency.blocking.coefficient                =8.0 # blocking other tasks
+urgency.uda.priority.H.coefficient          =6.0 # high Priority
+urgency.uda.priority.M.coefficient          =3.9 # medium Priority
+urgency.uda.priority.L.coefficient          =1.8 # low Priority
+urgency.user.tag.form3.coefficient          =6.0 
+urgency.scheduled.coefficient               =5.0 # scheduled tasks
+urgency.age.coefficient                     =2.0 # coefficient for age
+urgency.annotations.coefficient             =1.0 # has annotations
+urgency.tags.coefficient                    =1.0 # has tags
+urgency.project.coefficient                 =1.0 # assigned to any project
+urgency.user.project.My Project.coefficient =5.0 # assigned to project:"My Project"
+urgency.waiting.coefficient                 =-3.0 # waiting task
+urgency.blocked.coefficient                 =-5.0 # blocked by other tasks
+urgency.user.tag.recurrent.coefficient      = 0.1 # recurrent tag
+urgency.user.tag.later.coefficient          =-6.0 # if set for later then just ignore
 
 uda.reviewed.type=date
 uda.reviewed.label=Reviewed
@@ -45,9 +44,5 @@ report._reviewed.columns=uuid
 report._reviewed.sort=reviewed+,modified+
 report._reviewed.filter=( reviewed.none: or reviewed.before:now-6days ) and ( +PENDING or +WAITING )
 
-urgency.user.project.sns-sqs-go.coefficient=2.0
 context.home=-form3
-context.homefocus=-form3 and +today
 context.form3=+form3
-context.workfocus=+form3 and +today
-context=form3
