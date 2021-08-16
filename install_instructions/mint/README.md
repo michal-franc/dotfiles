@@ -180,3 +180,6 @@ then configure inotify-tools and inotifywait to run .config/keyboard.sh everytim
 
 # this should be added to xinitrc
 while inotifywait -r /tmp/keyboard.lock; do { bash $HOME/.config/keyboard.sh; }; done
+
+# zoxide
+you need to install zoxide as this is what zsh expects
