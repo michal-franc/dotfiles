@@ -34,7 +34,7 @@ height = 25
 ;offset-x = 1%
 ;offset-y = 1%
 radius = 10.0
-fixed-center = false
+fixed-center = true
 
 background = ${colors.background}
 foreground = ${colors.foreground}
@@ -54,20 +54,12 @@ module-margin-right = 2
 font-0 = fixed:pixelsize=10;1
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = siji:pixelsize=10;1
+font-3 = 3270Medium Nerd Font:style=Medium
 
-modules-right = battery memory cpu filesystem date
-modules-center = focus bspwm i3
+modules-right = gh snoozeslack gopom donetoday tasks battery memory cpu
+modules-left = focus bspwm i3
+modules-center = activetask
 
-[module/focus]
-type = custom/script
-exec = ~/focus.sh
-tail = true
-interval = 30
-
-[module/pomo]
-type = custom/script
-interval = 1
-exec = pomo status
 
 tray-position = right
 tray-padding = 2
@@ -268,21 +260,21 @@ format-disconnected =
 ;label-disconnected = %ifname% disconnected
 ;label-disconnected-foreground = ${colors.foreground-alt}
 
-[module/date]
-type = internal/date
-interval = 30
+;[module/date]
+;type = internal/date
+;interval = 30
+;
+;date = " %Y-%m-%d"
+;date-alt = " %Y-%m-%d"
+;
+;time = %H:%M
+;time-alt = %H:%M:%S
+;
+;format-prefix = 
+;format-prefix-foreground = ${colors.foreground-alt}
+;format-underline = #0a6cf5
 
-date = " %Y-%m-%d"
-date-alt = " %Y-%m-%d"
-
-time = %H:%M
-time-alt = %H:%M:%S
-
-format-prefix = 
-format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #0a6cf5
-
-label = %date% %time%
+;label = %date% %time%
 
 [module/pulseaudio]
 type = internal/pulseaudio
@@ -344,31 +336,28 @@ type = internal/battery
 battery = BAT0
 adapter = AC
 full-at = 98
-format-charging = <animation-charging> <label-charging>
+format-charging = <animation-charging>  <label-charging>
 format-charging-underline = #ffb52a
 
-format-discharging = <animation-discharging> <label-discharging>
+format-discharging = <animation-discharging>  <label-discharging>
 format-discharging-underline = ${self.format-charging-underline}
 
-format-full-prefix = " "
-format-full-prefix-foreground = ${colors.foreground-alt}
+format-full-prefix = " "
 format-full-underline = ${self.format-charging-underline}
 
-ramp-capacity-0 = 
-ramp-capacity-1 = 
-ramp-capacity-2 = 
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
 ramp-capacity-foreground = ${colors.foreground-alt}
 
-animation-charging-0 = 
-animation-charging-1 = 
-animation-charging-2 = 
-animation-charging-foreground = ${colors.foreground-alt}
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
 animation-charging-framerate = 750
 
-animation-discharging-0 = 
-animation-discharging-1 = 
-animation-discharging-2 = 
-animation-discharging-foreground = ${colors.foreground-alt}
+animation-discharging-0 = 
+animation-discharging-1 = 
+animation-discharging-2 = 
 animation-discharging-framerate = 750
 
 [module/temperature]
@@ -431,3 +420,61 @@ margin-top = 5
 margin-bottom = 5
 
 ; vim:ft=dosini
+
+;Custom modules for polybar
+[module/tasks]
+type = custom/script
+exec = ~/.config/polybar/taskstoday.sh
+label=   todo: %output% tasks
+interval = 60
+format-underline = #33D4FF
+
+[module/focus]
+type = custom/script
+exec = ~/focus.sh
+tail = true
+interval = 60
+
+[module/gopom]
+type = custom/script
+interval = 100
+exec = echo "pomodoro"
+label =   %output%
+click-right = kill -USR2 %pid%
+click-left = kill -USR1 %pid%
+format-underline = #C433FF
+
+[module/activetask]
+type = custom/script
+interval = 15
+exec = ~/.config/polybar/activetask.sh
+exec_if = ~/.config/polybar/activetask.sh
+label =   %output%
+label-foreground= #08FF00
+format-underiine = #99FF33
+
+[module/donetoday]
+type = custom/script
+interval = 15
+exec = ~/.config/polybar/donetoday.sh
+label =   done: %output%
+format-underline = #99FF33
+
+[module/snoozeslack]
+type = custom/script
+exec = ~/.config/polybar/snoozeslack.sh
+label = 聆  %output%
+tail = true
+click-right = kill -USR2 $(pgrep --oldest --parent %pid%)
+click-left = kill -USR1 $(pgrep --oldest --parent %pid%)
+format-underline = #00FFAE
+
+[module/gh]
+type = custom/script
+exec = ~/.config/polybar/gh.sh
+label =   PR
+tail = true
+format = %{A1:xdg-open https\://github.com/pulls:}<label>%{A}
+format-underline = #FF0000
+
+

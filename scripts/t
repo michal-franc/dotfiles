@@ -1,11 +1,17 @@
 #!/bin/bash  
 
 # alias for taskwarriors that works with project based on git repo
-
+clear
 dir=$(tdir)
 
 if [ "$dir" = "$USER" ]; then
   task $@
+  exit
+fi
+
+if [ "$dir" = "todo.work" ]; then
+  baseproject=$(basename "`pwd`")
+  task pro:$baseproject $@
   exit
 fi
 

@@ -12,13 +12,14 @@ pick=$1
 # docs list all the available documentations
 if [ "$pick" = "" ]; then
   echo displaying available docs
-  ls ~/Work/docs
+  ls ~/todo.work/projects
   exit
 fi
 
 if [ "$pick" = "." ]; then
-    nvim ~/Work/docs/$project.md
+    mkdir ~/todo.work/projects/$project
+    nvim ~/todo.work/projects/$project/README.md
     exit
 fi
 
-nvim ~/Work/docs/$pick.md
+nvim ~/todo.work/projects/$pick/README.md

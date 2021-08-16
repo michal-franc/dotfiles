@@ -14,7 +14,7 @@ fi
 export VISUAL='nvim'
 export EDITOR='nvim'
 
-plugins=(git gitfast z aws common-aliases docker extract fasd sudo taskwarrior vi-mode)
+plugins=(git gitfast zoxide aws common-aliases docker extract sudo taskwarrior history encode64 nmap ripgrep terraform vault) 
 source $ZSH/oh-my-zsh.sh
 
 # sudo command overrides
@@ -31,9 +31,6 @@ if [ -x "$(command -v cargo)" ]; then
   source $HOME/.cargo/env
 fi
 
-alias tlocal="task rc.data.location=.todo"
-alias tall="task"
-alias tw="timew"
 alias gs="git status"
 
 git config --global alias.force "push --force-with-lease"
@@ -41,9 +38,6 @@ git config --global alias.force "push --force-with-lease"
 if [ -x "$(command -v bat)" ]; then
   alias cat='bat'
 fi
-
-# load todos in bulk
-alias tnbulk="xargs -L1 task rc.data.location=.todo add pro:next < todo.md"
 
 # disabling XON/XOFF flow control
 stty -ixon
@@ -65,3 +59,8 @@ export SDKMAN_DIR="/home/mfranc/.sdkman"
 [[ -s "/home/mfranc/.sdkman/bin/sdkman-init.sh" ]] && source "/home/mfranc/.sdkman/bin/sdkman-init.sh"
 
 
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session.

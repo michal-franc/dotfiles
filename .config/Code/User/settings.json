@@ -15,12 +15,10 @@
     "editor.renderWhitespace": "all",
     "editor.wordWrap":"on",
     "editor.codeLens": false,
-    "editor.fontSize": 10,
     "editor.minimap.enabled": false,
     "files.enableTrash": false,
     "telemetry.enableCrashReporter": false,
     "telemetry.enableTelemetry": false,
-    "window.zoomLevel": 1,
     "window.menuBarVisibility": "toggle",
     "window.titleBarStyle": "custom",
     "window.menuBarStyle": "custom",
@@ -35,10 +33,12 @@
     "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
     "terminal.integrated.rendererType": "canvas",
     "extensions.ignoreRecommendations": true,
-    "workbench.editorAssociations": [
-        {
-            "viewType": "jupyter.notebook.ipynb",
-            "filenamePattern": "*.ipynb"
-        }
-    ],
+    "workbench.editorAssociations": {
+        "*.ipynb": "jupyter-notebook"
+    },
+    "notebook.cellToolbarLocation": {
+        "default": "right",
+        "jupyter-notebook": "left"
+    },
+    "window.zoomLevel": 1,
 }
