@@ -32,6 +32,7 @@ if [ -x "$(command -v cargo)" ]; then
 fi
 
 alias gs="git status"
+alias tui="taskwarrior-tui"
 
 git config --global alias.force "push --force-with-lease"
 
@@ -51,6 +52,8 @@ if [ -f ~/.secret ]; then
   source ~/.secret
 fi
 
+source ~/globalprotect
+
 # added by travis gem
 [ -f /home/mfranc/.travis/travis.sh ] && source /home/mfranc/.travis/travis.sh
 
@@ -64,3 +67,5 @@ export SDKMAN_DIR="/home/mfranc/.sdkman"
 export PATH="$PATH:$HOME/.rvm/bin"
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session.
+
+

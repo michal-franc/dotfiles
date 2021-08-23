@@ -183,3 +183,6 @@ while inotifywait -r /tmp/keyboard.lock; do { bash $HOME/.config/keyboard.sh; };
 
 # zoxide
 you need to install zoxide as this is what zsh expects
+
+# taskwarrior-tui
+https://github.com/kdheepak/taskwarrior-tui/
