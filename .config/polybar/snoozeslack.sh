@@ -1,9 +1,11 @@
 #!/bin/bash
 
+snooze_time_min=120
+
 source ~/.secret
 
 leftclick() {
-  curl -d "token=$SLACK_TOKEN" -X POST https://slack.com/api/dnd.setSnooze\?num_minutes\=35 -s -o nul
+  curl -d "token=$SLACK_TOKEN" -X POST https://slack.com/api/dnd.setSnooze\?num_minutes\=$snooze_time_min -s -o nul
   echo 鈴
   echo "" >> /tmp/slacksnoozed
 }
