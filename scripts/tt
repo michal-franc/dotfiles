@@ -1,3 +1,9 @@
 #!/bin/bash  
 clear
-task +today
+
+if [ $# -eq 0 ]
+then
+  task +today
+else
+  task $1 modify +today
+fi
