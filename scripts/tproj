@@ -1,7 +1,0 @@
-#!/bin/bash
-
-# used to set project coefficient in taskwarrior
-tproj() {
-  project=$(tdir)
-  task config urgency.user.project.$project.coefficient $1
-}
