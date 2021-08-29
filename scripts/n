@@ -1,16 +1,15 @@
 #!/bin/bash
 
-# script for taking quick notes
+# script for taking quick not
+file=~/Work/notes/quicknotes.md
 
-todayFileFolder=~/notes/_miszmasz/quick-notes/"$(date +%Y-%m-%d).md"
-
-if [ ! -f todayFileFolder ]; then
- echo Creating quick note for today
- touch $todayFileFolder
-fi
 
 if [[ $# -eq 0 ]] ; then
-  cat $todayFileFolder;
+  cat $file | tail
 else
-  echo "- $@" >> $todayFileFolder;
+  if [[ "$1" == "nvim" ]] ; then
+    nvim $file
+  else
+    echo "- $@" >> $file
+  fi
 fi 
