@@ -186,3 +186,6 @@ you need to install zoxide as this is what zsh expects
 
 # taskwarrior-tui
 https://github.com/kdheepak/taskwarrior-tui/
+
+#pgrep
+pip install pgrep
