@@ -56,9 +56,10 @@ font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = siji:pixelsize=10;1
 font-3 = 3270Medium Nerd Font:style=Medium
 
-modules-right = gh snoozeslack gopom donetoday tasks battery memory cpu
-modules-left = focus bspwm i3
-modules-center = activetask
+
+modules-right = gh snoozeslack gopomstats gopomtime battery
+modules-left = bspwm i3
+modules-center = tasks activetask donetoday 
 
 
 tray-position = right
@@ -429,20 +430,29 @@ label=   todo: %output% tasks
 interval = 60
 format-underline = #33D4FF
 
-[module/focus]
-type = custom/script
-exec = ~/focus.sh
-tail = true
-interval = 60
-
 [module/gopom]
 type = custom/script
-interval = 100
-exec = echo "pomodoro"
-label =   %output%
-click-right = kill -USR2 %pid%
-click-left = kill -USR1 %pid%
+exec = ~/.config/polybar/gopom.sh
+label =  %output% 
+tail = true
+click-right = kill -USR2 $(pgrep --oldest --parent %pid%)
+click-left = kill -USR1 $(pgrep --oldest --parent %pid%)
+
+[module/gopomtime]
+type = custom/script
+interval = 1 
+exec = cat /tmp/pomodoro
+exec-if = "pgrep gopom"
+label = 祥  %output%
 format-underline = #C433FF
+
+[module/gopomstats]
+type = custom/script
+interval = 15
+exec = ~/.config/polybar/pomodoro-stats.sh
+exec-if = test -f "/tmp/pomodoro-stats"
+label = pomodoros: %output%
+format-underline = #FFF000
 
 [module/activetask]
 type = custom/script
