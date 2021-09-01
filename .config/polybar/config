@@ -441,7 +441,7 @@ click-left = kill -USR1 $(pgrep --oldest --parent %pid%)
 [module/gopomtime]
 type = custom/script
 interval = 1 
-exec = cat /tmp/pomodoro
+exec = cat /tmp/pomodoro-timer
 exec-if = "pgrep gopom"
 label = 祥  %output%
 format-underline = #C433FF
