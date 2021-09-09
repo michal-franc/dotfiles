@@ -3,10 +3,15 @@ clear
 
 if [ $# -eq 0 ]
 then
-  task status:pending and +today modify -today +stash
-  echo stashed current +today tatsks
-elif [ "$1" == "pop" ]
-then
-  task status:pending and +stash modify -stash +today
-  echo restored stashed tasks to +today
+  echo available stashes 
+  task tags | grep stash
+else
+  if [ "$2" == "pop" ]
+  then
+    task status:pending and +$1stash modify -$1stash +today
+    echo restored stashed $1 tasks to +today
+  else
+    task status:pending and +today modify -today +$1stash
+    echo stashed current +today tasks with stash $1
+  fi
 fi
