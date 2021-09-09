@@ -12,6 +12,6 @@ elif [ "$1" == "vlow" ]; then
 else
   xrandr --output DP-1 --brightness 1
   xrandr --output DP-2 --brightness 1
-  echo 100000 | sudo tee /sys/class/backlight/intel_backlight/brightness
+  echo 70000 | sudo tee /sys/class/backlight/intel_backlight/brightness
 fi
 
