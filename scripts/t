@@ -9,20 +9,18 @@ if [ "$dir" = "$USER" ]; then
   exit
 fi
 
+# situation when we are in todo.work folder then we assume we deal with projects
 if [ "$dir" = "todo.work" ]; then
   baseproject=$(basename "`pwd`")
-  task pro:$baseproject $@
+
+  if [ -f context.md ]; then
+    context="+$(head -n 1 context.md )"
+  else
+    context=""
+  fi
+
+  task pro:$baseproject $context $@
   exit
 fi
 
-context=$(task _get rc.context)
-print $context
-if [ "$context" = "form3" ]; then
-  task +$context pro:$dir $@
-elif [ "$context" = "workfocus" ]; then
-  task +form3 +today  pro:$dir $@
-elif [ "$context" = "homefocus" ]; then
-  task +today pro:$dir $@
-else
-  task pro:$dir $@
-fi
+task pro:$dir $@
