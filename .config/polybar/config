@@ -59,7 +59,7 @@ font-3 = 3270Medium Nerd Font:style=Medium
 
 modules-right = gh snoozeslack gopomstats gopomtime battery
 modules-left = bspwm i3
-modules-center = tasks activetask donetoday 
+modules-center = tasks activecontext activetask donetoday 
 
 
 tray-position = right
@@ -461,6 +461,15 @@ exec = ~/.config/polybar/activetask.sh
 exec_if = ~/.config/polybar/activetask.sh
 label =   %output%
 label-foreground= #08FF00
+format-underiine = #99FF33
+
+[module/activecontext]
+type = custom/script
+interval = 15
+exec = ~/.config/polybar/activecontext.sh
+exec_if = ~/.config/polybar/activecontext.sh
+label = %output%
+label-foreground= #FF0000
 format-underiine = #99FF33
 
 [module/donetoday]
