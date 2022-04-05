@@ -1,6 +1,6 @@
 #!/bin/bash
 
-snooze_time_min=120
+snooze_time_min=480
 
 source ~/.secret
 

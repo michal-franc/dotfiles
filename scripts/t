@@ -4,8 +4,15 @@
 clear
 dir=$(tdir)
 
+# set context to current context or empty
+context="+$(task _get rc.context)"
+
+if [ "$context" = "+" ]; then
+  context=""
+fi
+
 if [ "$dir" = "$USER" ]; then
-  task $@
+  task $context $@
   exit
 fi
 
@@ -13,14 +20,13 @@ fi
 if [ "$dir" = "todo.work" ]; then
   baseproject=$(basename "`pwd`")
 
+  # override context if project has its own context
   if [ -f context.md ]; then
     context="+$(head -n 1 context.md )"
-  else
-    context=""
   fi
 
   task pro:$baseproject $context $@
   exit
 fi
 
-task pro:$dir $@
+task pro:$dir $context  $@

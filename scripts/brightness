@@ -5,6 +5,10 @@ if [ "$1" == "low" ]; then
   echo 40000 | sudo tee /sys/class/backlight/intel_backlight/brightness
   xrandr --output DP-1 --brightness 0.85
   xrandr --output DP-2 --brightness 0.85
+elif [ "$1" == "vvlow" ]; then
+  echo 4000 | sudo tee /sys/class/backlight/intel_backlight/brightness
+  xrandr --output DP-1 --brightness 0.7
+  xrandr --output DP-2 --brightness 0.7
 elif [ "$1" == "vlow" ]; then
   echo 10000 | sudo tee /sys/class/backlight/intel_backlight/brightness
   xrandr --output DP-1 --brightness 0.7
