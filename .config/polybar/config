@@ -57,7 +57,7 @@ font-2 = siji:pixelsize=10;1
 font-3 = 3270Medium Nerd Font:style=Medium
 
 
-modules-right = gh snoozeslack gopomstats gopomtime battery
+modules-right = security gh snoozeslack gopomstats gopomtime battery
 modules-left = bspwm i3
 modules-center = tasks activecontext activetask donetoday 
 
@@ -495,5 +495,13 @@ label =   PR
 tail = true
 format = %{A1:xdg-open https\://github.com/pulls:}<label>%{A}
 format-underline = #FF0000
+
+[module/security]
+interval = 15
+type = custom/script
+exec = ~/.config/polybar/security.sh
+tail = true
+label = %output%
+format-underline = #F00
 
 
