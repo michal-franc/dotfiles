@@ -7,7 +7,7 @@ dir=$(tdir)
 # set context to current context or empty
 context="+$(task _get rc.context)"
 
-if [ "$context" = "+" ]; then
+if [ "$context" = "+" ] || [ "$context" = "+home" ]; then
   context=""
 fi
 
