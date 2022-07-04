@@ -41,4 +41,10 @@ if [[ "$(/usr/bin/cat /etc/X11/default-display-manager)" != "/usr/sbin/gdm3" ]];
     exit -1
 fi
 
+# Check if uptime less than 2 weeks
+if uptime -p | grep -P '[2-9][0-9]?\sweek[s]?'; then 
+    echo "%{F#f00} UPTIME%{F-}"
+    exit -1
+fi
+
 echo "%{F#0f0}%{U#0f0}  Protected%{U-}%{F-}"
