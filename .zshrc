@@ -32,7 +32,9 @@ if [ -x "$(command -v cargo)" ]; then
 fi
 
 alias gs="git status"
+alias gpull="git pull master"
 alias tui="taskwarrior-tui"
+alias tg=". tgoto"
 
 git config --global alias.force "push --force-with-lease"
 

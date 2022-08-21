@@ -1,0 +1,21 @@
+#!/usr/bin/zsh
+source ~/.zshrc
+
+active_tasks="$(task status:pending and +ACTIVE count)"
+
+if [ "$active_tasks" = 0 ]
+then
+  exit 1
+fi
+
+if [ "$active_tasks" != 1 ]
+then
+  echo "$active_tasks active - unable to find goto project"
+  exit
+fi
+
+active_task_id=$(echo $(task activeid) | cut -d' ' -f 3)
+
+project_name="$(task _get $active_task_id.project)"
+echo "going to project $project_name"
+zi $project_name
