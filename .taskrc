@@ -53,8 +53,8 @@ report.activeid.filter=status:pending and +ACTIVE
 report.completedid.columns=id
 report.completedid.labels=ID
 report.completedid.filter=status:completed
-report.completeddescription.columns=project,description
-report.completeddescription.labels=Project,Description
+report.completeddescription.columns=id,description
+report.completeddescription.labels=,
 report.completeddescription.filter=status:completed
 report.completeddescription.sort=project
 
