@@ -1,0 +1,6 @@
+# !/bin/bash  
+
+file=$1
+# shift arguments so that number one is no longer first
+shift
+xargs -L1 task add $@ < $file

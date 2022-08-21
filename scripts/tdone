@@ -1,0 +1,9 @@
+#!/bin/bash  
+output=$(t add $@)
+# awk here will separate fields by space and .
+# given task warrior output `Created task 48bca96c-f27b-454d-a549-2edfb0d35afd.`
+# this will create 4 fields 'Created', 'task', '<guid>', '.'
+# then 3rd field is our guid
+id=$(echo $output | awk -F"[ .]" '{print $3}')
+task done $id
+

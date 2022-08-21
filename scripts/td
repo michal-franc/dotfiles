@@ -1,0 +1,4 @@
+#!/bin/bash  
+task done $1
+tt
+

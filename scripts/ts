@@ -1,0 +1,25 @@
+#!/bin/bash  
+
+if [ $# -eq 0 ]
+then
+  active_tasks="$(task status:pending and +ACTIVE count)"
+
+  if [ "$active_tasks" = 0 ]
+  then
+    echo no task active unable to stop
+    exit
+  fi
+
+  if [ "$active_tasks" != 1 ]
+  then
+    echo "$active_tasks active - unable to stop"
+    exit
+  fi
+
+  active_task_id=$(echo $(task activeid) | cut -d' ' -f 3)
+  task $active_task_id stop
+  exit
+fi
+
+task $1 start
+
