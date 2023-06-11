@@ -1,4 +1,8 @@
 colors:
+  footer:
+    bar:
+      background: '0x282a36'
+      foreground: '0xf8f8f2'
   primary:
     background: '0x282a36'
     foreground: '0xf8f8f2'
@@ -15,9 +19,6 @@ colors:
     focused_match:
       foreground: '0x44475a'
       background: '0xffb86c'
-    bar:
-      background: '0x282a36'
-      foreground: '0xf8f8f2'
   line_indicator:
     foreground: None
     background: None
