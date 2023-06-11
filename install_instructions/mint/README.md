@@ -1,6 +1,33 @@
+### TODO:
+- todo.work is required as some scripts are attached to it
+
+
+
 ### Mint install process
 Take the mint with xfce (not cinammon) image and install it just like usual.
 Pick English US keyboard. Install third party software. Enable encryption - pick a passphrase.
+
+### First Run after install if VBOX
+- Enable 3d acceleration
+- increase memory limits for graphic card
+Add guest additions go to mounted drive folder `media/username/VBox*******`
+```
+sudo bash VBoxLinuxAdditions.run
+reboot
+```
+
+## First step is to clone this repo
+
+add new ssh key to github account
+
+```
+sudo apt-get upgrade
+sudo apt-get install git
+```
+- git init in your home dir
+- `git remote add origin git@github.com:michal-franc/dotfiles.git`
+- `git fetch --all`
+- `git checkout master --force`
 
 ### SETTINGS - TODO env variable passed by user or in config file:
 - pick go version
@@ -9,23 +36,9 @@ Pick English US keyboard. Install third party software. Enable encryption - pick
 
 ### install_base.sh
 
-Run install.sh. It does.
+Run install_base.sh. It does.
 - upgrades the base kernel, distro
 - installs xclip, git, zsh, vim, i3, termite, rofi, maim, zoom, chrome, slack, ohmyzsh and more
-
-#### If running on VM - install Guest Additions
-Before procedding install Guest Additions and make sure software rendering message is gone
-Installing Guest Addtions is simple - just add image and in terminal on admin rights run the sh. Then restart.
-
-### Run install_additions.sh
-
-### Github SSH
-Configure Github ssh key
-
-```bash
-ssh-keygen -t rsa -b 4096 -C "email"
-cat ~/.ssh/id_rsa.pub | xclip -selection c
-```
 
 Paste the key from clipboard to github.
 
