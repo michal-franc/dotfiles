@@ -6,7 +6,6 @@
         }
     ],
     "csharp.suppressDotnetRestoreNotification": true,
-    "workbench.activityBar.visible": true,
     "workbench.statusBar.visible": false,
     "workbench.colorTheme": "Dracula",
     "workbench.enableExperiments": false,

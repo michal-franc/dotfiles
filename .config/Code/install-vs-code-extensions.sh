@@ -1,12 +1,9 @@
 code --install-extension ban.spellright
 code --install-extension dracula-theme.theme-dracula
-code --install-extension jchannon.csharpextensions
-code --install-extension mauve.terraform
+code --install-extension ms-python.debugpy
 code --install-extension ms-python.python
-code --install-extension ms-vscode.csharp
-code --install-extension ms-vscode.Go
-code --install-extension PeterJausovec.vscode-docker
-code --install-extension rebornix.ruby
+code --install-extension ms-python.vscode-pylance
 code --install-extension shd101wyy.markdown-preview-enhanced
 code --install-extension sleistner.vscode-fileutils
 code --install-extension vscodevim.vim
+code --install-extension wingrunr21.vscode-ruby
