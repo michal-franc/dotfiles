@@ -1,5 +1,6 @@
 # YOU NEED TO INSTALL PYTHOIN BEFORE
 
+sudo apt-get install zsh
 
 echo installing ohmyzsh
 # https://github.com/robbyrussell/oh-my-zsh 
