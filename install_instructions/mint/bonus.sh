@@ -9,10 +9,11 @@ snap install slack --classic
 
 
 #echo installing chrome
-#pushd ~/Downloads
-#  wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb 
-#  dpkg -i google-chrome-stable_current_amd64.deb 
-#popd
+pushd ~/Downloads
+  sudo apt-get install libu2f-udev
+  wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb 
+  sudo dpkg -i google-chrome-stable_current_amd64.deb 
+popd
 
 #echo installing zoom
 #pushd ~/Downloads
