@@ -22,3 +22,6 @@ apt-get install code # or code-insiders
 
 echo installing shutter
 sudo apt install shutter
+
+# https://github.com/jdx/mise
+curl https://mise.run | sh
