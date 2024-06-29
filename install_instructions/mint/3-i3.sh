@@ -1,13 +1,13 @@
 #!/bin/bash
 
-/usr/lib/apt/apt-helper download-file https://debian.sur5r.net/i3/pool/main/s/sur5r-keyring/sur5r-keyring_2023.02.18_all.deb keyring.deb SHA256:a511ac5f10cd811f8a4ca44d665f2fa1add7a9f09bef238cdfad8461f5239cc4
-sudo apt install ./keyring.deb
-echo "deb http://debian.sur5r.net/i3 jammy universe" | sudo tee /etc/apt/sources.list.d/sur5r-i3.list
+curl https://baltocdn.com/i3-window-manager/signing.asc | sudo apt-key add -
+sudo apt install apt-transport-https --yes
+echo "deb https://baltocdn.com/i3-window-manager/i3/i3-autobuild-ubuntu/ all main" | sudo tee /etc/apt/sources.list.d/i3-autobuild.list
 sudo apt update
 sudo apt install i3
 
 echo installing i3
-apt-get install i3 libanyevent-i3-perl -y # libanyevent i3-perl required for saving layouts
+apt-get libanyevent-i3-perl -y # libanyevent i3-perl required for saving layouts
 
 echo installing rofi for i3
 add-apt-repository ppa:jasonpleau/rofi
@@ -37,6 +37,7 @@ libxcb-ewmh-dev libasound2-dev libxcb-composite0-dev libxcb-image0-dev -y
 echo installing polybar
 sudo apt install python3-xcbgen xcb-proto -y
 sudo apt-get install libjsoncpp-dev 
+sudo apt-get install libuv1.dev
 
 pushd ~/Downloads
   git clone git@github.com:jaagr/polybar.git --recursive
