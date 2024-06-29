@@ -28,7 +28,7 @@ set $right l
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec alacritty
+bindsym $mod+Return exec alacritty msg create-window
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -58,10 +58,10 @@ bindsym Control+Shift+$right move right
 bindsym $mod+Control+Tab workspace next
 
 # split in horizontal orientation
-bindsym $mod+b split h exec alacritty
+bindsym $mod+b split h exec alacritty msg create-window
 
 # split in vertical orientation
-bindsym $mod+v split v exec alacritty
+bindsym $mod+v split v exec alacritty msg create-window
 
 # enter fullscreen mode for the focused container
 #bindsym $mod+f fullscreen toggle
