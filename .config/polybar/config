@@ -456,7 +456,7 @@ format-underline = #FFF000
 
 [module/activetask]
 type = custom/script
-interval = 15
+interval = 60
 exec = ~/.config/polybar/activetask.sh
 exec_if = ~/.config/polybar/activetask.sh
 label =   %output%
@@ -474,7 +474,7 @@ format-underiine = #99FF33
 
 [module/donetoday]
 type = custom/script
-interval = 15
+interval = 60
 exec = ~/.config/polybar/donetoday.sh
 label =   done: %output%
 format-underline = #99FF33
