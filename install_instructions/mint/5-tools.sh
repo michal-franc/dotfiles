@@ -2,7 +2,7 @@ apt-get install maim
 
 echo installing essential tools
 apt-get install xclip zsh curl jq \
-                tig entr taskwarrior \
+                tig entr \
                 feh ncdu zathura htop bats ripgrep -y
 
 curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | bash
