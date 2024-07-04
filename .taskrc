@@ -43,8 +43,9 @@ report._reviewed.columns=uuid
 report._reviewed.sort=reviewed+,modified+
 report._reviewed.filter=( reviewed.none: or reviewed.before:now-6days ) and ( +PENDING or +WAITING )
 
-context.home=-form3
-context.form3=+form3
+context.home=-stream
+context.stream=+stream
+
 report.active.columns=id,project,description
 report.active.labels=ID,Project,Description
 report.activeid.labels=ID
