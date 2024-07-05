@@ -482,6 +482,7 @@ format-underline = #99FF33
 [module/snoozeslack]
 type = custom/script
 exec = ~/.config/polybar/snoozeslack.sh
+exec-if = false
 label = 聆  %output%
 tail = true
 click-right = kill -USR2 $(pgrep --oldest --parent %pid%)
@@ -491,6 +492,7 @@ format-underline = #00FFAE
 [module/gh]
 type = custom/script
 exec = ~/.config/polybar/gh.sh
+exec-if = false
 label =   PR
 tail = true
 format = %{A1:xdg-open https\://github.com/pulls:}<label>%{A}
