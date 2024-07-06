@@ -63,5 +63,5 @@ include ~/todo.work/projects/coeff.md
 
 
 verbose=blank,header,footnote,label,new-id,new-uuid,affected,edit,special,project,sync,ovveride,unwait
-news.version=2.6.0
+news.version=3.0.2
 context=home
