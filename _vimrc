@@ -30,14 +30,16 @@ Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 " telescope
 Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+Plug 'nvim-tree/nvim-web-devicons'
 
 " testing new
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'rust-lang/rust.vim'
-Plug 'kien/ctrlp.vim'
 Plug 'junegunn/vim-easy-align'
+Plug 'nvim-tree/nvim-tree.lua'
 
 " nice glyphs
 " Plug 'ryanoasis/vim-devicons'
@@ -127,6 +129,13 @@ nnoremap <silent> <c-l> :call Focus('right', 'l')<CR>
 nnoremap <silent> <c-h> :call Focus('left', 'h')<CR>
 nnoremap <silent> <c-k> :call Focus('up', 'k')<CR>
 nnoremap <silent> <c-j> :call Focus('down', 'j')<CR>
+
+
+"telescope config
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 " NERDTree show hidden files like .babelrc .gitignore
 let NERDTreeShowHidden=1
