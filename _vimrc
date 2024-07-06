@@ -17,6 +17,7 @@ Plug 'xuyuanp/nerdtree-git-plugin'
 Plug 'junegunn/goyo.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'vim-syntastic/syntastic'
+Plug 'dracula/vim', { 'as': 'dracula' }
 
 " neovim
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -83,6 +84,8 @@ Plug 'junegunn/vim-easy-align'
 "Plug 'OmniSharp/omnisharp-vim'
 
 call plug#end()
+
+colorscheme dracula
 
 " autocmd! BufWritePost * Neomake
 " autocmd InsertChange,TextChanged * update | Neomake
