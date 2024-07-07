@@ -9,7 +9,6 @@ autocmd BufEnter * silent! lcd %:p:h " automatically sets up the pwd for a file
 call plug#begin('~/.vim/plugged')
 
 " ready and stable
-Plug 'scrooloose/nerdtree'
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'airblade/vim-gitgutter'
@@ -31,7 +30,6 @@ Plug 'nvim-lua/plenary.nvim'
 " telescope
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
-Plug 'nvim-tree/nvim-web-devicons'
 
 " testing new
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
@@ -40,6 +38,7 @@ Plug 'tpope/vim-commentary'
 Plug 'rust-lang/rust.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'nvim-tree/nvim-tree.lua'
+Plug 'nvim-tree/nvim-web-devicons'
 
 " nice glyphs
 " Plug 'ryanoasis/vim-devicons'
@@ -135,8 +134,9 @@ nnoremap <silent> <c-j> :call Focus('down', 'j')<CR>
 nnoremap <s-f>j <cmd>Telescope find_files<cr>
 nnoremap <s-f>k <cmd>Telescope live_grep<cr>
 nnoremap <s-f>b <cmd>Telescope buffers<cr>
-nnoremap <s-f>h <cmd>Telescope help_tags<cr>
 
+"nvim tree
+nnoremap <s-f>h <cmd>NvimTreeFocus<cr> 
 " NERDTree show hidden files like .babelrc .gitignore
 let NERDTreeShowHidden=1
 

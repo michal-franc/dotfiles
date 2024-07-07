@@ -61,5 +61,9 @@
     {
         "key": "ctrl+p",
         "command": "-workbench.action.quickOpen"
+    },
+    {
+        "key": "shift+f h",
+        "command": "workbench.explorer.fileView.focus"
     }
 ]
