@@ -132,10 +132,10 @@ nnoremap <silent> <c-j> :call Focus('down', 'j')<CR>
 
 
 "telescope config
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-nnoremap <leader>fb <cmd>Telescope buffers<cr>
-nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+nnoremap <s-f>j <cmd>Telescope find_files<cr>
+nnoremap <s-f>k <cmd>Telescope live_grep<cr>
+nnoremap <s-f>b <cmd>Telescope buffers<cr>
+nnoremap <s-f>h <cmd>Telescope help_tags<cr>
 
 " NERDTree show hidden files like .babelrc .gitignore
 let NERDTreeShowHidden=1
