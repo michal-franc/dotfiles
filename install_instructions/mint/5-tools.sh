@@ -9,3 +9,7 @@ curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | 
 
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install
+
+
+# .config/JetBrains/Goland2024.1/keymaps - has the config values
+# Goland requires IdeaVim plugin and Dracula theme plugin installed
