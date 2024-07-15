@@ -43,7 +43,6 @@ report._reviewed.columns=uuid
 report._reviewed.sort=reviewed+,modified+
 report._reviewed.filter=( reviewed.none: or reviewed.before:now-6days ) and ( +PENDING or +WAITING )
 
-context.home=-stream
 context.stream=+stream
 
 report.active.columns=id,project,description
@@ -64,4 +63,3 @@ include ~/todo.work/projects/coeff.md
 
 verbose=blank,header,footnote,label,new-id,new-uuid,affected,edit,special,project,sync,ovveride,unwait
 news.version=3.0.2
-context=home

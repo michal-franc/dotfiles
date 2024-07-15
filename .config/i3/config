@@ -144,7 +144,7 @@ exec --no-startup-id $HOME/.config/startup.sh
 # i3gaps
 gaps inner 8
 gaps vertical 100
-gaps horizontal 550
+gaps horizontal 700
 smart_gaps inverse_outer
 
 # class                 border  backgr. text    indicator child_border

@@ -55,3 +55,15 @@ text = "CellForeground"
 [colors.vi_mode_cursor]
 cursor = "CellForeground"
 text = "CellBackground"
+
+
+ [font]
+ normal = { family = "monospace", style = "Regular" } # Default font face and style
+ bold = { family = "monospace", style = "Bold" } # Font face and style for bold text
+ italic = { family = "monospace", style = "Italic" } # Font face and style for italic text
+ bold_italic = { family = "monospace", style = "Bold Italic" } # Font for bold and italic text
+ size = 11.25 # Font size in points
+ offset = { x = 0, y = 0 } # Additional spacing between characters and lines
+ glyph_offset = { x = 0, y = 0 } # Offset for positioning glyphs within their cells
+ builtin_box_drawing = true # Use built-in box drawing characters for better alignment
+
