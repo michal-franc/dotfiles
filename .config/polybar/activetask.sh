@@ -1,5 +1,5 @@
 #!/bin/bash
-active_tasks="$(task status:pending and +ACTIVE count)"
+active_tasks="$(task rc.gc=no status:pending and +ACTIVE count 2>/dev/null </dev/null)"
 
 if [ "$active_tasks" = 0 ]
 then
@@ -12,8 +12,8 @@ then
   exit
 fi
 
-active_task_id=$(echo $(task activeid) | cut -d' ' -f 3)
+active_task_id=$(echo $(task rc.gc=no activeid 2>/dev/null </dev/null) | cut -d' ' -f 3)
 
-echo "$active_task_id.$(task _get $active_task_id.project): $(task _get $active_task_id.description)"
+echo "$active_task_id.$(task rc.gc=no _get $active_task_id.project 2>/dev/null </dev/null): $(task rc.gc=no _get $active_task_id.description 2>/dev/null </dev/null)"
 exit
 
