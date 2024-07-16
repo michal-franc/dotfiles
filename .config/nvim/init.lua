@@ -10,6 +10,13 @@ vim.opt.termguicolors = true
 -- empty setup using defaults
 require("nvim-tree").setup()
 
+local function on_attach(bufnr)
+    -- custom mappings
+    vim.keymap.set('n', '<s-f>j', "<cmd>Telescope find_files<cr>", { silent = true})
+    vim.keymap.set('n', '<s-f>k', "<cmd>Telescope live_grep<cr>", { silent = true})
+    vim.keymap.set('n', '<s-f>b', "<cmd>Telescope buffers<cr>", { silent = true})
+end
+
 -- OR setup with some options
 require("nvim-tree").setup({
   sort = {
@@ -24,4 +31,6 @@ require("nvim-tree").setup({
   filters = {
     dotfiles = false,
   },
+
+  on_attach = on_attach,
 })
