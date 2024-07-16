@@ -7,14 +7,18 @@ vim.g.loaded_netrwPlugin = 1
 -- optionally enable 24-bit colour
 vim.opt.termguicolors = true
 
+local api = require "nvim-tree.api"
+
 -- empty setup using defaults
 require("nvim-tree").setup()
 
 local function on_attach(bufnr)
+    -- default mappings
+    api.config.mappings.default_on_attach(bufnr)
     -- custom mappings
-    vim.keymap.set('n', '<s-f>j', "<cmd>Telescope find_files<cr>", { silent = true})
-    vim.keymap.set('n', '<s-f>k', "<cmd>Telescope live_grep<cr>", { silent = true})
-    vim.keymap.set('n', '<s-f>b', "<cmd>Telescope buffers<cr>", { silent = true})
+    vim.keymap.set('n', '<s-f>j', "<cmd>Telescope find_files<cr>", { silent = true, buffer=bufnr})
+    vim.keymap.set('n', '<s-f>k', "<cmd>Telescope live_grep<cr>", { silent = true, buffer=bufnr})
+    vim.keymap.set('n', '<s-f>b', "<cmd>Telescope buffers<cr>", { silent = true, buffer=bufnr})
 end
 
 -- OR setup with some options
