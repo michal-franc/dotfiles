@@ -46,6 +46,9 @@ i3-save-tree --workspace <workspace_nr> > <file>
 This saves layout in `workspace nr` to a `file`. It is a json format. You need to modify this file uncommenting relevant `swallows` params. Don't worry this json file is not fully valid.
 Remove all the comments like split v etc, you only need to keep one element in swallow column without comma - this is important. Othwerwise this wont work.
 
+Don't make the json json like the elements don;t need comma in beetwen.
+All the comments are to be removed and only one swallow element should be kept.
+
 My system requires `json file` and corresponding `script` with the same name.
 
 Example:
