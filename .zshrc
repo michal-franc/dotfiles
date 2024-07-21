@@ -9,7 +9,7 @@ fi
 
 export GOPATH=$HOME/Work/go-src
 export GO111MODULE=on
-export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin:$HOME/tools:$HOME/scripts:$HOME/.tfenv/bin:$GOPATH/bin/mockery:/home/linuxbrew/.linuxbrew/bin
+export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin:$HOME/tools:$HOME/scripts:$HOME/.tfenv/bin:$GOPATH/bin/mockery:/home/linuxbrew/.linuxbrew/bin:/$HOME/Work/goland/bin
 
 export NOTES_DIR=$HOME/notes
 
@@ -32,10 +32,6 @@ bindkey -M viins 'kk' vi-cmd-mode
 
 # disable default taskwarrior alias for t
 unalias t
-
-if [ -x "$(command -v cargo)" ]; then
-  source $HOME/.cargo/env
-fi
 
 alias gs="git status"
 alias gpull="git pull master"
