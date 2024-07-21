@@ -1,0 +1,16 @@
+#!/bin/bash
+
+workspace=$1
+
+if [ -z "$1" ]
+then
+  echo "No workspace number supplied: example 'layout leetcode 2'"
+  exit
+fi
+
+i3-msg "workspace $workspace; append_layout /home/michal-franc/layouts/leetcode.json"
+
+google-chrome-stable --new-window leetcode.com chatgpt.com &
+alacritty --working-directory $HOME/Work/CodingKatas/leetcode &
+alacritty --working-directory $HOME/Work/CodingKatas/leetcode &
+alacritty --working-directory $HOME/Work/CodingKatas/leetcode &
