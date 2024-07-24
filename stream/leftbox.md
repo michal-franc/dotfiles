@@ -1,3 +1,2 @@
-Currently working on RGT
+Coding to build up muscle memory after more architecture oriented role.
 
-my own custom tool to execute tests
