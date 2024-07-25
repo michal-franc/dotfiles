@@ -2,15 +2,25 @@
   <action id="ActivateProjectToolWindow">
     <keyboard-shortcut first-keystroke="shift f" second-keystroke="h" />
   </action>
+  <action id="Console.TableResult.FindInGrid" />
+  <action id="Debug" />
+  <action id="EditSource">
+    <keyboard-shortcut first-keystroke="shift f" second-keystroke="g" />
+  </action>
+  <action id="EditorFocusGutter" />
+  <action id="Find" />
+  <action id="Graph.RouteEdges" />
   <action id="HideSideWindows">
     <keyboard-shortcut first-keystroke="ctrl b" />
     <keyboard-shortcut first-keystroke="shift ctrl b" />
   </action>
+  <action id="Resume" />
   <action id="SearchEverywhere">
     <keyboard-shortcut first-keystroke="f1" />
     <keyboard-shortcut first-keystroke="shift ctrl a" />
     <keyboard-shortcut first-keystroke="shift f" second-keystroke="j" />
   </action>
+  <action id="SpeedSearch" />
   <action id="ToggleDistractionFreeMode">
     <keyboard-shortcut first-keystroke="shift ctrl v" />
   </action>
