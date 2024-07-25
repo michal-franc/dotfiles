@@ -1,3 +1,4 @@
 imap kk <Esc>
+imap <c-f> F
 set clipboard+=unnamed
 set NERDTree
