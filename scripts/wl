@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # script for quick worklog creation
-file=~/Work/mfranc-work/worklog.md
+file=~/Work/notes/worklog.md
 
 if [[ $# -eq 0 ]] ; then
   cat $file | tail

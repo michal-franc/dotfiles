@@ -5,10 +5,10 @@
 tag=$1
 link=$2
 
-dir=~/Work/notes/links-dump
+dir=~/Work/notes/Archive/links-dump
 
 if [ -z "$tag" ] ; then
-  echo list of links in mess:
+  echo list of links:
   echo 
   ls $dir -A1
   exit 0
