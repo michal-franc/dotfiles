@@ -5,6 +5,7 @@ active_tasks="$(task status:pending and +ACTIVE count)"
 
 if [ "$active_tasks" = 0 ]
 then
+  echo "no active tasks"
   exit 1
 fi
 
