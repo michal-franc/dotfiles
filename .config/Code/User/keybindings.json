@@ -42,7 +42,7 @@
     {
         "key": "shift+k shift+i",
         "command": "editor.action.showHover",
-        "when": "editorTextFocus"
+        "when": "editorTextFocus && vim.mode != 'Insert' && vim.mode != 'CommandlineInProgress' && vim.mode != 'SearchInProgressMode'"
     },
     {
         "key": "ctrl+k ctrl+i",
