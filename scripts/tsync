@@ -6,6 +6,7 @@ pushd ~/todo.work
   read -p "are you sure you want to commit these changes? y/n " pick
   if [ "$pick" == "y" ]; then
     git add .task
+    git add .task/taskchampion.sqlite3
     git commit -m 'syncing todo'
     git pull origin master --no-edit
     git push origin master
