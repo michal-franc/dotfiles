@@ -10,7 +10,7 @@ fi
 
 i3-msg "workspace $workspace; append_layout /home/michal-franc/layouts/leetcode.json"
 
-google-chrome-stable --new-window leetcode.com chatgpt.com &
+google-chrome-stable --new-window leetcode.com chatgpt.com "https://www.techinterviewhandbook.org/grind75?weeks=26&hours=8" https://neetcode.io/roadmap &
 alacritty --working-directory $HOME/Work/CodingKatas/leetcode &
 alacritty --working-directory $HOME/Work/CodingKatas/leetcode &
 alacritty --working-directory $HOME/Work/CodingKatas/leetcode &
