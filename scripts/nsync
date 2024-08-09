@@ -1,0 +1,13 @@
+#!/bin/bash
+# Script for syncing my todo list
+# git add -> commit -> pull -> auto merge and push
+pushd ~/Work/notes
+  git status
+  read -p "are you sure you want to commit these changes? y/n " pick
+  if [ "$pick" == "y" ]; then
+    git add -A
+    git commit -m 'syncing notes'
+    git pull origin master --no-edit
+    git push origin master
+  fi
+popd
