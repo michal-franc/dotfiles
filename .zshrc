@@ -20,7 +20,7 @@ fi
 export VISUAL='nvim'
 export EDITOR='nvim'
 
-plugins=(git gitfast zoxide aws common-aliases docker extract sudo taskwarrior history encode64 nmap terraform vault) 
+plugins=(git gitfast zoxide aws common-aliases docker extract sudo taskwarrior history encode64 nmap terraform) 
 source $ZSH/oh-my-zsh.sh
 
 # sudo command overrides
