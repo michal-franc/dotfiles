@@ -202,3 +202,6 @@ https://github.com/kdheepak/taskwarrior-tui/
 
 #pgrep
 pip install pgrep
+
+# Problem with left / right monitor orientation on vbox guest machine
+- change in vbox - video input screent - 1 to host 2monitor, 2 monitor to host1 monitor - I HAVE NO IDEA WHY THIS WORKS
