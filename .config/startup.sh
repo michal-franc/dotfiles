@@ -1,7 +1,7 @@
 #!/bin/bash
 
-xrandr --output Virtual1 --primary --auto --brightness 1 --rotate normal
-xrandr --output Virtual2 --auto --left-of Virtual1 --brightness 1 --rotate normal 
+xrandr --output Virtual2 --primary --auto --brightness 1 --rotate normal 
+# xrandr --output Virtual1 --auto --right-of Virtual2 --brightness 1 --rotate normal
 
 echo monitors set
 
