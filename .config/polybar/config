@@ -57,7 +57,7 @@ font-2 = siji:pixelsize=10;1
 font-3 = 3270Medium Nerd Font:style=Medium
 
 
-modules-right = security gh snoozeslack gopomstats gopomtime battery
+modules-right = memory security gh snoozeslack gopomstats gopomtime battery
 modules-left = bspwm i3
 modules-center = tasks activecontext activetask donetoday 
 
@@ -221,7 +221,7 @@ interval = 10
 format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
 format-underline = #4bffdc
-label = mem - %percentage_used%%
+label = RAM %percentage_used%%
 
 [module/wlan]
 type = internal/network
