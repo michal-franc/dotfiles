@@ -25,7 +25,7 @@ urgency.due.coefficient                     =12.0 # overdue or near due date
 urgency.blocking.coefficient                =8.0 # blocking other tasks
 urgency.uda.priority.H.coefficient          =6.0 # high Priority
 urgency.uda.priority.M.coefficient          =3.9 # medium Priority
-urgency.uda.priority.L.coefficient          =1.8 # low Priority
+urgency.uda.priority.L.coefficient          =-10.0 # low Priority
 urgency.scheduled.coefficient               =5.0 # scheduled tasks
 urgency.age.coefficient                     =2.0 # coefficient for age
 urgency.annotations.coefficient             =1.0 # has annotations
@@ -60,6 +60,7 @@ report.completeddescription.sort=project
 
 include ~/Work/notes/projects/coeff.md
 
+report.list.sort=urgency-
 
 verbose=blank,header,footnote,label,new-id,new-uuid,affected,edit,special,project,sync,ovveride,unwait
 news.version=3.0.2

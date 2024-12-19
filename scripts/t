@@ -12,7 +12,7 @@ if [ "$context" = "+" ] || [ "$context" = "+home" ]; then
 fi
 
 if [ "$dir" = "$USER" ]; then
-  task $context $@
+  task '(urgency > 0)' $context $@
   exit
 fi
 
@@ -25,8 +25,8 @@ if [ "$dir" = "todo.work" ]; then
     context="+$(head -n 1 context.md )"
   fi
 
-  task pro:$baseproject $context $@
+  task '(urgency > 0)' pro:$baseproject $context $@
   exit
 fi
 
-task pro:$dir $context  $@
+task '(urgency > 0)' pro:$dir $context  $@

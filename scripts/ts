@@ -21,5 +21,5 @@ then
   exit
 fi
 
+# check if task is active  already then stop
 task $1 start
-
