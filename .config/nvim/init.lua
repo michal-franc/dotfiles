@@ -11,7 +11,6 @@ local api = require "nvim-tree.api"
 
 -- empty setup using defaults
 require("nvim-tree").setup()
-require("lspconfig").pyright.setup{}
 
 local function on_attach(bufnr)
     -- default mappings
@@ -101,13 +100,6 @@ cmp.setup.cmdline(':', {
   }),
   matching = { disallow_symbol_nonprefix_matching = false }
 })
-
--- Set up lspconfig.
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
--- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
-require('lspconfig')['pyright'].setup {
-  capabilities = capabilities
-}
 
 --telescope config
 local telescope = require('telescope')
