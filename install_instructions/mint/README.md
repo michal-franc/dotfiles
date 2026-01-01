@@ -93,9 +93,10 @@ connect <device>
 Use SDkman to manage java
 https://sdkman.io/install
 
+IMPORTA NVIDIA GTX 670 -> nvidia-470
 NVIDIA DRIVErs
 sudo add-apt-repository ppa:graphics-drivers
-sudo apt-get install nvidia-xxx
+sudo apt-get install nvidia-470
 
 installing GPG key from 1pass or last pass to sign commits
 copy paste key to /tmp
