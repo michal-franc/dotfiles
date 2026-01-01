@@ -40,4 +40,11 @@
         "jupyter-notebook": "left"
     },
     "window.zoomLevel": 1,
+    "spellright.groupDictionaries": false,
+    "spellright.configurationUpdate": false,
+    "spellright.notificationClass": "hint",
+    "files.exclude": {
+        "**/*.import": true,
+        "**/*.uid": true
+    },
 }
