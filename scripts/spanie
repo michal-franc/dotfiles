@@ -1,2 +1,2 @@
 #!/bin/bash
-systemctl suspend
+sudo systemctl suspend

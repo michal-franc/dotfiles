@@ -12,7 +12,7 @@ if [ "$context" = "+" ] || [ "$context" = "+home" ]; then
 fi
 
 if [ "$dir" = "$USER" ]; then
-  task '(urgency > 0)' $context $@
+  task $context $@
   exit
 fi
 
