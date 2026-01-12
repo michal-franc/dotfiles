@@ -12,6 +12,7 @@ node_modules/
 !*.zshrc
 !*.xinitrc
 !*.taskrc
+!*.tmux.conf
 !*recurrent.sh
 !*.muttrc
 !README.md

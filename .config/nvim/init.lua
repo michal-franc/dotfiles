@@ -35,7 +35,10 @@ require("nvim-tree").setup({
   filters = {
     dotfiles = false,
   },
-
+  filesystem_watchers = {
+    enable = true,
+    debounce_delay = 50,
+  },
   on_attach = on_attach,
 })
 
