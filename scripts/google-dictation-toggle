@@ -1,0 +1,19 @@
+#!/bin/bash
+
+PIDFILE="/tmp/google-dictation.pid"
+
+if [ -f "$PIDFILE" ] && kill -0 $(cat "$PIDFILE") 2>/dev/null; then
+    # Kill the google-dictation process and its pipeline
+    pkill -P $(cat "$PIDFILE") 2>/dev/null
+    kill $(cat "$PIDFILE") 2>/dev/null
+    rm "$PIDFILE"
+    notify-send "Dictation" "Stopped" -t 1000
+else
+    # Kill any orphaned google-dictation processes
+    pkill -f "python.*google-dictation" 2>/dev/null
+
+    # Run dictation (types directly via xdotool)
+    setsid ~/scripts/google-dictation 2>/tmp/google-dictation.log &
+    echo $! > "$PIDFILE"
+    notify-send "Dictation" "Listening..." -t 1000
+fi

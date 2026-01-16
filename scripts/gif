@@ -1,0 +1,73 @@
+#!/bin/bash
+# Record a screen region as GIF
+# Usage: gif [output.gif] [duration_seconds]
+#
+# Examples:
+#   gif                    # Records to ./recording.gif, press q to stop
+#   gif demo.gif           # Records to ./demo.gif, press q to stop
+#   gif demo.gif 10        # Records for 10 seconds
+
+OUTPUT="${1:-recording.gif}"
+DURATION="${2:-}"
+FPS=15
+TMP_VIDEO="/tmp/gif_recording_$$.mp4"
+
+# Ensure output has .gif extension
+if [[ ! "$OUTPUT" == *.gif ]]; then
+    OUTPUT="${OUTPUT}.gif"
+fi
+
+echo "Select region to record..."
+read X Y W H <<< "$(slop -f "%x %y %w %h")"
+
+if [ -z "$X" ]; then
+    echo "Selection cancelled"
+    exit 1
+fi
+
+# Make dimensions even (required by some codecs)
+W=$((W / 2 * 2))
+H=$((H / 2 * 2))
+
+echo "Recording ${W}x${H} at +${X},${Y}"
+echo "Press 'q' to stop recording"
+
+# Build ffmpeg command
+FFMPEG_CMD="ffmpeg -f x11grab -framerate $FPS -video_size ${W}x${H} -i :0.0+${X},${Y}"
+
+if [ -n "$DURATION" ]; then
+    FFMPEG_CMD="$FFMPEG_CMD -t $DURATION"
+    echo "Recording for $DURATION seconds..."
+fi
+
+# Record to temporary video file
+$FFMPEG_CMD -c:v libx264 -preset ultrafast -crf 18 "$TMP_VIDEO"
+
+if [ ! -f "$TMP_VIDEO" ]; then
+    echo "Recording failed"
+    exit 1
+fi
+
+echo "Converting to GIF..."
+
+# Check if gifski is available (better quality)
+if command -v gifski &> /dev/null; then
+    gifski --fps $FPS --quality 90 -o "$OUTPUT" "$TMP_VIDEO"
+else
+    # Fallback to ffmpeg GIF conversion with palette for better quality
+    PALETTE="/tmp/gif_palette_$$.png"
+    ffmpeg -i "$TMP_VIDEO" -vf "fps=$FPS,scale=${W}:-1:flags=lanczos,palettegen=stats_mode=diff" -y "$PALETTE"
+    ffmpeg -i "$TMP_VIDEO" -i "$PALETTE" -lavfi "fps=$FPS,scale=${W}:-1:flags=lanczos[x];[x][1:v]paletteuse=dither=bayer:bayer_scale=5:diff_mode=rectangle" -y "$OUTPUT"
+    rm -f "$PALETTE"
+fi
+
+# Cleanup
+rm -f "$TMP_VIDEO"
+
+if [ -f "$OUTPUT" ]; then
+    SIZE=$(du -h "$OUTPUT" | cut -f1)
+    echo "✓ Saved to $OUTPUT ($SIZE)"
+else
+    echo "Failed to create GIF"
+    exit 1
+fi

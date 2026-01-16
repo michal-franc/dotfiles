@@ -1,0 +1,148 @@
+#!/home/mfranc/.local/share/mise/installs/python/3.14.0/bin/python3
+
+import os
+import sys
+import queue
+import struct
+import time
+import subprocess
+import pyaudio
+from google.cloud import speech
+
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.path.expanduser(
+    "~/.config/gcloud/speech-credentials.json"
+)
+
+# Audio config
+RATE = 16000
+CHUNK = int(RATE / 10)  # 100ms chunks
+SILENCE_TIMEOUT = 300  # seconds of silence before pausing
+ENERGY_THRESHOLD = 300  # audio energy threshold for voice detection
+
+audio_queue = queue.Queue()
+last_speech_time = time.time()
+is_streaming = False
+
+STATE_FILE = "/tmp/google-dictation.state"
+
+def set_state(state):
+    """Write current state to file for polybar detection."""
+    with open(STATE_FILE, "w") as f:
+        f.write(state)
+
+def type_text(text):
+    """Type text using xdotool."""
+    if text:
+        subprocess.run(["xdotool", "type", "--clearmodifiers", "--", text], check=False)
+
+def get_audio_energy(data):
+    """Calculate RMS energy of audio chunk."""
+    samples = struct.unpack(f"{len(data)//2}h", data)
+    return (sum(s * s for s in samples) / len(samples)) ** 0.5
+
+def audio_callback(in_data, frame_count, time_info, status):
+    audio_queue.put(in_data)
+    return None, pyaudio.paContinue
+
+def generate_audio():
+    global last_speech_time, is_streaming
+    while is_streaming:
+        try:
+            chunk = audio_queue.get(timeout=0.5)
+            if chunk is None:
+                return
+            yield speech.StreamingRecognizeRequest(audio_content=chunk)
+        except queue.Empty:
+            if time.time() - last_speech_time > SILENCE_TIMEOUT:
+                return
+
+def wait_for_voice(pa, stream):
+    """Wait until voice activity is detected."""
+    set_state("paused")
+    print("Paused (silence). Waiting for voice...", file=sys.stderr)
+    while True:
+        try:
+            chunk = audio_queue.get(timeout=0.5)
+            energy = get_audio_energy(chunk)
+            if energy > ENERGY_THRESHOLD:
+                print("Voice detected, resuming...", file=sys.stderr)
+                return True
+        except queue.Empty:
+            continue
+        except KeyboardInterrupt:
+            return False
+
+def run_recognition(client, streaming_config):
+    global last_speech_time, is_streaming
+    is_streaming = True
+    last_speech_time = time.time()
+    set_state("listening")
+
+    # Clear any buffered audio
+    while not audio_queue.empty():
+        try:
+            audio_queue.get_nowait()
+        except queue.Empty:
+            break
+
+    responses = client.streaming_recognize(streaming_config, generate_audio())
+
+    for response in responses:
+        for result in response.results:
+            if result.is_final:
+                last_speech_time = time.time()
+                transcript = result.alternatives[0].transcript
+                type_text(transcript)
+            elif result.alternatives:
+                last_speech_time = time.time()
+
+    is_streaming = False
+
+def main():
+    client = speech.SpeechClient()
+
+    config = speech.RecognitionConfig(
+        encoding=speech.RecognitionConfig.AudioEncoding.LINEAR16,
+        sample_rate_hertz=RATE,
+        language_code="en-US",
+        enable_automatic_punctuation=True,
+    )
+    streaming_config = speech.StreamingRecognitionConfig(
+        config=config,
+        interim_results=True,
+    )
+
+    pa = pyaudio.PyAudio()
+    stream = pa.open(
+        format=pyaudio.paInt16,
+        channels=1,
+        rate=RATE,
+        input=True,
+        frames_per_buffer=CHUNK,
+        stream_callback=audio_callback,
+    )
+
+    print("Listening... (Ctrl+C to stop)", file=sys.stderr)
+    stream.start_stream()
+
+    try:
+        while True:
+            try:
+                run_recognition(client, streaming_config)
+            except Exception as e:
+                print(f"Recognition error: {e}", file=sys.stderr)
+                time.sleep(1)
+                continue
+            if not wait_for_voice(pa, stream):
+                break
+    except KeyboardInterrupt:
+        pass
+    finally:
+        if os.path.exists(STATE_FILE):
+            os.remove(STATE_FILE)
+        stream.stop_stream()
+        stream.close()
+        pa.terminate()
+
+if __name__ == "__main__":
+    main()

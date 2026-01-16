@@ -1,0 +1,4 @@
+#!/bin/bash
+read X Y W H <<< "$(slop -f "%x %y %w %h")"
+
+ffmpeg -f x11grab -video_size ${W}x${H} -i :0.0+${X},${Y} -vcodec h264 output.mp4
