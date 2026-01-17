@@ -1,0 +1,17 @@
+#!/bin/bash
+
+PIDFILE="/tmp/deepgram-dictation.pid"
+
+if [ -f "$PIDFILE" ] && kill -0 $(cat "$PIDFILE") 2>/dev/null; then
+    # Kill the deepgram-dictation process
+    kill $(cat "$PIDFILE") 2>/dev/null
+    notify-send "Dictation" "Stopped" -t 1000
+else
+    # Kill any orphaned deepgram-dictation processes
+    pkill -f "python.*deepgram-dictation" 2>/dev/null
+    rm -f "$PIDFILE"
+
+    # Run dictation (script writes its own PID file)
+    setsid ~/scripts/deepgram-dictation 2>/tmp/deepgram-dictation.log &
+    notify-send "Dictation" "Listening..." -t 1000
+fi

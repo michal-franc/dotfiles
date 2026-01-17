@@ -1,0 +1,133 @@
+#!/home/mfranc/.local/share/mise/installs/python/3.14.0/bin/python3
+
+import os
+import sys
+import signal
+
+API_KEY_FILE = "/tmp/deepgram_api_key"
+PIDFILE = "/tmp/deepgram-dictation.pid"
+
+# Write PID file
+with open(PIDFILE, 'w') as f:
+    f.write(str(os.getpid()))
+
+def cleanup_and_exit(signum=None, frame=None):
+    try:
+        os.remove(PIDFILE)
+    except:
+        pass
+    sys.exit(0)
+
+signal.signal(signal.SIGTERM, cleanup_and_exit)
+signal.signal(signal.SIGINT, cleanup_and_exit)
+
+try:
+    with open(API_KEY_FILE) as f:
+        api_key = f.read().strip()
+        os.environ["DEEPGRAM_API_KEY"] = api_key
+except FileNotFoundError:
+    print(f"Error: API key file not found at {API_KEY_FILE}", file=sys.stderr)
+    sys.exit(1)
+
+if not api_key:
+    print("Error: DEEPGRAM_API_KEY is empty", file=sys.stderr)
+    sys.exit(1)
+
+import time
+import threading
+import subprocess
+import pyaudio
+from deepgram import DeepgramClient
+from deepgram.core.events import EventType
+
+def type_text(text):
+    """Type text into active window using xdotool"""
+    subprocess.run(['xdotool', 'type', '--', text + ' '], check=False)
+
+FORMAT = pyaudio.paInt16
+CHANNELS = 1
+RATE = 16000
+CHUNK = 8000
+SILENCE_TIMEOUT = 10.0  # seconds of silence before auto-stop
+
+def main():
+    client = DeepgramClient()
+    last_speech_time = time.time()
+    has_received_speech = False
+    running = True
+
+    try:
+        with client.listen.v1.connect(
+            model="nova-2",
+            language="en-US",
+            smart_format="true",
+            punctuate="true",
+            interim_results="false",
+            endpointing="300",
+            encoding="linear16",
+            sample_rate=str(RATE),
+        ) as connection:
+
+            def on_message(message):
+                nonlocal last_speech_time, has_received_speech
+                msg_type = getattr(message, 'type', '')
+
+                # Handle transcript results
+                if hasattr(message, 'channel'):
+                    alternatives = message.channel.alternatives
+                    if alternatives and len(alternatives) > 0:
+                        transcript = alternatives[0].transcript
+                        if transcript:
+                            last_speech_time = time.time()
+                            has_received_speech = True
+                            type_text(transcript)
+
+                # Handle speech started event
+                if msg_type == 'SpeechStarted':
+                    last_speech_time = time.time()
+                    has_received_speech = True
+
+            def on_error(error):
+                print(f"\nError: {error}", file=sys.stderr)
+
+            connection.on(EventType.MESSAGE, on_message)
+            connection.on(EventType.ERROR, on_error)
+            connection.on(EventType.OPEN, lambda _: print("Listening... (auto-stops after silence)", file=sys.stderr))
+            connection.on(EventType.CLOSE, lambda _: print("\n", file=sys.stderr))
+
+            # Start listening in background thread
+            listen_thread = threading.Thread(target=connection.start_listening, daemon=True)
+            listen_thread.start()
+
+            # Open microphone and stream audio
+            audio = pyaudio.PyAudio()
+            stream = audio.open(
+                format=FORMAT,
+                channels=CHANNELS,
+                rate=RATE,
+                input=True,
+                frames_per_buffer=CHUNK,
+            )
+
+            try:
+                while running:
+                    data = stream.read(CHUNK, exception_on_overflow=False)
+                    connection.send_media(data)
+
+                    # Check for silence timeout (only after receiving some speech)
+                    if has_received_speech and (time.time() - last_speech_time) > SILENCE_TIMEOUT:
+                        running = False
+            except KeyboardInterrupt:
+                pass
+            finally:
+                stream.stop_stream()
+                stream.close()
+                audio.terminate()
+                cleanup_and_exit()
+
+    except Exception as e:
+        print(f"Error: {e}", file=sys.stderr)
+        cleanup_and_exit()
+
+if __name__ == "__main__":
+    main()
