@@ -40,6 +40,12 @@ Run install_base.sh. It does.
 - upgrades the base kernel, distro
 - installs xclip, git, zsh, vim, i3, termite, rofi, maim, zoom, chrome, slack, ohmyzsh and more
 
+### Papirus Icon Theme
+Install Papirus for rofi icons (used by task-menu scripts):
+```bash
+sudo apt install papirus-icon-theme
+```
+
 Paste the key from clipboard to github.
 
 ### Configure GIT
@@ -89,6 +95,20 @@ connect <device>
 
 #### Down Below spam :)
 
+### Node.js / fnm
+Fast Node Manager - modern alternative to nvm
+https://github.com/Schniz/fnm
+
+```bash
+curl -fsSL https://fnm.vercel.app/install | bash
+# Add to your shell config (.zshrc):
+# eval "$(fnm env --use-on-cd)"
+source ~/.zshrc
+
+fnm install --lts
+fnm use lts-latest
+```
+
 ### JAVA
 Use SDkman to manage java
 https://sdkman.io/install
@@ -98,14 +118,48 @@ NVIDIA DRIVErs
 sudo add-apt-repository ppa:graphics-drivers
 sudo apt-get install nvidia-470
 
-installing GPG key from 1pass or last pass to sign commits
-copy paste key to /tmp
-`gpg --import key` -> passphrase should be stored somewhere
-git config --global commit.gpgsign true
-git config --global user.signingkey <fingerprint>
-git config --global user.name ""
-git config --global user.email ""
-git config --global core.editor vim
+### GPG Key Setup for Commit Signing
+
+1. **Export your GPG key from 1Password/LastPass** and save to `/tmp/gpg-key.asc`
+
+2. **Import the key:**
+   ```bash
+   gpg --import /tmp/gpg-key.asc
+   # Enter passphrase when prompted (stored in password manager)
+   rm /tmp/gpg-key.asc  # Clean up
+   ```
+
+3. **Find your key ID:**
+   ```bash
+   gpg --list-secret-keys --keyid-format=long
+   # Look for line like: sec   ed25519/E589B203D90A0978
+   # The key ID is after the slash: E589B203D90A0978
+   ```
+
+4. **Configure Git to use GPG signing:**
+   ```bash
+   git config --global user.signingkey <KEY_ID>
+   git config --global commit.gpgsign true
+   git config --global user.name "Michal Franc"
+   git config --global user.email "lam.michal.franc@gmail.com"
+   git config --global core.editor vim
+   ```
+
+5. **Add public key to GitHub:**
+   ```bash
+   gpg --armor --export <KEY_ID> | xclip -selection clipboard
+   ```
+   Then paste in GitHub → Settings → SSH and GPG keys → New GPG key
+
+6. **Test signing works:**
+   ```bash
+   echo "test" | gpg --clearsign
+   # Should prompt for passphrase and output signed message
+   ```
+
+**Troubleshooting:**
+- If GPG hangs, you may need: `export GPG_TTY=$(tty)`
+- Add to `.zshrc` if needed permanently
 
 #instlaling iptables
 sudo apt-get install iptables-persistent
@@ -206,3 +260,53 @@ pip install pgrep
 
 # Problem with left / right monitor orientation on vbox guest machine
 - change in vbox - video input screent - 1 to host 2monitor, 2 monitor to host1 monitor - I HAVE NO IDEA WHY THIS WORKS
+
+### Nerd Dictation (Voice to Text)
+Offline voice-to-text using Vosk speech recognition.
+
+1. **Install dependencies:**
+   ```bash
+   sudo apt-get install python3-pip portaudio19-dev python3-pyaudio xdotool
+   ```
+
+2. **Clone and install nerd-dictation:**
+   ```bash
+   git clone https://github.com/ideasman42/nerd-dictation.git ~/tools/nerd-dictation
+   pip3 install vosk
+   ```
+
+3. **Download Vosk model:**
+   ```bash
+   mkdir -p ~/.config/nerd-dictation
+   cd ~/.config/nerd-dictation
+   # Small English model (~50MB) - faster, less accurate
+   wget https://alphacephei.com/vosk/models/vosk-model-small-en-us-0.15.zip
+   unzip vosk-model-small-en-us-0.15.zip
+   mv vosk-model-small-en-us-0.15 model
+
+   # OR Large English model (~1.8GB) - slower, more accurate
+   # wget https://alphacephei.com/vosk/models/vosk-model-en-us-0.22.zip
+   # unzip vosk-model-en-us-0.22.zip
+   # mv vosk-model-en-us-0.22 model
+   ```
+
+4. **Usage:**
+   ```bash
+   # Start dictation
+   ~/tools/nerd-dictation/nerd-dictation begin --vosk-model-dir ~/.config/nerd-dictation/model
+
+   # Stop dictation
+   ~/tools/nerd-dictation/nerd-dictation end
+   ```
+
+5. **Optional - add aliases to .zshrc:**
+   ```bash
+   alias dictate='~/tools/nerd-dictation/nerd-dictation begin --vosk-model-dir ~/.config/nerd-dictation/model'
+   alias dictate-stop='~/tools/nerd-dictation/nerd-dictation end'
+   ```
+
+6. **Optional - bind to i3 keybindings in ~/.config/i3/config:**
+   ```
+   bindsym $mod+d exec ~/tools/nerd-dictation/nerd-dictation begin --vosk-model-dir ~/.config/nerd-dictation/model
+   bindsym $mod+Shift+d exec ~/tools/nerd-dictation/nerd-dictation end
+   ```
