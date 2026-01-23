@@ -3,19 +3,43 @@
 import os
 import sys
 import signal
+import argparse
+
+# Parse arguments
+parser = argparse.ArgumentParser()
+parser.add_argument('--claude', action='store_true', help='Send transcript to Claude CLI')
+args = parser.parse_args()
+
+MODE = 'claude' if args.claude else 'type'
 
 API_KEY_FILE = "/tmp/deepgram_api_key"
 PIDFILE = "/tmp/deepgram-dictation.pid"
+
+# Accumulated transcript for claude mode
+transcript_buffer = []
+cleanup_done = False
 
 # Write PID file
 with open(PIDFILE, 'w') as f:
     f.write(str(os.getpid()))
 
 def cleanup_and_exit(signum=None, frame=None):
+    global cleanup_done
+    if cleanup_done:
+        return
+    cleanup_done = True
+
     try:
         os.remove(PIDFILE)
     except:
         pass
+
+    # In claude mode, send accumulated transcript to claude in a terminal
+    if MODE == 'claude' and transcript_buffer:
+        full_text = ' '.join(transcript_buffer)
+        import subprocess
+        subprocess.Popen(['alacritty', '-e', 'claude', full_text])
+
     sys.exit(0)
 
 signal.signal(signal.SIGTERM, cleanup_and_exit)
@@ -58,7 +82,7 @@ def main():
 
     try:
         with client.listen.v1.connect(
-            model="nova-2",
+            model="nova-3",
             language="en-US",
             smart_format="true",
             punctuate="true",
@@ -80,7 +104,10 @@ def main():
                         if transcript:
                             last_speech_time = time.time()
                             has_received_speech = True
-                            type_text(transcript)
+                            if MODE == 'type':
+                                type_text(transcript)
+                            else:
+                                transcript_buffer.append(transcript)
 
                 # Handle speech started event
                 if msg_type == 'SpeechStarted':

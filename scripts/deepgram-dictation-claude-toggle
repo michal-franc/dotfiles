@@ -1,0 +1,17 @@
+#!/bin/bash
+
+PIDFILE="/tmp/deepgram-dictation.pid"
+
+if [ -f "$PIDFILE" ] && kill -0 $(cat "$PIDFILE") 2>/dev/null; then
+    # Kill the deepgram-dictation process
+    kill $(cat "$PIDFILE") 2>/dev/null
+    notify-send "Claude Dictation" "Stopped" -t 1000
+else
+    # Kill any orphaned deepgram-dictation processes
+    pkill -f "python.*deepgram-dictation" 2>/dev/null
+    rm -f "$PIDFILE"
+
+    # Run dictation in claude mode (script writes its own PID file)
+    setsid ~/scripts/deepgram-dictation --claude 2>/tmp/deepgram-dictation.log &
+    notify-send "Claude Dictation" "Listening... (will send to Claude)" -t 1000
+fi
