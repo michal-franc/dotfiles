@@ -28,6 +28,10 @@ node_modules/
 !i3-layouts
 !install_instructions
 !layouts
+!scripts
+!scripts/*
+!scripts/cron
+!scripts/cron/*
 
 # and not this stuff from .config
 !polybar
