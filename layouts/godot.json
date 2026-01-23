@@ -1,0 +1,76 @@
+{
+    "border": "pixel",
+    "floating": "auto_off",
+    "layout": "splith",
+    "percent": 0.65,
+    "type": "con",
+    "nodes": [
+        {
+            "border": "pixel",
+            "current_border_width": 1,
+            "floating": "auto_off",
+            "geometry": {
+               "height": 1080,
+               "width": 1920,
+               "x": 0,
+               "y": 0
+            },
+            "name": "Godot Engine",
+            "percent": 1,
+            "swallows": [
+               {
+                 "class": "^Godot$"
+               }
+            ],
+            "type": "con"
+        }
+    ]
+}
+
+{
+    "border": "pixel",
+    "floating": "auto_off",
+    "layout": "splitv",
+    "percent": 0.35,
+    "type": "con",
+    "nodes": [
+        {
+            "border": "pixel",
+            "current_border_width": 1,
+            "floating": "auto_off",
+            "geometry": {
+               "height": 720,
+               "width": 640,
+               "x": 0,
+               "y": 0
+            },
+            "name": "Game Window",
+            "percent": 0.75,
+            "swallows": [
+               {
+                 "class": "^Godot_Engine$"
+               }
+            ],
+            "type": "con"
+        },
+        {
+            "border": "pixel",
+            "current_border_width": 1,
+            "floating": "auto_off",
+            "geometry": {
+               "height": 360,
+               "width": 640,
+               "x": 0,
+               "y": 0
+            },
+            "name": "Debug Terminal",
+            "percent": 0.25,
+            "swallows": [
+               {
+                "class": "^Termite$"
+               }
+            ],
+            "type": "con"
+        }
+    ]
+}

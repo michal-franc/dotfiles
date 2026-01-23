@@ -1,0 +1,24 @@
+#!/bin/bash
+
+function usage() {
+  echo godot
+  echo "usage: godot f w"
+  echo "f -> project folder path"
+  echo "w -> workspace number"
+  echo example: godot ~/Projects/MyGame 5
+  echo
+  echo Opens up a layout with Godot editor and dedicated game capture window
+}
+
+if [ -z "$1" ] || [ -z "$2" ]; then
+  usage
+  exit
+fi
+
+workspace=$2
+folder=$1
+
+i3-msg "workspace $workspace; append_layout /home/mfranc/layouts/godot.json"
+
+godot --path "$folder" &
+termite -d "$folder" &
