@@ -27,6 +27,8 @@ Plug 'hrsh7th/nvim-compe'
 " dependencies
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
+" Plug 'greggh/claude-code.nvim'  " Disabled - using symlinked dev version instead
+
 " telescope
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
@@ -39,6 +41,7 @@ Plug 'rust-lang/rust.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'nvim-tree/nvim-tree.lua'
 Plug 'nvim-tree/nvim-web-devicons'
+Plug 'MeanderingProgrammer/render-markdown.nvim'
 
 " nice glyphs
 " Plug 'ryanoasis/vim-devicons'

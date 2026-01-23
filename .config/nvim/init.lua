@@ -121,3 +121,28 @@ telescope.setup {
     }
   }
 }
+
+require('render-markdown').setup({})
+
+require("claude-code").setup({
+  window = {
+    position = "float",
+    float = {
+      width = "90%",      -- Take up 90% of the editor width
+      height = "90%",     -- Take up 90% of the editor height
+      row = "center",     -- Center vertically
+      col = "center",     -- Center horizontally
+      relative = "editor",
+      border = "double",  -- Use double border style
+    },
+  },
+  -- Inline editing: prompt dialog with hidden terminal
+  inline = {
+    enable = true,
+    keymaps = {
+      prompt = '<A-c>i',              -- Alt+c then i: Open prompt dialog
+      toggle_terminal = '<A-c>t',     -- Alt+c then t: Toggle terminal visibility
+    },
+  },
+})
+
