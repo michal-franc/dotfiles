@@ -64,3 +64,15 @@ report.list.sort=urgency-
 
 verbose=blank,header,footnote,label,new-id,new-uuid,affected,edit,special,project,sync,ovveride,unwait
 news.version=3.0.2
+
+# Parking system aliases
+alias.park=modify wait:someday
+alias.unpark=modify wait:
+alias.parked=status:waiting list
+
+# Parked tasks report
+report.parked.description=Parked/someday tasks
+report.parked.columns=id,project,description
+report.parked.labels=ID,Project,Description
+report.parked.filter=status:waiting
+report.parked.sort=project+
