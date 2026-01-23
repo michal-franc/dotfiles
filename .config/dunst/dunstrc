@@ -69,8 +69,11 @@ hide_duplicates_count = yes
 # the top and down respectevly.
 # The width can be negative.  In this case the actual width is the
 # screen width minus the width defined in within the geometry option.
-#geometry = "250x50-40+40"
-geometry = "300x100-1024+30"
+# New dunst 1.9+ positioning
+origin = top-center
+offset = 0x30
+width = 300
+height = 100
 
 # Shrink window if it's smaller than the width.  Will be ignored if
 # width is 0.
