@@ -40,3 +40,5 @@ node_modules/
 !fontcoding
 !Code/User/*.json
 !Code/*.sh
+!rofi
+!dunst

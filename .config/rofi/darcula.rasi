@@ -1,0 +1,103 @@
+/*
+ * ROFI Darcula Theme
+ *
+ * Based on JetBrains Darcula color scheme
+ *
+ */
+
+
+* {
+  black:      #000000;
+  red:        #FF6B68;
+  green:      #6A8759;
+  yellow:     #FFC66D;
+  blue:       #6897BB;
+  purple:     #9876AA;
+  orange:     #CC7832;
+  cyan:       #299999;
+  emphasis:   #214283;
+  text:       #A9B7C6;
+  text-alt:   #808080;
+  fg:         #A9B7C6;
+  bg:         #2B2B2B;
+
+  spacing: 0;
+  background-color: transparent;
+
+  font: "0xProto Nerd Font Mono 12";
+  text-color: @text;
+}
+
+window {
+  transparency: "real";
+  width: 1100px;
+  location: center;
+  anchor: center;
+  background-color: #2B2B2Bee;
+  border: 2px;
+  border-color: #3C3F41;
+  border-radius: 8px;
+}
+
+mainbox {
+  padding: 20px;
+}
+
+inputbar {
+  margin: 0px 0px 20px 0px;
+  children: [prompt, textbox-prompt-colon, entry, case-indicator];
+}
+
+prompt {
+  text-color: @orange;
+}
+
+textbox-prompt-colon {
+  expand: false;
+  str: ":";
+  text-color: @text-alt;
+}
+
+entry {
+  margin: 0px 10px;
+}
+
+listview {
+  spacing: 5px;
+  dynamic: true;
+  scrollbar: false;
+}
+
+element {
+  padding: 5px;
+  text-color: @text-alt;
+  highlight: bold #6A8759;
+  border-radius: 3px;
+}
+
+element selected {
+  background-color: @emphasis;
+  text-color: @text;
+}
+
+element urgent, element selected urgent {
+  text-color: @red;
+}
+
+element active, element selected active {
+  text-color: @purple;
+}
+
+message {
+  padding: 5px;
+  border-radius: 3px;
+  background-color: @emphasis;
+  border: 1px;
+  border-color: @orange;
+}
+
+button selected {
+  padding: 5px;
+  border-radius: 3px;
+  background-color: @emphasis;
+}
