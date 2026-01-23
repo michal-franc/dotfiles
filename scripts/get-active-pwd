@@ -1,0 +1,26 @@
+#!/bin/bash
+# ~/.local/bin/get-active-pwd
+
+# Get the PID of the focused window
+FOCUSED_PID=$(xdotool getwindowfocus getwindowpid)
+
+# Walk up process tree to find shell/terminal
+get_pwd_from_pid() {
+    local pid=$1
+    
+    # Try to get cwd directly
+    if [ -d "/proc/$pid/cwd" ]; then
+        readlink "/proc/$pid/cwd"
+        return 0
+    fi
+    
+    # If that fails, try children
+    for child in $(pgrep -P "$pid"); do
+        get_pwd_from_pid "$child" && return 0
+    done
+    
+    return 1
+}
+
+PWD=$(get_pwd_from_pid "$FOCUSED_PID")
+echo "${PWD:-$HOME}"
