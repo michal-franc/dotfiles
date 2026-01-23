@@ -1,8 +1,6 @@
 export ZSH=$HOME/.oh-my-zsh
 export GOPATH=$HOME/go
 
-
-
 if [ -f ~/.gvm/scripts/gvm ]; then
   source ~/.gvm/scripts/gvm
 fi
@@ -78,7 +76,7 @@ export PATH="$PATH:$HOME/.rvm/bin"
 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-eval "$(mise activate)"
+eval "$(/home/mfranc/.local/bin/mise activate)"
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/home/michal-franc/Work/otee/google-cloud-sdk/path.zsh.inc' ]; then . '/home/michal-franc/Work/otee/google-cloud-sdk/path.zsh.inc'; fi
@@ -88,3 +86,17 @@ if [ -f '/home/michal-franc/Work/otee/google-cloud-sdk/completion.zsh.inc' ]; th
 
 # add Pulumi to the PATH
 export PATH=$PATH:/home/michal-franc/.pulumi/bin
+
+# fnm
+FNM_PATH="/home/mfranc/.local/share/fnm"
+if [ -d "$FNM_PATH" ]; then
+  export PATH="$FNM_PATH:$PATH"
+  eval "`fnm env`"
+fi
+
+# bun completions
+[ -s "/home/mfranc/.bun/_bun" ] && source "/home/mfranc/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
