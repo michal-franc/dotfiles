@@ -54,10 +54,11 @@ module-margin-right = 2
 font-0 = fixed:pixelsize=10;1
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = siji:pixelsize=10;1
-font-3 = 3270Medium Nerd Font:style=Medium
+font-3 = 0xProto Nerd Font:style=Regular
+font-4 = Noto Color Emoji:scale=10;2
 
 
-modules-right = memory security gh snoozeslack gopomstats gopomtime battery
+modules-right = memory dictation security gh snoozeslack gopomstats gopomtime battery
 modules-left = bspwm i3
 modules-center = tasks activecontext activetask donetoday 
 
@@ -222,6 +223,12 @@ format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
 format-underline = #4bffdc
 label = RAM %percentage_used%%
+
+[module/dictation]
+type = custom/script
+exec = ~/.config/polybar/dictation.sh
+interval = 1
+label = %output%
 
 [module/wlan]
 type = internal/network
