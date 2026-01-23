@@ -1,0 +1,76 @@
+#!/bin/bash
+# ~/.local/bin/task-menu-today
+
+# Show only tasks tagged +today or currently active
+TASKS_JSON=$(task status:pending '(+today or +ACTIVE)' export)
+MAX_PROJ=$(echo "$TASKS_JSON" | jq -r '[.[] | (.project // "-") | length] | max // 0')
+PAD_WIDTH=$((MAX_PROJ + 3))
+
+# Sort tasks and get index for lookup
+SORTED_JSON=$(echo "$TASKS_JSON" | jq 'sort_by(-.urgency)')
+
+SELECTED_IDX=$(echo "$SORTED_JSON" | \
+  jq -r --argjson pad "$PAD_WIDTH" '.[] |
+    (if (.tags // [] | contains(["recurrent"])) then "media-playlist-repeat" elif .priority == "H" then "emblem-important" elif .priority == "M" then "dialog-information" elif .priority == "L" then "dialog-question" else "dialog-apply" end) as $icon |
+    (.project // "-") as $proj | ($proj + " " * ($pad - ($proj | length))) as $projpad |
+    " \($projpad)\(.description[0:60])\u0000icon\u001f\($icon)"' | \
+  rofi -dmenu -p "Today" -i -format 'i' -lines 15 -show-icons)
+
+if [ -z "$SELECTED_IDX" ] || [ "$SELECTED_IDX" = "-1" ]; then
+    exit 0
+fi
+
+# Extract UUID and description from JSON by index
+UUID=$(echo "$SORTED_JSON" | jq -r ".[$SELECTED_IDX].uuid")
+DESC=$(echo "$SORTED_JSON" | jq -r ".[$SELECTED_IDX].description[0:60]")
+
+TASK_DATA=$(task $UUID export | jq -r '.[0]')
+IS_ACTIVE=$(echo "$TASK_DATA" | jq -r '.start // empty')
+HAS_TODAY=$(echo "$TASK_DATA" | jq -r 'if (.tags // [] | contains(["today"])) then "yes" else "" end')
+
+ACTIONS="Done\0icon\x1fdialog-ok\n"
+if [ -n "$IS_ACTIVE" ]; then
+    ACTIONS+="Stop\0icon\x1fmedia-playback-pause\n"
+else
+    ACTIONS+="Start\0icon\x1fmedia-playback-start\n"
+fi
+if [ -n "$HAS_TODAY" ]; then
+    ACTIONS+="Undo Today\0icon\x1fedit-undo\n"
+fi
+ACTIONS+="Tomorrow\0icon\x1fmedia-skip-forward\n"
+ACTIONS+="Next Week\0icon\x1fx-office-calendar\n"
+ACTIONS+="Park\0icon\x1fmedia-playback-stop"
+
+ACTION=$(echo -e "$ACTIONS" | rofi -dmenu -p "$DESC" -i -show-icons)
+
+case "$ACTION" in
+    "Done")
+        task $UUID done
+        notify-send "✓ Task Completed" "$DESC"
+        ;;
+    "Start")
+        task +ACTIVE stop
+        task $UUID start
+        notify-send "Task Started" "$DESC"
+        ;;
+    "Stop")
+        task $UUID stop
+        notify-send "Task Stopped" "$DESC"
+        ;;
+    "Undo Today")
+        task $UUID modify -today scheduled:
+        notify-send "Removed from Today" "$DESC"
+        ;;
+    "Tomorrow")
+        task $UUID modify -today scheduled:tomorrow
+        notify-send "Moved to Tomorrow" "$DESC"
+        ;;
+    "Next Week")
+        task $UUID modify -today scheduled:today+1week
+        notify-send "Postponed by a Week" "$DESC"
+        ;;
+    "Park")
+        task $UUID modify wait:someday -today scheduled:
+        notify-send "Parked" "$DESC"
+        ;;
+esac

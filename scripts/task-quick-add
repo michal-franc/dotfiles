@@ -1,0 +1,9 @@
+#!/bin/bash
+# ~/.local/bin/task-quick-add
+
+DESC=$(rofi -dmenu -p "New Task:" -lines 0)
+
+if [ -n "$DESC" ]; then
+    task add project:quick_add +today "$DESC"
+    notify-send "Task Added" "$DESC"
+fi
