@@ -9,12 +9,21 @@ PAD_WIDTH=$((MAX_PROJ + 3))
 # Sort tasks and get index for lookup
 SORTED_JSON=$(echo "$TASKS_JSON" | jq 'sort_by(-.urgency)')
 
-SELECTED_IDX=$(echo "$SORTED_JSON" | \
+# Get indices of today tasks for highlighting (offset by 1 for the special entry)
+TODAY_INDICES=$(echo "$SORTED_JSON" | jq -r 'to_entries | .[] | select(.value.tags // [] | contains(["today"])) | (.key + 1)' | paste -sd,)
+
+ROFI_ARGS="-dmenu -p Tasks -i -format i -lines 15 -show-icons"
+[ -n "$TODAY_INDICES" ] && ROFI_ARGS="$ROFI_ARGS -a $TODAY_INDICES"
+
+# Add special "Record Done Task" entry at the top (index 0)
+SPECIAL_ENTRY=" + Record Done Task\0icon\x1fdialog-ok-apply"
+TASK_ENTRIES=$(echo "$SORTED_JSON" | \
   jq -r --argjson pad "$PAD_WIDTH" '.[] |
     (if (.tags // [] | contains(["recurrent"])) then "media-playlist-repeat" elif .priority == "H" then "emblem-important" elif .priority == "M" then "dialog-information" elif .priority == "L" then "dialog-question" else "dialog-apply" end) as $icon |
     (.project // "-") as $proj | ($proj + " " * ($pad - ($proj | length))) as $projpad |
-    " \($projpad)\(.description[0:60])\u0000icon\u001f\($icon)"' | \
-  rofi -dmenu -p "Tasks" -i -format 'i' -lines 15 -show-icons)
+    " \($projpad)\(.description[0:60])\u0000icon\u001f\($icon)"')
+
+SELECTED_IDX=$(echo -e "$SPECIAL_ENTRY\n$TASK_ENTRIES" | rofi $ROFI_ARGS)
 
 LOG="/tmp/task-menu-debug.log"
 echo "=== $(date) ===" >> "$LOG"
@@ -25,9 +34,54 @@ if [ -z "$SELECTED_IDX" ] || [ "$SELECTED_IDX" = "-1" ]; then
     exit 0
 fi
 
+# Handle special "Record Done Task" entry (index 0)
+if [ "$SELECTED_IDX" = "0" ]; then
+    echo "Record Done Task selected" >> "$LOG"
+
+    # Step 1: Get task description
+    DONE_DESC=$(rofi -dmenu -p "Done task description:" -lines 0)
+    if [ -z "$DONE_DESC" ]; then
+        echo "No description entered, exiting" >> "$LOG"
+        exit 0
+    fi
+
+    # Step 2: Get list of projects and let user select
+    PROJECTS=$(task _unique project | grep -v '^$' | sort)
+    PROJECT_LIST="(No Project)\0icon\x1fdialog-cancel"
+    while IFS= read -r proj; do
+        [ -n "$proj" ] && PROJECT_LIST+="\n$proj\0icon\x1ffolder"
+    done <<< "$PROJECTS"
+
+    SELECTED_PROJECT=$(echo -e "$PROJECT_LIST" | rofi -dmenu -p "Select project:" -i -show-icons)
+
+    if [ -z "$SELECTED_PROJECT" ]; then
+        echo "No project selected, exiting" >> "$LOG"
+        exit 0
+    fi
+
+    # Step 3: Create task and mark as done
+    if [ "$SELECTED_PROJECT" = "(No Project)" ]; then
+        echo "Creating task without project: $DONE_DESC" >> "$LOG"
+        task add "$DONE_DESC"
+    else
+        echo "Creating task with project $SELECTED_PROJECT: $DONE_DESC" >> "$LOG"
+        task add project:"$SELECTED_PROJECT" "$DONE_DESC"
+    fi
+
+    # Get the UUID of the just-created task and mark it done
+    NEW_UUID=$(task +LATEST uuids)
+    task $NEW_UUID done >> "$LOG" 2>&1
+
+    notify-send "✓ Recorded Done Task" "$DONE_DESC"
+    exit 0
+fi
+
+# Adjust index for actual tasks (offset by 1 due to special entry)
+TASK_IDX=$((SELECTED_IDX - 1))
+
 # Extract UUID and description from JSON by index
-UUID=$(echo "$SORTED_JSON" | jq -r ".[$SELECTED_IDX].uuid")
-DESC=$(echo "$SORTED_JSON" | jq -r ".[$SELECTED_IDX].description[0:60]")
+UUID=$(echo "$SORTED_JSON" | jq -r ".[$TASK_IDX].uuid")
+DESC=$(echo "$SORTED_JSON" | jq -r ".[$TASK_IDX].description[0:60]")
 
 echo "UUID: '$UUID'" >> "$LOG"
 echo "DESC: '$DESC'" >> "$LOG"
@@ -51,7 +105,9 @@ else
 fi
 ACTIONS+="Tomorrow\0icon\x1fmedia-skip-forward\n"
 ACTIONS+="Next Week\0icon\x1fx-office-calendar\n"
-ACTIONS+="Park\0icon\x1fmedia-playback-stop"
+ACTIONS+="Park\0icon\x1fmedia-playback-stop\n"
+ACTIONS+="Edit\0icon\x1faccessories-text-editor\n"
+ACTIONS+="Delete\0icon\x1fedit-delete"
 
 # Step 2: Choose action
 ACTION=$(echo -e "$ACTIONS" | rofi -dmenu -p "$DESC" -i -show-icons)
@@ -93,6 +149,17 @@ case "$ACTION" in
         ;;
     "Park")
         task $UUID modify wait:someday -today scheduled:
-        notify-send "🅿️ Parked" "$DESC"
+        notify-send "Parked" "$DESC"
+        ;;
+    "Edit")
+        NEW_DESC=$(rofi -dmenu -p "Edit description:" -lines 0 -filter "$DESC")
+        if [ -n "$NEW_DESC" ] && [ "$NEW_DESC" != "$DESC" ]; then
+            task $UUID modify description:"$NEW_DESC"
+            notify-send "✏️ Task Updated" "$NEW_DESC"
+        fi
+        ;;
+    "Delete")
+        task rc.confirmation=off $UUID delete
+        notify-send "Deleted" "$DESC"
         ;;
 esac

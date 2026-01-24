@@ -2,6 +2,7 @@
 # End-of-day activity review script
 # Aggregates: git commits, window activity, terminal history, browser history, claude sessions
 # Outputs summary with potential todo items and sources
+# Streams results section by section with timing
 
 DATE="${1:-$(date +%Y-%m-%d)}"
 OUTPUT_FILE="/tmp/activity-summary-$DATE.md"
@@ -13,48 +14,67 @@ GIT_DIRS=(
     "$HOME/dotfiles"
 )
 
-echo "# Activity Summary for $DATE" > "$OUTPUT_FILE"
-echo "" >> "$OUTPUT_FILE"
-echo "## Potential Done Tasks" >> "$OUTPUT_FILE"
-echo "" >> "$OUTPUT_FILE"
+# Helper to output and save simultaneously
+out() {
+    echo "$1" | tee -a "$OUTPUT_FILE"
+}
+
+# Clear output file
+> "$OUTPUT_FILE"
+
+out "# Activity Summary for $DATE"
+out ""
+out "## Potential Done Tasks"
+out ""
 
 #######################################
 # Git Commits
 #######################################
-echo "### From Git Commits" >> "$OUTPUT_FILE"
-echo "" >> "$OUTPUT_FILE"
+echo -n "Processing git commits..." >&2
+start_time=$(($(date +%s%N)/1000000))
 
+out "### From Git Commits"
+out ""
+
+found=0
 for dir in "${GIT_DIRS[@]}"; do
     if [ -d "$dir" ]; then
-        find "$dir" -maxdepth 3 -name ".git" -type d 2>/dev/null | while read -r gitdir; do
+        while IFS= read -r gitdir; do
             repo="${gitdir%/.git}"
             repo_name=$(basename "$repo")
 
             commits=$(git -C "$repo" log --format="%s" --since="$DATE 00:00" --until="$DATE 23:59" --author="$(git config user.name)" 2>/dev/null)
 
             if [ -n "$commits" ]; then
-                echo "$commits" | while read -r msg; do
-                    echo "- [git:$repo_name] $msg" >> "$OUTPUT_FILE"
-                done
+                while IFS= read -r msg; do
+                    out "- [git:$repo_name] $msg"
+                    found=1
+                done <<< "$commits"
             fi
-        done
+        done < <(find "$dir" -maxdepth 3 -name ".git" -type d 2>/dev/null)
     fi
 done
-echo "" >> "$OUTPUT_FILE"
+
+[ $found -eq 0 ] && out "_No commits found_"
+out ""
+
+end_time=$(($(date +%s%N)/1000000))
+echo -e " \033[90m$((end_time - start_time))ms\033[0m" >&2
 
 #######################################
-# Window Activity (aggregated)
+# Window Activity
 #######################################
-echo "### From Window Activity" >> "$OUTPUT_FILE"
-echo "" >> "$OUTPUT_FILE"
+echo -n "Processing window activity..." >&2
+start_time=$(($(date +%s%N)/1000000))
+
+out "### From Window Activity"
+out ""
 
 WINDOW_LOG="$LOG_DIR/windows-$DATE.log"
 if [ -f "$WINDOW_LOG" ]; then
-    # Extract unique meaningful window titles as potential tasks
     awk -F'|' '{
         app = $2
         title = $3
-        # Skip generic titles
         if (title !~ /^(New Tab|Untitled|$)/) {
             key = app "|" title
             if (!seen[key]++) {
@@ -68,56 +88,74 @@ if [ -f "$WINDOW_LOG" ]; then
     }
     END {
         for (key in count) {
-            if (count[key] >= 2) {  # Only show if focused multiple times
+            if (count[key] >= 2) {
                 print "- [window:" apps[key] "] " substr(titles[key], 1, 80)
             }
         }
-    }' "$WINDOW_LOG" | sort -u | head -20 >> "$OUTPUT_FILE"
-    echo "" >> "$OUTPUT_FILE"
+    }' "$WINDOW_LOG" | sort -u | head -20 | while IFS= read -r line; do
+        out "$line"
+    done
 else
-    echo "_No window log found for $DATE_" >> "$OUTPUT_FILE"
-    echo "" >> "$OUTPUT_FILE"
+    out "_No window log found for $DATE_"
 fi
+out ""
+
+end_time=$(($(date +%s%N)/1000000))
+echo -e " \033[90m$((end_time - start_time))ms\033[0m" >&2
 
 #######################################
-# Terminal Commands (interesting ones)
+# Terminal Commands
 #######################################
-echo "### From Terminal" >> "$OUTPUT_FILE"
-echo "" >> "$OUTPUT_FILE"
+echo -n "Processing terminal history..." >&2
+start_time=$(($(date +%s%N)/1000000))
 
-# Parse zsh history (format: : timestamp:0;command)
+out "### From Terminal"
+out ""
+
 if [ -f "$HOME/.zsh_history" ]; then
-    start_ts=$(date -d "$DATE 00:00" +%s 2>/dev/null || date -j -f "%Y-%m-%d %H:%M" "$DATE 00:00" +%s 2>/dev/null)
-    end_ts=$(date -d "$DATE 23:59" +%s 2>/dev/null || date -j -f "%Y-%m-%d %H:%M" "$DATE 23:59" +%s 2>/dev/null)
+    start_ts=$(date -d "$DATE 00:00" +%s 2>/dev/null)
+    end_ts=$(date -d "$DATE 23:59" +%s 2>/dev/null)
 
-    # Extract commands from today, filter out noise
-    grep -a "^:" "$HOME/.zsh_history" | while IFS= read -r line; do
-        ts=$(echo "$line" | sed 's/^: \([0-9]*\):.*/\1/')
-        cmd=$(echo "$line" | sed 's/^: [0-9]*:[0-9]*;//')
-
-        if [ "$ts" -ge "$start_ts" ] 2>/dev/null && [ "$ts" -le "$end_ts" ] 2>/dev/null; then
-            echo "$cmd"
-        fi
-    done 2>/dev/null | \
-    grep -vE '^(ls|cd|cat|less|head|tail|pwd|clear|exit|fg|bg|history|ll|la|\.\.|\.)$' | \
-    grep -vE '^(git status|git diff|git log|task |rofi)' | \
-    sort | uniq -c | sort -rn | head -15 | \
-    awk '{$1=""; gsub(/^ +/, ""); print "- [terminal] " $0}' >> "$OUTPUT_FILE"
+    # Use awk for faster processing instead of while loop
+    awk -v start="$start_ts" -v end="$end_ts" -F':' '
+    /^: [0-9]+:/ {
+        ts = $2
+        gsub(/^ /, "", ts)
+        if (ts >= start && ts <= end) {
+            cmd = $0
+            sub(/^: [0-9]+:[0-9]+;/, "", cmd)
+            if (cmd !~ /^(ls|cd|cat|less|head|tail|pwd|clear|exit|fg|bg|history|ll|la|\.\.|\.| )$/ &&
+                cmd !~ /^(git status|git diff|git log|task |rofi)/) {
+                cmds[cmd]++
+            }
+        }
+    }
+    END {
+        for (cmd in cmds) {
+            print cmds[cmd] "\t" cmd
+        }
+    }' "$HOME/.zsh_history" | sort -rn | head -15 | while IFS=$'\t' read -r count cmd; do
+        out "- [terminal] $cmd"
+    done
 fi
-echo "" >> "$OUTPUT_FILE"
+out ""
+
+end_time=$(($(date +%s%N)/1000000))
+echo -e " \033[90m$((end_time - start_time))ms\033[0m" >&2
 
 #######################################
 # Browser History
 #######################################
-echo "### From Browser" >> "$OUTPUT_FILE"
-echo "" >> "$OUTPUT_FILE"
+echo -n "Processing browser history..." >&2
+start_time=$(($(date +%s%N)/1000000))
+
+out "### From Browser"
+out ""
 
 CHROME_HISTORY="$HOME/.config/google-chrome/Default/History"
 if [ -f "$CHROME_HISTORY" ]; then
-    # Copy to avoid locking issues
     cp "$CHROME_HISTORY" /tmp/chrome_history_copy.db 2>/dev/null
 
-    # Query for today's visits
     sqlite3 /tmp/chrome_history_copy.db "
         SELECT DISTINCT
             CASE
@@ -136,29 +174,33 @@ if [ -f "$CHROME_HISTORY" ]; then
         AND title != ''
         ORDER BY last_visit_time DESC
         LIMIT 25
-    " 2>/dev/null | while IFS='|' read -r desc; do
-        echo "- [browser] $desc" >> "$OUTPUT_FILE"
+    " 2>/dev/null | while IFS= read -r desc; do
+        out "- [browser] $desc"
     done
 
     rm -f /tmp/chrome_history_copy.db
 else
-    echo "_Chrome history not found_" >> "$OUTPUT_FILE"
+    out "_Chrome history not found_"
 fi
-echo "" >> "$OUTPUT_FILE"
+out ""
+
+end_time=$(($(date +%s%N)/1000000))
+echo -e " \033[90m$((end_time - start_time))ms\033[0m" >&2
 
 #######################################
 # Claude Sessions
 #######################################
-echo "### From Claude Sessions" >> "$OUTPUT_FILE"
-echo "" >> "$OUTPUT_FILE"
+echo -n "Processing Claude sessions..." >&2
+start_time=$(($(date +%s%N)/1000000))
+
+out "### From Claude Sessions"
+out ""
 
 CLAUDE_HISTORY="$HOME/.claude/history.jsonl"
 if [ -f "$CLAUDE_HISTORY" ]; then
-    # Convert date to timestamp range (milliseconds)
     start_ts=$(($(date -d "$DATE 00:00" +%s) * 1000))
     end_ts=$(($(date -d "$DATE 23:59" +%s) * 1000))
 
-    # Extract unique projects and first message from each session today
     jq -r --argjson start "$start_ts" --argjson end "$end_ts" '
         select(.timestamp >= $start and .timestamp <= $end) |
         "\(.project // "unknown")|\(.display)"
@@ -167,24 +209,29 @@ if [ -f "$CLAUDE_HISTORY" ]; then
     {
         proj = $1
         msg = $2
-        # Get project basename
         n = split(proj, parts, "/")
         proj_name = parts[n]
 
-        # Only keep first meaningful message per project
-        if (length(msg) > 10 && !seen[proj]++) {
-            gsub(/^ +| +$/, "", msg)
+        # Clean message
+        gsub(/^ +| +$/, "", msg)
+
+        # Skip noise: single chars, very short, or duplicate messages
+        if (length(msg) > 15 && !seen[msg]++) {
             print "- [claude:" proj_name "] " substr(msg, 1, 80)
         }
-    }' | head -15 >> "$OUTPUT_FILE"
+    }' | head -20 | while IFS= read -r line; do
+        out "$line"
+    done
 else
-    echo "_Claude history not found_" >> "$OUTPUT_FILE"
+    out "_Claude history not found_"
 fi
-echo "" >> "$OUTPUT_FILE"
+out ""
+
+end_time=$(($(date +%s%N)/1000000))
+echo -e " \033[90m$((end_time - start_time))ms\033[0m" >&2
 
 #######################################
-# Output
+# Done
 #######################################
-echo "Activity summary saved to: $OUTPUT_FILE"
-echo ""
-cat "$OUTPUT_FILE"
+echo "" >&2
+echo -e "\033[32mSaved to: $OUTPUT_FILE\033[0m" >&2

@@ -1,8 +1,8 @@
 #!/bin/bash
 # ~/.local/bin/task-menu-today
 
-# Show only tasks tagged +today or currently active
-TASKS_JSON=$(task status:pending '(+today or +ACTIVE)' export)
+# Show only tasks tagged +today, scheduled for today, or currently active
+TASKS_JSON=$(task status:pending '(+today or +ACTIVE or scheduled:today)' export)
 MAX_PROJ=$(echo "$TASKS_JSON" | jq -r '[.[] | (.project // "-") | length] | max // 0')
 PAD_WIDTH=$((MAX_PROJ + 3))
 
@@ -39,7 +39,9 @@ if [ -n "$HAS_TODAY" ]; then
 fi
 ACTIONS+="Tomorrow\0icon\x1fmedia-skip-forward\n"
 ACTIONS+="Next Week\0icon\x1fx-office-calendar\n"
-ACTIONS+="Park\0icon\x1fmedia-playback-stop"
+ACTIONS+="Park\0icon\x1fmedia-playback-stop\n"
+ACTIONS+="Edit\0icon\x1faccessories-text-editor\n"
+ACTIONS+="Delete\0icon\x1fedit-delete"
 
 ACTION=$(echo -e "$ACTIONS" | rofi -dmenu -p "$DESC" -i -show-icons)
 
@@ -72,5 +74,16 @@ case "$ACTION" in
     "Park")
         task $UUID modify wait:someday -today scheduled:
         notify-send "Parked" "$DESC"
+        ;;
+    "Edit")
+        NEW_DESC=$(rofi -dmenu -p "Edit description:" -lines 0 -filter "$DESC")
+        if [ -n "$NEW_DESC" ] && [ "$NEW_DESC" != "$DESC" ]; then
+            task $UUID modify description:"$NEW_DESC"
+            notify-send "✏️ Task Updated" "$NEW_DESC"
+        fi
+        ;;
+    "Delete")
+        task rc.confirmation=off $UUID delete
+        notify-send "Deleted" "$DESC"
         ;;
 esac
