@@ -84,8 +84,14 @@ element urgent, element selected urgent {
   text-color: @red;
 }
 
-element active, element selected active {
-  text-color: @purple;
+element active {
+  background-color: #3C5A3C;
+  text-color: @text;
+}
+
+element selected active {
+  background-color: #4A7A4A;
+  text-color: @text;
 }
 
 message {

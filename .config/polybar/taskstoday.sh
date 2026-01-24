@@ -1,3 +1,3 @@
 #!/bin/bash
-task tc.gc=no status:pending +today count 2>/dev/null </dev/null
+task rc.gc=no status:pending '(+today or scheduled:today)' count 2>/dev/null </dev/null
 

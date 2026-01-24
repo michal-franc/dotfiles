@@ -58,9 +58,9 @@ font-3 = 0xProto Nerd Font:style=Regular
 font-4 = Noto Color Emoji:scale=10;2
 
 
-modules-right = memory dictation security gh snoozeslack gopomstats gopomtime battery
+modules-right = cpu memory dictation security gh snoozeslack gopomstats gopomtime battery
 modules-left = bspwm i3
-modules-center = tasks activecontext activetask donetoday 
+modules-center = tasks activecontext activetask taskhistory donetoday 
 
 
 tray-position = right
@@ -433,7 +433,7 @@ margin-bottom = 5
 [module/tasks]
 type = custom/script
 exec = ~/.config/polybar/taskstoday.sh
-label=   todo: %output% tasks
+label= todo: %output% tasks
 interval = 60
 format-underline = #33D4FF
 
@@ -466,7 +466,7 @@ type = custom/script
 interval = 15
 exec = ~/.config/polybar/activetask.sh
 exec_if = ~/.config/polybar/activetask.sh
-label =   %output%
+label = %output%
 label-foreground= #08FF00
 format-underiine = #99FF33
 
@@ -485,6 +485,13 @@ interval = 15
 exec = ~/.config/polybar/donetoday.sh
 label =   done: %output%
 format-underline = #99FF33
+
+[module/taskhistory]
+type = custom/script
+interval = 300
+exec = ~/.config/polybar/taskhistory.sh
+label = %output%
+format-underline = #333333
 
 [module/snoozeslack]
 type = custom/script
