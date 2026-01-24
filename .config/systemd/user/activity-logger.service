@@ -1,0 +1,12 @@
+[Unit]
+Description=Activity window logger for i3
+After=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=/home/mfranc/scripts/activity-logger
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target

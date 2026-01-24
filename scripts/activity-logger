@@ -1,0 +1,40 @@
+#!/bin/bash
+# Active window logger using i3 events
+# More efficient than polling - triggers only on window focus change
+# Run in background: activity-logger &
+
+LOG_DIR="$HOME/.local/share/activity"
+mkdir -p "$LOG_DIR"
+
+get_log_file() {
+    echo "$LOG_DIR/windows-$(date +%Y-%m-%d).log"
+}
+
+log_current_window() {
+    local timestamp=$(date '+%Y-%m-%d %H:%M:%S')
+    local log_file=$(get_log_file)
+
+    # Get focused window info from i3
+    local window_info=$(i3-msg -t get_tree | jq -r '
+        recurse(.nodes[], .floating_nodes[]) |
+        select(.focused == true) |
+        "\(.window_properties.class // "unknown")|\(.name // "unknown")"
+    ' 2>/dev/null | head -1)
+
+    if [ -n "$window_info" ] && [ "$window_info" != "|" ]; then
+        local window_class=$(echo "$window_info" | cut -d'|' -f1)
+        local window_name=$(echo "$window_info" | cut -d'|' -f2-)
+        echo "$timestamp|$window_class|$window_name" >> "$log_file"
+    fi
+}
+
+# Log initial window
+log_current_window
+
+# Subscribe to i3 window events
+i3-msg -t subscribe -m '["window"]' | while read -r event; do
+    # Only log on focus changes
+    if echo "$event" | jq -e '.change == "focus"' > /dev/null 2>&1; then
+        log_current_window
+    fi
+done

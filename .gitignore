@@ -42,3 +42,11 @@ node_modules/
 !Code/*.sh
 !rofi
 !dunst
+!systemd
+!systemd/user
+!systemd/user/*
+
+# feature documentation
+!features
+!features/*
+!features/**
