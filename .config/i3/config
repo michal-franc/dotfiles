@@ -187,6 +187,7 @@ for_window [title=".*(DEBUG)"] floating enable
 
 bindsym Ctrl+grave exec --no-startup-id ~/scripts/deepgram-dictation-toggle
 bindsym Ctrl+apostrophe exec --no-startup-id ~/scripts/deepgram-dictation-claude-toggle
+bindsym Ctrl+Shift+grave exec --no-startup-id ~/scripts/dictation-headphone-toggle
 
 
 # Task warrior integration

@@ -1,0 +1,74 @@
+#!/bin/bash
+
+# Dictation toggle with automatic microphone switching to headphones
+# On first toggle: saves current mic state, switches to headphone mic, starts dictation
+# On second toggle: stops dictation, restores previous mic state
+
+PIDFILE="/tmp/deepgram-dictation.pid"
+STATEFILE="/tmp/dictation-mic-state"
+
+CARD="bluez_card.AC_80_0A_5D_C1_97"
+A2DP_PROFILE="a2dp-sink"
+HSP_PROFILE="headset-head-unit-msbc"
+YETI_SOURCE="alsa_input.usb-Blue_Microphones_Yeti_Stereo_Microphone_REV8-00.analog-stereo"
+
+is_dictation_running() {
+    [ -f "$PIDFILE" ] && kill -0 $(cat "$PIDFILE") 2>/dev/null
+}
+
+save_mic_state() {
+    local current_source=$(pactl get-default-source 2>/dev/null)
+    local current_profile=$(pactl list cards | grep -A20 "$CARD" | grep "Active Profile:" | cut -d: -f2 | tr -d ' ')
+    echo "source=$current_source" > "$STATEFILE"
+    echo "profile=$current_profile" >> "$STATEFILE"
+}
+
+restore_mic_state() {
+    if [ -f "$STATEFILE" ]; then
+        source "$STATEFILE"
+
+        # Restore bluetooth profile if it was saved
+        if [ -n "$profile" ]; then
+            pactl set-card-profile "$CARD" "$profile" 2>/dev/null
+            sleep 0.3
+        fi
+
+        # Restore default source
+        if [ -n "$source" ]; then
+            pactl set-default-source "$source" 2>/dev/null
+        fi
+
+        rm -f "$STATEFILE"
+    fi
+}
+
+switch_to_headphone_mic() {
+    # Switch bluetooth to HSP profile (enables mic)
+    pactl set-card-profile "$CARD" "$HSP_PROFILE" 2>/dev/null
+    sleep 0.5
+
+    # Set headphone as default source
+    headphone_source=$(pactl list sources short | grep "bluez.*input" | cut -f2)
+    if [ -n "$headphone_source" ]; then
+        pactl set-default-source "$headphone_source"
+    fi
+}
+
+if is_dictation_running; then
+    # Stop dictation and restore mic state
+    kill $(cat "$PIDFILE") 2>/dev/null
+    restore_mic_state
+    notify-send "Dictation" "Stopped - mic restored" -t 1500
+else
+    # Kill any orphaned processes
+    pkill -f "python.*deepgram-dictation" 2>/dev/null
+    rm -f "$PIDFILE"
+
+    # Save current mic state and switch to headphone
+    save_mic_state
+    switch_to_headphone_mic
+
+    # Start dictation
+    setsid ~/scripts/deepgram-dictation 2>/tmp/deepgram-dictation.log &
+    notify-send "Dictation" "Listening via headphone mic..." -t 1500
+fi
