@@ -4,6 +4,7 @@ import os
 import sys
 import signal
 import argparse
+import subprocess
 
 # Parse arguments
 parser = argparse.ArgumentParser()
@@ -50,16 +51,19 @@ try:
         api_key = f.read().strip()
         os.environ["DEEPGRAM_API_KEY"] = api_key
 except FileNotFoundError:
-    print(f"Error: API key file not found at {API_KEY_FILE}", file=sys.stderr)
+    msg = f"API key file not found at {API_KEY_FILE}"
+    print(f"Error: {msg}", file=sys.stderr)
+    subprocess.run(['notify-send', '-u', 'critical', 'Dictation Error', msg])
     sys.exit(1)
 
 if not api_key:
-    print("Error: DEEPGRAM_API_KEY is empty", file=sys.stderr)
+    msg = "DEEPGRAM_API_KEY is empty"
+    print(f"Error: {msg}", file=sys.stderr)
+    subprocess.run(['notify-send', '-u', 'critical', 'Dictation Error', msg])
     sys.exit(1)
 
 import time
 import threading
-import subprocess
 import pyaudio
 from deepgram import DeepgramClient
 from deepgram.core.events import EventType
@@ -154,6 +158,7 @@ def main():
 
     except Exception as e:
         print(f"Error: {e}", file=sys.stderr)
+        subprocess.run(['notify-send', '-u', 'critical', 'Dictation Error', str(e)])
         cleanup_and_exit()
 
 if __name__ == "__main__":

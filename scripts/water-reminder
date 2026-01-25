@@ -1,0 +1,10 @@
+#!/bin/bash
+# Water reminder - runs in background, notifies every hour
+
+export DISPLAY=:0
+export DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/$(id -u)/bus"
+
+while true; do
+    sleep 1h
+    notify-send -u normal -t 10000 "💧 Drink Water!" "Time to hydrate"
+done

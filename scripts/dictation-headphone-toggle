@@ -13,33 +13,42 @@ HSP_PROFILE="headset-head-unit-msbc"
 YETI_SOURCE="alsa_input.usb-Blue_Microphones_Yeti_Stereo_Microphone_REV8-00.analog-stereo"
 
 is_dictation_running() {
-    [ -f "$PIDFILE" ] && kill -0 $(cat "$PIDFILE") 2>/dev/null
+    [ -f "$PIDFILE" ] && kill -0 "$(cat "$PIDFILE")" 2>/dev/null
+}
+
+get_pid() {
+    [ -f "$PIDFILE" ] && cat "$PIDFILE"
 }
 
 save_mic_state() {
     local current_source=$(pactl get-default-source 2>/dev/null)
     local current_profile=$(pactl list cards | grep -A20 "$CARD" | grep "Active Profile:" | cut -d: -f2 | tr -d ' ')
-    echo "source=$current_source" > "$STATEFILE"
-    echo "profile=$current_profile" >> "$STATEFILE"
+    # Use separate lines for robustness (no = parsing issues)
+    echo "$current_source" > "$STATEFILE"
+    echo "$current_profile" >> "$STATEFILE"
 }
 
 restore_mic_state() {
-    if [ -f "$STATEFILE" ]; then
-        source "$STATEFILE"
-
-        # Restore bluetooth profile if it was saved
-        if [ -n "$profile" ]; then
-            pactl set-card-profile "$CARD" "$profile" 2>/dev/null
-            sleep 0.3
-        fi
-
-        # Restore default source
-        if [ -n "$source" ]; then
-            pactl set-default-source "$source" 2>/dev/null
-        fi
-
-        rm -f "$STATEFILE"
+    if [ ! -f "$STATEFILE" ]; then
+        return 1
     fi
+
+    # Read state file line by line (more robust than source)
+    local saved_source=$(sed -n '1p' "$STATEFILE")
+    local saved_profile=$(sed -n '2p' "$STATEFILE")
+
+    # Restore bluetooth profile if it was saved
+    if [ -n "$saved_profile" ]; then
+        pactl set-card-profile "$CARD" "$saved_profile" 2>/dev/null
+        sleep 0.3
+    fi
+
+    # Restore default source
+    if [ -n "$saved_source" ]; then
+        pactl set-default-source "$saved_source" 2>/dev/null
+    fi
+
+    rm -f "$STATEFILE"
 }
 
 switch_to_headphone_mic() {
@@ -56,7 +65,15 @@ switch_to_headphone_mic() {
 
 if is_dictation_running; then
     # Stop dictation and restore mic state
-    kill $(cat "$PIDFILE") 2>/dev/null
+    pid=$(get_pid)
+    kill "$pid" 2>/dev/null
+
+    # Wait for process to actually die (up to 2 seconds)
+    for i in {1..20}; do
+        kill -0 "$pid" 2>/dev/null || break
+        sleep 0.1
+    done
+
     restore_mic_state
     notify-send "Dictation" "Stopped - mic restored" -t 1500
 else
