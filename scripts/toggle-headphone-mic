@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# Toggle Sony WH-1000XM4 between A2DP (high quality, no mic) and HSP/HFP (mic enabled)
+
+CARD="bluez_card.AC_80_0A_5D_C1_97"
+A2DP_PROFILE="a2dp-sink"
+HSP_PROFILE="headset-head-unit-msbc"
+
+# Get current profile
+current_profile=$(pactl list cards | grep -A20 "$CARD" | grep "Active Profile:" | cut -d: -f2 | tr -d ' ')
+
+if [[ "$current_profile" == "$A2DP_PROFILE" ]]; then
+    # Switch to HSP (enable mic)
+    pactl set-card-profile "$CARD" "$HSP_PROFILE"
+    # Set headphones as default source
+    sleep 0.5
+    headphone_source=$(pactl list sources short | grep "bluez.*input" | cut -f2)
+    if [[ -n "$headphone_source" ]]; then
+        pactl set-default-source "$headphone_source"
+    fi
+    notify-send -i audio-input-microphone "Microphone" "Switched to WH-1000XM4 headset mic (lower audio quality)"
+else
+    # Switch to A2DP (high quality, no mic)
+    pactl set-card-profile "$CARD" "$A2DP_PROFILE"
+    # Set Yeti as default source
+    yeti_source="alsa_input.usb-Blue_Microphones_Yeti_Stereo_Microphone_REV8-00.analog-stereo"
+    pactl set-default-source "$yeti_source"
+    notify-send -i audio-card "Microphone" "Switched to Yeti USB mic (high quality audio)"
+fi

@@ -3,6 +3,8 @@
 /*/
 node_modules/
 *.lock
+*.deb
+*.log
 
 # But not these files...
 !*.gitignore
@@ -35,6 +37,7 @@ node_modules/
 
 # and not this stuff from .config
 !polybar
+!polybar/*
 !termite
 !compton.conf
 !fontcoding

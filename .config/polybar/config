@@ -58,7 +58,7 @@ font-3 = 0xProto Nerd Font:style=Regular
 font-4 = Noto Color Emoji:scale=10;2
 
 
-modules-right = cpu memory dictation security gh snoozeslack gopomstats gopomtime battery
+modules-right = cpu memory microphone dictation security gh snoozeslack gopomstats gopomtime battery
 modules-left = bspwm i3
 modules-center = tasks activecontext activetask taskhistory donetoday 
 
@@ -229,6 +229,14 @@ type = custom/script
 exec = ~/.config/polybar/dictation.sh
 interval = 1
 label = %output%
+
+[module/microphone]
+type = custom/script
+exec = ~/.config/polybar/microphone.sh
+interval = 2
+label = %output%
+click-left = ~/scripts/toggle-headphone-mic
+format-underline = #00bfff
 
 [module/wlan]
 type = internal/network
