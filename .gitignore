@@ -45,6 +45,8 @@ node_modules/
 !Code/*.sh
 !rofi
 !dunst
+!.config/autostart/
+!.config/autostart/xfce4-notifyd.desktop
 !systemd
 !systemd/user
 !systemd/user/*
