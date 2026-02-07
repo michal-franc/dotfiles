@@ -64,10 +64,25 @@ deepgram-dictation-toggle
 deepgram-dictation-claude-toggle
 ```
 
+## Streaming Configuration
+
+The script is tuned for low-latency, raw streaming:
+
+| Setting | Value | Why |
+|---------|-------|-----|
+| `interim_results` | `true` | Words appear as you speak, not after a pause |
+| `smart_format` | `false` | No auto-capitalization or number formatting |
+| `punctuate` | `false` | No punctuation inserted |
+| `endpointing` | `100ms` | Fast segment finalization |
+| `CHUNK` | `2000` (125ms) | Audio sent frequently for low latency |
+
+Interim results work by typing partial text immediately, then backspacing and replacing it when a more complete transcript arrives. Once a segment is finalized (`is_final=True`), the text is committed with a trailing space.
+
 ## How It Works
 
 1. Opens microphone stream
-2. Sends audio chunks to Deepgram WebSocket
-3. Receives transcribed text in real-time
-4. Types text using xdotool (or buffers for Claude)
-5. Auto-stops after silence timeout
+2. Sends small audio chunks (125ms) to Deepgram WebSocket
+3. Receives interim transcripts immediately as you speak
+4. Types interim text, backspaces and replaces as transcript refines
+5. Commits finalized text with a space
+6. Auto-stops after silence timeout

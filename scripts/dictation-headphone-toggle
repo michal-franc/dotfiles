@@ -64,7 +64,7 @@ switch_to_headphone_mic() {
 }
 
 if is_dictation_running; then
-    # Stop dictation and restore mic state
+    # Stop dictation (the monitor subshell handles restore)
     pid=$(get_pid)
     kill "$pid" 2>/dev/null
 
@@ -74,18 +74,36 @@ if is_dictation_running; then
         sleep 0.1
     done
 
-    restore_mic_state
     notify-send "Dictation" "Stopped - mic restored" -t 1500
 else
     # Kill any orphaned processes
     pkill -f "python.*deepgram-dictation" 2>/dev/null
     rm -f "$PIDFILE"
 
+    # If state file exists from a crashed session, restore first
+    if [ -f "$STATEFILE" ]; then
+        restore_mic_state
+        sleep 0.3
+    fi
+
     # Save current mic state and switch to headphone
     save_mic_state
     switch_to_headphone_mic
 
-    # Start dictation
-    setsid ~/scripts/deepgram-dictation 2>/tmp/deepgram-dictation.log &
+    # Start dictation inside a monitor that always restores on exit
+    setsid bash -c '
+        ~/scripts/deepgram-dictation 2>/tmp/deepgram-dictation.log
+        # Always restore when dictation ends, regardless of how it exited
+        STATEFILE="/tmp/dictation-mic-state"
+        CARD="bluez_card.AC_80_0A_5D_C1_97"
+        if [ -f "$STATEFILE" ]; then
+            saved_source=$(sed -n "1p" "$STATEFILE")
+            saved_profile=$(sed -n "2p" "$STATEFILE")
+            [ -n "$saved_profile" ] && pactl set-card-profile "$CARD" "$saved_profile" 2>/dev/null
+            sleep 0.3
+            [ -n "$saved_source" ] && pactl set-default-source "$saved_source" 2>/dev/null
+            rm -f "$STATEFILE"
+        fi
+    ' &
     notify-send "Dictation" "Listening via headphone mic..." -t 1500
 fi

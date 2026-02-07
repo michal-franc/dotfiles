@@ -70,12 +70,17 @@ from deepgram.core.events import EventType
 
 def type_text(text):
     """Type text into active window using xdotool"""
-    subprocess.run(['xdotool', 'type', '--', text + ' '], check=False)
+    subprocess.run(['xdotool', 'type', '--', text], check=False)
+
+def backspace(n):
+    """Delete n characters by sending BackSpace keys"""
+    if n > 0:
+        subprocess.run(['xdotool', 'key', '--repeat', str(n), 'BackSpace'], check=False)
 
 FORMAT = pyaudio.paInt16
 CHANNELS = 1
 RATE = 16000
-CHUNK = 8000
+CHUNK = 2000
 SILENCE_TIMEOUT = 10.0  # seconds of silence before auto-stop
 
 def main():
@@ -88,20 +93,24 @@ def main():
         with client.listen.v1.connect(
             model="nova-3",
             language="en-US",
-            smart_format="true",
-            punctuate="true",
-            interim_results="false",
-            endpointing="300",
+            smart_format="false",
+            punctuate="false",
+            interim_results="true",
+            endpointing="100",
             encoding="linear16",
             sample_rate=str(RATE),
         ) as connection:
 
+            # Track how many chars were typed for the current interim segment
+            interim_typed = 0
+
             def on_message(message):
-                nonlocal last_speech_time, has_received_speech
+                nonlocal last_speech_time, has_received_speech, interim_typed
                 msg_type = getattr(message, 'type', '')
 
                 # Handle transcript results
                 if hasattr(message, 'channel'):
+                    is_final = getattr(message, 'is_final', True)
                     alternatives = message.channel.alternatives
                     if alternatives and len(alternatives) > 0:
                         transcript = alternatives[0].transcript
@@ -109,9 +118,21 @@ def main():
                             last_speech_time = time.time()
                             has_received_speech = True
                             if MODE == 'type':
+                                # Erase previous interim text
+                                backspace(interim_typed)
                                 type_text(transcript)
+                                if is_final:
+                                    # Segment done, add space and reset
+                                    type_text(' ')
+                                    interim_typed = 0
+                                else:
+                                    interim_typed = len(transcript)
                             else:
-                                transcript_buffer.append(transcript)
+                                if is_final:
+                                    transcript_buffer.append(transcript)
+                        elif is_final:
+                            # Empty final transcript — reset interim
+                            interim_typed = 0
 
                 # Handle speech started event
                 if msg_type == 'SpeechStarted':
