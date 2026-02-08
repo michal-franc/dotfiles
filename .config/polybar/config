@@ -60,7 +60,7 @@ font-4 = Noto Color Emoji:scale=10;2
 
 modules-right = cpu memory microphone dictation security gh snoozeslack gopomstats gopomtime battery
 modules-left = bspwm i3
-modules-center = tasks activecontext activetask taskhistory donetoday 
+modules-center = tasks activecontext activetask taskhistory donetoday ankies claude
 
 
 tray-position = right
@@ -434,6 +434,19 @@ screenchange-reload = true
 [global/wm]
 margin-top = 5
 margin-bottom = 5
+
+[module/ankies]
+type = custom/script
+interval = 300
+exec = /home/mfranc/.local/share/mise/installs/go/1.25.4/bin/ankies-franc due
+label = %{T4}󰘸%{T-}  %output%
+click-left = alacritty -e /home/mfranc/.local/share/mise/installs/go/1.25.4/bin/ankies-franc review
+
+[module/claude]
+type = custom/script
+interval = 5
+exec = ~/.config/polybar/claude.sh
+label = %{T4}󰚩%{T-}  %output%
 
 ; vim:ft=dosini
 
