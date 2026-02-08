@@ -148,8 +148,25 @@ case "$ACTION" in
         notify-send "📆 Postponed by a Week" "$DESC"
         ;;
     "Park")
-        task $UUID modify wait:someday -today scheduled:
-        notify-send "Parked" "$DESC"
+        DAYS_MENU="1 day\0icon\x1fmedia-skip-forward
+2 days\0icon\x1fmedia-skip-forward
+3 days\0icon\x1fmedia-skip-forward
+5 days\0icon\x1fmedia-skip-forward
+1 week\0icon\x1fx-office-calendar
+2 weeks\0icon\x1fx-office-calendar
+1 month\0icon\x1fx-office-calendar
+Someday\0icon\x1fmedia-playback-stop"
+        PARK_SELECTION=$(echo -e "$DAYS_MENU" | rofi -dmenu -p "Park for how long?" -i -show-icons)
+        case "$PARK_SELECTION" in
+            "1 day") task $UUID modify wait:today+1day -today scheduled: && notify-send "Parked 1 day" "$DESC" ;;
+            "2 days") task $UUID modify wait:today+2days -today scheduled: && notify-send "Parked 2 days" "$DESC" ;;
+            "3 days") task $UUID modify wait:today+3days -today scheduled: && notify-send "Parked 3 days" "$DESC" ;;
+            "5 days") task $UUID modify wait:today+5days -today scheduled: && notify-send "Parked 5 days" "$DESC" ;;
+            "1 week") task $UUID modify wait:today+1week -today scheduled: && notify-send "Parked 1 week" "$DESC" ;;
+            "2 weeks") task $UUID modify wait:today+2weeks -today scheduled: && notify-send "Parked 2 weeks" "$DESC" ;;
+            "1 month") task $UUID modify wait:today+1month -today scheduled: && notify-send "Parked 1 month" "$DESC" ;;
+            "Someday") task $UUID modify wait:someday -today scheduled: && notify-send "Parked indefinitely" "$DESC" ;;
+        esac
         ;;
     "Edit")
         NEW_DESC=$(rofi -dmenu -p "Edit description:" -lines 0 -filter "$DESC")
