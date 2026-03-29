@@ -35,6 +35,8 @@ alias gs="git status"
 alias gpull="git pull master"
 alias tui="taskwarrior-tui"
 alias tg=". tgoto"
+alias g='goxide'
+alias gi='goxide i'
 
 git config --global alias.force "push --force-with-lease"
 

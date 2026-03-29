@@ -47,4 +47,5 @@
         "**/*.import": true,
         "**/*.uid": true
     },
+    "git.openRepositoryInParentFolders": "never",
 }

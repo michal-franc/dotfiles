@@ -1,4 +1,11 @@
 #!/bin/bash
 read X Y W H <<< "$(slop -f "%x %y %w %h")"
 
-ffmpeg -f x11grab -video_size ${W}x${H} -i :0.0+${X},${Y} -vcodec h264 output.mp4
+# Round width and height to even numbers (required for yuv420p)
+W=$(( W + W % 2 ))
+H=$(( H + H % 2 ))
+
+ffmpeg -f x11grab -video_size ${W}x${H} -i :0.0+${X},${Y} \
+  -vcodec libx264 -pix_fmt yuv420p -profile:v baseline -level 3.1 \
+  -fs 9961472 \
+  -movflags +faststart output.mp4

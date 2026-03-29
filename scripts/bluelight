@@ -1,0 +1,26 @@
+#!/bin/bash
+
+set_gamma() {
+  local gamma=$1
+  for output in $(xrandr --listmonitors | awk 'NR>1 {print $NF}'); do
+    xrandr --output "$output" --gamma "$gamma"
+  done
+}
+
+case "$1" in
+  0|off)  set_gamma 1.0:1.0:1.0 ;;
+  1)      set_gamma 1.0:0.95:0.9 ;;
+  2)      set_gamma 1.0:0.90:0.8 ;;
+  3)      set_gamma 1.0:0.85:0.7 ;;
+  4)      set_gamma 1.0:0.75:0.55 ;;
+  5)      set_gamma 1.0:0.65:0.4 ;;
+  *)
+    echo "Usage: bluelight {0-5}"
+    echo "  0 - off (normal)"
+    echo "  1 - minimal"
+    echo "  2 - light"
+    echo "  3 - moderate"
+    echo "  4 - strong"
+    echo "  5 - max"
+    ;;
+esac

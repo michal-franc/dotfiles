@@ -63,6 +63,9 @@ bindsym $mod+b split h exec alacritty msg create-window
 # split in vertical orientation
 bindsym $mod+v split v exec alacritty msg create-window
 
+# fork current claude session into a new terminal
+bindsym $mod+Shift+b exec ~/scripts/claude-fork
+
 # enter fullscreen mode for the focused container
 #bindsym $mod+f fullscreen toggle
 

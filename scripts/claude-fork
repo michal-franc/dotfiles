@@ -1,0 +1,57 @@
+#!/bin/bash
+# Fork a running Claude Code session into a new alacritty window.
+# Shows a rofi picker of all active Claude sessions.
+
+TMPFILE=$(mktemp)
+trap "rm -f $TMPFILE" EXIT
+
+# Build list of running claude sessions
+for f in ~/.claude/sessions/*.json; do
+    data=$(python3 -c "
+import json
+d = json.load(open('$f'))
+pid, sid, cwd = d['pid'], d['sessionId'], d['cwd']
+name = d.get('name', '')
+# Check if process is still running
+import os
+try:
+    os.kill(pid, 0)
+    label = name if name else cwd
+    print(f'{sid}\t{cwd}\t{label}')
+except:
+    pass
+" 2>/dev/null)
+    [ -n "$data" ] && echo "$data" >> "$TMPFILE"
+done
+
+if [ ! -s "$TMPFILE" ]; then
+    notify-send "claude-fork" "No running Claude sessions found"
+    exit 1
+fi
+
+# If only one session, skip picker
+COUNT=$(wc -l < "$TMPFILE")
+if [ "$COUNT" -eq 1 ]; then
+    CHOSEN=$(cat "$TMPFILE")
+else
+    # Show rofi picker with labels
+    CHOSEN=$(cut -f3 "$TMPFILE" | rofi -dmenu -i -p "Fork session" | head -1)
+    [ -z "$CHOSEN" ] && exit 0
+    # Map label back to full line
+    CHOSEN=$(grep "$CHOSEN" "$TMPFILE" | head -1)
+fi
+
+SESSION_ID=$(echo "$CHOSEN" | cut -f1)
+SESSION_CWD=$(echo "$CHOSEN" | cut -f2)
+
+SESSION_NAME=$(python3 -c "
+import json, glob
+for f in glob.glob('$HOME/.claude/sessions/*.json'):
+    d = json.load(open(f))
+    if d['sessionId'] == '$SESSION_ID':
+        print(d.get('name', '')); break
+" 2>/dev/null)
+
+FORK_NAME="${SESSION_NAME:-unnamed}-fork"
+
+alacritty -e bash -c "cd \"$SESSION_CWD\" && claude --resume \"$SESSION_ID\" --fork-session -n \"$FORK_NAME\""

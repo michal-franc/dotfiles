@@ -99,13 +99,14 @@ def main():
             endpointing="100",
             encoding="linear16",
             sample_rate=str(RATE),
+            mip_opt_out="true",
         ) as connection:
 
-            # Track how many chars were typed for the current interim segment
-            interim_typed = 0
+            # Track the current interim text so we can diff against it
+            current_interim = ''
 
             def on_message(message):
-                nonlocal last_speech_time, has_received_speech, interim_typed
+                nonlocal last_speech_time, has_received_speech, current_interim
                 msg_type = getattr(message, 'type', '')
 
                 # Handle transcript results
@@ -118,21 +119,26 @@ def main():
                             last_speech_time = time.time()
                             has_received_speech = True
                             if MODE == 'type':
-                                # Erase previous interim text
-                                backspace(interim_typed)
-                                type_text(transcript)
+                                # Find common prefix, only backspace/retype the diff
+                                common = 0
+                                for a, b in zip(current_interim, transcript):
+                                    if a == b:
+                                        common += 1
+                                    else:
+                                        break
+                                backspace(len(current_interim) - common)
+                                type_text(transcript[common:])
                                 if is_final:
-                                    # Segment done, add space and reset
                                     type_text(' ')
-                                    interim_typed = 0
+                                    current_interim = ''
                                 else:
-                                    interim_typed = len(transcript)
+                                    current_interim = transcript
                             else:
                                 if is_final:
                                     transcript_buffer.append(transcript)
                         elif is_final:
                             # Empty final transcript — reset interim
-                            interim_typed = 0
+                            current_interim = ''
 
                 # Handle speech started event
                 if msg_type == 'SpeechStarted':

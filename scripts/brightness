@@ -1,21 +1,25 @@
 #!/bin/bash
 
+BACKLIGHT="/sys/class/backlight/intel_backlight/brightness"
+
+set_brightness() {
+  local level=$1
+  local xbright=$2
+  if [ -f "$BACKLIGHT" ]; then
+    echo "$level" | sudo tee "$BACKLIGHT"
+  fi
+  for output in $(xrandr --listmonitors | awk 'NR>1 {print $NF}'); do
+    xrandr --output "$output" --brightness "$xbright"
+  done
+}
 
 if [ "$1" == "low" ]; then
-  echo 40000 | sudo tee /sys/class/backlight/intel_backlight/brightness
-  xrandr --output DP-1 --brightness 0.85
-  xrandr --output DP-2 --brightness 0.85
+  set_brightness 40000 0.85
 elif [ "$1" == "vvlow" ]; then
-  echo 4000 | sudo tee /sys/class/backlight/intel_backlight/brightness
-  xrandr --output DP-1 --brightness 0.7
-  xrandr --output DP-2 --brightness 0.7
+  set_brightness 4000 0.7
 elif [ "$1" == "vlow" ]; then
-  echo 10000 | sudo tee /sys/class/backlight/intel_backlight/brightness
-  xrandr --output DP-1 --brightness 0.7
-  xrandr --output DP-2 --brightness 0.7
+  set_brightness 10000 0.7
 else
-  xrandr --output DP-1 --brightness 1
-  xrandr --output DP-2 --brightness 1
-  echo 70000 | sudo tee /sys/class/backlight/intel_backlight/brightness
+  set_brightness 70000 1
 fi
 
