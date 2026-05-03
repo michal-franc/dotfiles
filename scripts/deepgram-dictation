@@ -13,7 +13,7 @@ args = parser.parse_args()
 
 MODE = 'claude' if args.claude else 'type'
 
-API_KEY_FILE = "/tmp/deepgram_api_key"
+API_KEY_FILE = "/home/mfranc/deepgram_api_key"
 PIDFILE = "/tmp/deepgram-dictation.pid"
 
 # Accumulated transcript for claude mode
@@ -25,10 +25,34 @@ with open(PIDFILE, 'w') as f:
     f.write(str(os.getpid()))
 
 def cleanup_and_exit(signum=None, frame=None):
-    global cleanup_done
+    global cleanup_done, capturing
     if cleanup_done:
         return
     cleanup_done = True
+
+    # Stop mic capture if it was started (may not exist if we exit before setup)
+    capturing = False
+    mic = globals().get('_mic_stream')
+    if mic is not None:
+        try:
+            mic.stop_stream()  # unblocks any in-flight read() in capture thread
+        except Exception:
+            pass
+    # Wait for capture thread to leave read() before tearing down PortAudio state
+    cap_thread = globals().get('_capture_thread')
+    if cap_thread is not None and cap_thread.is_alive():
+        cap_thread.join(timeout=1.0)
+    if mic is not None:
+        try:
+            mic.close()
+        except Exception:
+            pass
+    pa = globals().get('_pa')
+    if pa is not None:
+        try:
+            pa.terminate()
+        except Exception:
+            pass
 
     try:
         os.remove(PIDFILE)
@@ -64,7 +88,50 @@ if not api_key:
 
 import time
 import threading
+import queue
 import pyaudio
+
+FORMAT = pyaudio.paInt16
+CHANNELS = 1
+RATE = 16000
+CHUNK = 2000
+SILENCE_TIMEOUT = 10.0  # seconds of silence before auto-stop (after first speech)
+PRE_SPEECH_TIMEOUT = 30.0  # seconds with no speech ever before giving up
+
+# Open mic and start capturing into a queue BEFORE the slow Deepgram setup,
+# so the first 1-2s of speech aren't lost while the websocket connects.
+# Bounded queue caps memory if Deepgram setup hangs (~32KB/s, so 240 chunks ≈ 30s).
+audio_queue = queue.Queue(maxsize=240)
+capturing = True
+
+_pa = pyaudio.PyAudio()
+_mic_stream = _pa.open(
+    format=FORMAT,
+    channels=CHANNELS,
+    rate=RATE,
+    input=True,
+    frames_per_buffer=CHUNK,
+)
+
+def _capture_loop():
+    while capturing:
+        try:
+            data = _mic_stream.read(CHUNK, exception_on_overflow=False)
+        except Exception:
+            break
+        try:
+            audio_queue.put(data, timeout=1.0)
+        except queue.Full:
+            # Drop oldest if consumer is stalled
+            try:
+                audio_queue.get_nowait()
+                audio_queue.put_nowait(data)
+            except (queue.Empty, queue.Full):
+                pass
+
+_capture_thread = threading.Thread(target=_capture_loop, daemon=True)
+_capture_thread.start()
+
 from deepgram import DeepgramClient
 from deepgram.core.events import EventType
 
@@ -77,14 +144,10 @@ def backspace(n):
     if n > 0:
         subprocess.run(['xdotool', 'key', '--repeat', str(n), 'BackSpace'], check=False)
 
-FORMAT = pyaudio.paInt16
-CHANNELS = 1
-RATE = 16000
-CHUNK = 2000
-SILENCE_TIMEOUT = 10.0  # seconds of silence before auto-stop
-
 def main():
+    global capturing
     client = DeepgramClient()
+    start_time = time.time()
     last_speech_time = time.time()
     has_received_speech = False
     running = True
@@ -157,30 +220,30 @@ def main():
             listen_thread = threading.Thread(target=connection.start_listening, daemon=True)
             listen_thread.start()
 
-            # Open microphone and stream audio
-            audio = pyaudio.PyAudio()
-            stream = audio.open(
-                format=FORMAT,
-                channels=CHANNELS,
-                rate=RATE,
-                input=True,
-                frames_per_buffer=CHUNK,
-            )
-
             try:
                 while running:
-                    data = stream.read(CHUNK, exception_on_overflow=False)
+                    try:
+                        data = audio_queue.get(timeout=0.5)
+                    except queue.Empty:
+                        # If the capture thread died (mic disconnect, ALSA error)
+                        # we'll never get more audio — bail out instead of hanging.
+                        if not _capture_thread.is_alive() and capturing:
+                            print("Mic capture thread died — exiting", file=sys.stderr)
+                            subprocess.run(['notify-send', '-u', 'critical', 'Dictation Error', 'Mic capture stopped'])
+                            running = False
+                        continue
                     connection.send_media(data)
 
                     # Check for silence timeout (only after receiving some speech)
                     if has_received_speech and (time.time() - last_speech_time) > SILENCE_TIMEOUT:
                         running = False
+                    # If no speech ever, give up after PRE_SPEECH_TIMEOUT
+                    elif not has_received_speech and (time.time() - start_time) > PRE_SPEECH_TIMEOUT:
+                        print("No speech detected — exiting", file=sys.stderr)
+                        running = False
             except KeyboardInterrupt:
                 pass
             finally:
-                stream.stop_stream()
-                stream.close()
-                audio.terminate()
                 cleanup_and_exit()
 
     except Exception as e:
