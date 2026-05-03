@@ -1,11 +1,22 @@
 #!/bin/bash
-read X Y W H <<< "$(slop -f "%x %y %w %h")"
+SIZE_MB=${1:-10}
+SIZE_BYTES=$(( SIZE_MB * 1024 * 1024 ))
+
+read X Y W H <<< "$(slop --noopengl -f "%x %y %w %h")"
 
 # Round width and height to even numbers (required for yuv420p)
 W=$(( W + W % 2 ))
 H=$(( H + H % 2 ))
 
+OUTPUT=~/Videos/recording_$(date +%Y%m%d_%H%M%S).mp4
+
+# Wait for space press anywhere (global, no window focus needed)
+notify-send -a clearcaps "Video" "Press Insert to start recording (${SIZE_MB}MB limit)"
+echo "Waiting for Insert key..."
+stdbuf -oL xinput test-xi2 --root 2>/dev/null | awk '/RawKeyPress/{found=1} found && /detail: 118/{exit}'
+echo "Recording starting... (output: $OUTPUT)"
+
 ffmpeg -f x11grab -video_size ${W}x${H} -i :0.0+${X},${Y} \
   -vcodec libx264 -pix_fmt yuv420p -profile:v baseline -level 3.1 \
-  -fs 9961472 \
-  -movflags +faststart output.mp4
+  -fs "$SIZE_BYTES" \
+  -movflags +faststart "$OUTPUT"
