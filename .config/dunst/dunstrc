@@ -223,6 +223,12 @@ timeout = 8
 # NOTE: It might be helpful to run dunst -print in a terminal in order
 # to find fitting options for rules.
 
+[clearcaps]
+    appname = clearcaps
+    origin = center
+    offset = 0x0
+    timeout = 2
+
 #[espeak]
 #    summary = "*"
 #    script = dunst_espeak.sh
