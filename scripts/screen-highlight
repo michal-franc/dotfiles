@@ -1,0 +1,127 @@
+#!/bin/bash
+
+# Crop a region of the screen, then add yellow translucent highlights to
+# sub-regions. Phase 1: drag-select the crop area. Phase 2: the cropped
+# image is shown at native size on the same monitor. Each drag adds a
+# highlight that you see immediately. Overlapping highlights do not
+# darken (uniform alpha via union mask). Press Escape or right-click to
+# commit and copy to clipboard.
+
+set -u
+
+BASE=$(mktemp --suffix=.png)
+OUT=$(mktemp --suffix=.png)
+MASK=$(mktemp --suffix=.png)
+FEH_PID=0
+cleanup() {
+    [ "$FEH_PID" -ne 0 ] && kill "$FEH_PID" 2>/dev/null
+    rm -f "$BASE" "$MASK"
+}
+trap cleanup EXIT
+
+notify() { command -v notify-send >/dev/null && notify-send -t 1500 "screen-highlight" "$1"; }
+
+find_monitor() {
+    local px=$1 py=$2 geom w h x y rest
+    while read -r geom; do
+        w=${geom%%x*}
+        rest=${geom#*x}
+        h=${rest%%+*}
+        rest=${rest#*+}
+        x=${rest%%+*}
+        y=${rest##*+}
+        if [ "$px" -ge "$x" ] && [ "$px" -lt "$((x + w))" ] && \
+           [ "$py" -ge "$y" ] && [ "$py" -lt "$((y + h))" ]; then
+            echo "$w $h $x $y"
+            return
+        fi
+    done < <(xrandr | awk '/ connected/ {
+        for (i=1; i<=NF; i++) if ($i ~ /^[0-9]+x[0-9]+\+[-0-9]+\+[-0-9]+$/) print $i
+    }')
+}
+
+show_modal() {
+    [ "$FEH_PID" -ne 0 ] && { kill "$FEH_PID" 2>/dev/null; wait "$FEH_PID" 2>/dev/null; }
+    feh --borderless --geometry "${CW}x${CH}" "$OUT" >/dev/null 2>&1 &
+    FEH_PID=$!
+    sleep 0.15
+    i3-msg "[class=\"feh\"] floating enable, border pixel 0, resize set ${CW} px ${CH} px, move position ${MX} px ${MY} px" >/dev/null 2>&1
+    sleep 0.1
+}
+
+# Render OUT = BASE with yellow translucent fill over the union of RECTS.
+# Uses a binary mask so overlapping rectangles don't double the alpha.
+render() {
+    local args=(-size "${CW}x${CH}" xc:black -fill white)
+    local r
+    for r in "${RECTS[@]}"; do
+        args+=(-draw "rectangle $r")
+    done
+    args+=("$MASK")
+    convert "${args[@]}"
+
+    convert "$BASE" \
+        \( -size "${CW}x${CH}" xc:'#ffff00' \
+           "$MASK" -alpha off -compose CopyOpacity -composite \
+           -channel A -evaluate multiply 0.4 +channel \) \
+        -compose Over -composite "$OUT"
+}
+
+sleep 0.3
+notify "1/2: select crop region"
+
+crop=$(slop -f "%x %y %w %h") || exit 0
+read -r CX CY CW CH <<<"$crop"
+
+maim --noopengl -g "${CW}x${CH}+${CX}+${CY}" "$BASE"
+cp "$BASE" "$OUT"
+
+PCX=$((CX + CW / 2))
+PCY=$((CY + CH / 2))
+mon=$(find_monitor "$PCX" "$PCY")
+if [ -n "$mon" ]; then
+    read -r MW MH MX MY <<<"$mon"
+else
+    MX=0; MY=0
+fi
+sleep 0.25
+show_modal
+notify "Drag to add highlights. Esc/right-click to copy."
+
+RECTS=()
+while geom=$(slop -f "%x %y %w %h" 2>/dev/null); do
+    read -r SX SY SSW SSH <<<"$geom"
+    if [ "$SSW" -lt 2 ] || [ "$SSH" -lt 2 ]; then
+        continue
+    fi
+
+    IX=$((SX - MX))
+    IY=$((SY - MY))
+    IW=$SSW
+    IH=$SSH
+    [ "$IX" -lt 0 ] && { IW=$((IW + IX)); IX=0; }
+    [ "$IY" -lt 0 ] && { IH=$((IH + IY)); IY=0; }
+    [ $((IX + IW)) -gt "$CW" ] && IW=$((CW - IX))
+    [ $((IY + IH)) -gt "$CH" ] && IH=$((CH - IY))
+    [ "$IW" -lt 1 ] && IW=1
+    [ "$IH" -lt 1 ] && IH=1
+    IX2=$((IX + IW))
+    IY2=$((IY + IH))
+
+    RECTS+=("$IX,$IY $IX2,$IY2")
+    render
+    show_modal
+done
+
+kill "$FEH_PID" 2>/dev/null
+wait "$FEH_PID" 2>/dev/null
+FEH_PID=0
+
+xclip -selection clipboard -t image/png <"$OUT"
+sleep 0.2
+notify "copied to clipboard"
+
+# Defer OUT cleanup so xclip's daemon has time to read the file.
+# BASE and MASK are removed by the EXIT trap.
+( sleep 2; rm -f "$OUT" ) &
+disown
