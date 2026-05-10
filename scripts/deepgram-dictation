@@ -96,7 +96,7 @@ CHANNELS = 1
 RATE = 16000
 CHUNK = 2000
 SILENCE_TIMEOUT = 10.0  # seconds of silence before auto-stop (after first speech)
-PRE_SPEECH_TIMEOUT = 30.0  # seconds with no speech ever before giving up
+PRE_SPEECH_TIMEOUT = 5.0  # seconds with no speech ever before giving up
 
 # Open mic and start capturing into a queue BEFORE the slow Deepgram setup,
 # so the first 1-2s of speech aren't lost while the websocket connects.
